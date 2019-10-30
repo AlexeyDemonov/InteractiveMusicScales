@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    enum NoteValue
+    enum Sound
     {
         C   = 1,
         Cd  = 2,
