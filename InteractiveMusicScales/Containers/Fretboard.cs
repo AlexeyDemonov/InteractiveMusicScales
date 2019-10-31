@@ -70,7 +70,7 @@ namespace InteractiveMusicScales
 
                 for (int i = 0; i < base.notescount; i++)
                 {
-                    if(base.notes[i].Equals(value))
+                    if(base.notes[i].Sound == value.Sound)
                     {
                         shifts[@string] = i;
                         isSet = true;
