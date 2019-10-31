@@ -11,15 +11,11 @@ namespace InteractiveMusicScales
 
         public Pianoroll(Note[] notes) : base(notes, "Pianoroll")
         {
-            /*guardians*/
-            if (notes == null)
-                throw new ArgumentNullException("Pianoroll.Ctor: 'notes' array can not be null");
-            if (notes.Length == 0)
-                throw new ArgumentException("Pianoroll.Ctor: 'notes' array can not be empty (its length was zero)");
+            //Argument checks are in abstract base class
         }
 
         /// <summary>
-        /// Returns the note from requested position (in semitones, starting with zero)
+        /// Returns the note from requested position
         /// </summary>
         /// <param name="pianokey"></param>
         /// <returns></returns>
@@ -36,7 +32,7 @@ namespace InteractiveMusicScales
 
                 //I do not expect incoming indexes be multiple times larger than the last index
                 //that is why I am setting looped subtraction instead of division with remainder
-                while (index > base.notescount)
+                while (index >= base.notescount)
                     index -= base.notescount;
 
                 return base.notes[index];
