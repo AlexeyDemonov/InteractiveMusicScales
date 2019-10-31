@@ -10,7 +10,7 @@ namespace InteractiveMusicScales
     {
         public Sound Sound { get; }
 
-        public bool IsSelected { get; set; } = false;
+        public bool IsChecked { get; set; } = false;
 
         public bool IsKeynote { get; set; } = false;
 

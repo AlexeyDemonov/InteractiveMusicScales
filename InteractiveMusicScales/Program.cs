@@ -16,6 +16,9 @@ namespace InteractiveMusicScales
 
             app.MainWindow = window;
 
+            var interfacedata = new InterfaceData();
+            window.DataContext = interfacedata;
+
             app.InitializeComponent();
             app.Run();
         }

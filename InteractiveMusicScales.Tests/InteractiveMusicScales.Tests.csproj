@@ -52,6 +52,7 @@
     <Compile Include="Fretboard_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pianoroll_Tests.cs" />
+    <Compile Include="NoteButton_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

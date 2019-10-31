@@ -4,9 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InteractiveMusicScales"
+        xmlns:i="clr-namespace:InteractiveMusicScales.Interface"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="436" Width="232">
+    <Window.Resources>
+        <Style TargetType="i:NoteButton">
+            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note}"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+
+        <i:NoteButton Note="{Binding Pianoroll[0]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[1]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[2]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[3]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[4]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[5]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[6]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[7]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[8]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[9]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[10]}"/>
+        <i:NoteButton Note="{Binding Pianoroll[11]}"/>
+
+        <i:NoteButton Note="{Binding Pianoroll[11]}" Content="{Binding RelativeSource={RelativeSource Self}, Path=IsKeyNote}"/>
+
+    </StackPanel>
 </Window>
