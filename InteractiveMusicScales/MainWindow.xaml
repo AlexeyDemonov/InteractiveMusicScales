@@ -8,9 +8,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="436" Width="232">
     <Window.Resources>
+        
+        <!--NoteButton Style and Triggers-->
         <Style TargetType="i:NoteButton">
             <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note}"/>
+            <Setter Property="Command" Value="{Binding NoteCommand}"/>
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note}"/>
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Note.IsChecked}" Value="True">
+                    <Setter Property="Background" Value="LightCoral"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Note.IsKeynote}" Value="True">
+                    <Setter Property="FontWeight" Value="ExtraBold"/>
+                </DataTrigger>
+                
+            </Style.Triggers>
+            
         </Style>
+        
+        
     </Window.Resources>
     <StackPanel>
 
@@ -26,8 +44,6 @@
         <i:NoteButton Note="{Binding Pianoroll[9]}"/>
         <i:NoteButton Note="{Binding Pianoroll[10]}"/>
         <i:NoteButton Note="{Binding Pianoroll[11]}"/>
-
-        <i:NoteButton Note="{Binding Pianoroll[11]}" Content="{Binding RelativeSource={RelativeSource Self}, Path=IsKeyNote}"/>
 
     </StackPanel>
 </Window>

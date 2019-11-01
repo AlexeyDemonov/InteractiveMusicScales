@@ -22,8 +22,18 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Binded properties
-        public Pianoroll Pianoroll { get; }
+        Pianoroll pianoroll;
+        public Pianoroll Pianoroll
+        {
+            get => pianoroll;
 
-        public ICommand NoteCommand { get; }
+            private set
+            {
+                pianoroll = value;
+                RaisePropertyChange();
+            }
+        }
+
+        public ICommand NoteCommand { get; private set; }
     }
 }

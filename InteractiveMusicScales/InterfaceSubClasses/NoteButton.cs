@@ -10,27 +10,12 @@ namespace InteractiveMusicScales.Interface
 {
     class NoteButton : Button
     {
-        //==============================================================
-        //Properties
+        public static DependencyProperty NoteProperty = DependencyProperty.Register("Note", typeof(Note), typeof(NoteButton));
+
         public Note Note
         {
             get => (Note)GetValue(NoteProperty);
             set => SetValue(NoteProperty, value);
         }
-
-        public bool IsChecked
-        {
-            get => Note?.IsChecked ?? false;
-        }
-
-        public bool IsKeyNote
-        {
-            get => Note?.IsKeynote ?? false;
-        }
-
-
-        //==============================================================
-        //Dependencies for binding
-        public static DependencyProperty NoteProperty = DependencyProperty.Register("Note", typeof(Note), typeof(NoteButton));
     }
 }

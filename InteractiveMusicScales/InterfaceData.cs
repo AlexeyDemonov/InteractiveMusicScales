@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InteractiveMusicScales
 {
@@ -33,7 +35,12 @@ namespace InteractiveMusicScales
 
         void CheckNote(Note note)
         {
-            note.IsChecked = true;
+            //note.IsChecked = !note.IsChecked;
+            note.IsKeynote = !note.IsKeynote;
+
+            var pianoSwap = this.Pianoroll;
+            this.Pianoroll = null;
+            this.Pianoroll = pianoSwap;
         }
     }
 }
