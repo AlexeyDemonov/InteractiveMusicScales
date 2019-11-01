@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="436" Width="232">
     <Window.Resources>
-        
+
         <!--Converters-->
         <i:SharpNoteNameConverter  x:Key="SharpNote"/>
         <i:FlatNoteNameConverter   x:Key="FlatNote"/>
@@ -16,11 +16,34 @@
 
         <!--NoteButton Style and Triggers-->
         <Style TargetType="i:NoteButton">
-            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource HiddenNote} }"/>
+
+            <!--Template rework for changing 'mouse over' highlight effect-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="i:NoteButton">
+                        <Border BorderThickness="0.5" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+            <!--Static properties-->
+            <Setter Property="Focusable" Value="False"/>
+
+            <!--Binded properties-->
+            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource SharpNote} }"/>
             <Setter Property="Command" Value="{Binding NoteCommand}"/>
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note}"/>
 
+            <!--Triggers-->
             <Style.Triggers>
+
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Note.IsChecked}" Value="True">
                     <Setter Property="Background" Value="LightCoral"/>
                 </DataTrigger>
@@ -28,7 +51,7 @@
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Note.IsKeynote}" Value="True">
                     <Setter Property="FontWeight" Value="ExtraBold"/>
                 </DataTrigger>
-                
+
             </Style.Triggers>
             
         </Style>
