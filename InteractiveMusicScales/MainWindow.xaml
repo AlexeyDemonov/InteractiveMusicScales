@@ -9,9 +9,14 @@
         Title="MainWindow" Height="436" Width="232">
     <Window.Resources>
         
+        <!--Converters-->
+        <i:SharpNoteNameConverter  x:Key="SharpNote"/>
+        <i:FlatNoteNameConverter   x:Key="FlatNote"/>
+        <i:HiddenNoteNameConverter x:Key="HiddenNote"/>
+
         <!--NoteButton Style and Triggers-->
         <Style TargetType="i:NoteButton">
-            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note}"/>
+            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource HiddenNote} }"/>
             <Setter Property="Command" Value="{Binding NoteCommand}"/>
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note}"/>
 

@@ -51,6 +51,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InterfaceSubClasses\Converters\FlatNoteNameConverter.cs" />
+    <Compile Include="InterfaceSubClasses\Converters\HiddenNoteNameConverter.cs" />
+    <Compile Include="InterfaceSubClasses\Converters\SharpNoteNameConverter.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,6 +84,7 @@
     <Compile Include="Containers\Note.cs" />
     <Compile Include="Containers\Pianoroll.cs" />
     <Compile Include="InterfaceSubClasses\NoteButton.cs" />
+    <Compile Include="InterfaceSubClasses\Converters\AbstractNoteNameConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

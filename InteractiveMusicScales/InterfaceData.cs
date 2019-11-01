@@ -28,7 +28,7 @@ namespace InteractiveMusicScales
                 new Note(Sound.B)
             };
 
-            this.Pianoroll = new Pianoroll(notes);
+            this.pianoroll = new Pianoroll(notes);
 
             this.NoteCommand = new CommandParametrized( (arg) => CheckNote((Note)arg) );
         }
