@@ -51,6 +51,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InterfaceSubClasses\Converters\SemitoneToBoolConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\FlatNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\HiddenNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SharpNoteNameConverter.cs" />

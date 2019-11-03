@@ -13,7 +13,8 @@
         <i:SharpNoteNameConverter  x:Key="SharpNote"/>
         <i:FlatNoteNameConverter   x:Key="FlatNote"/>
         <i:HiddenNoteNameConverter x:Key="HiddenNote"/>
-        
+        <i:SemitoneToBoolConverter x:Key="SemitoneToBool"/>
+
         <!--Colors-->
         <SolidColorBrush x:Key="MenuColor">#D3D3D3</SolidColorBrush>
         <SolidColorBrush x:Key="GrayedPianoKeyColor">#E1E1E1</SolidColorBrush>
@@ -42,7 +43,7 @@
             <Setter Property="Margin" Value="10"/>
 
             <!--Binded properties-->
-            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource SharpNote} }"/>
+            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note}"/>
             <Setter Property="Command" Value="{Binding NoteCommand}"/>
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note}"/>
 
@@ -90,8 +91,8 @@
             </DockPanel.Resources>
 
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <RadioButton>#</RadioButton>
-                <RadioButton>b</RadioButton>
+                <RadioButton IsChecked="{Binding PianorollSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Sharp}">#</RadioButton>
+                <RadioButton IsChecked="{Binding PianorollSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Flat}">b</RadioButton>
             </StackPanel>
 
             <Grid HorizontalAlignment="Center">
@@ -105,6 +106,17 @@
                     <!--Note button style-->
                     <Style TargetType="i:NoteButton" BasedOn="{StaticResource MainNoteButtonStyle}">
                         <Setter Property="Grid.ColumnSpan" Value="2"/>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding PianorollSemitone}" Value="Sharp">
+                                <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource SharpNote}}"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding PianorollSemitone}" Value="Flat">
+                                <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource FlatNote}}"/>
+                            </DataTrigger>
+                            
+                        </Style.Triggers>
                     </Style>
                     
                     <!--Piano key styles-->

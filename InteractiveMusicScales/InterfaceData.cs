@@ -31,6 +31,7 @@ namespace InteractiveMusicScales
             };
 
             this.pianoroll = new Pianoroll(notes);
+            this.pianorollSemitone = Semitone.Sharp;
 
             this.NoteCommand = new CommandParametrized( (arg) => ToggleNoteCheck((Note)arg) );
         }

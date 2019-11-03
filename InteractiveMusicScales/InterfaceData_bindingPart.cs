@@ -22,6 +22,8 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Binded properties
+        public ICommand NoteCommand { get; private set; }
+
         Pianoroll pianoroll;
         public Pianoroll Pianoroll
         {
@@ -34,6 +36,15 @@ namespace InteractiveMusicScales
             }
         }
 
-        public ICommand NoteCommand { get; private set; }
+        Semitone pianorollSemitone;
+        public Semitone PianorollSemitone
+        {
+            get => pianorollSemitone;
+            set
+            {
+                pianorollSemitone = value;
+                RaisePropertyChange();
+            }
+        }
     }
 }
