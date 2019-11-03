@@ -10,6 +10,8 @@ namespace InteractiveMusicScales
 {
     partial class InterfaceData
     {
+        //==============================================================
+        //Constructor
         public InterfaceData()
         {
             var notes = new Note[]
@@ -30,13 +32,20 @@ namespace InteractiveMusicScales
 
             this.pianoroll = new Pianoroll(notes);
 
-            this.NoteCommand = new CommandParametrized( (arg) => CheckNote((Note)arg) );
+            this.NoteCommand = new CommandParametrized( (arg) => ToggleNoteCheck((Note)arg) );
         }
 
-        void CheckNote(Note note)
+
+        //==============================================================
+        //Methods
+        void ToggleNoteCheck(Note note)
         {
             note.IsChecked = !note.IsChecked;
+            UpdateAllNoteBindings();
+        }
 
+        void UpdateAllNoteBindings()
+        {
             var pianoSwap = this.Pianoroll;
             this.Pianoroll = null;
             this.Pianoroll = pianoSwap;
