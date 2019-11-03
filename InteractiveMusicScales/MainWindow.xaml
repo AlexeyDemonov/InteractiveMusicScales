@@ -39,6 +39,7 @@
 
             <!--Static properties-->
             <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Margin" Value="10"/>
 
             <!--Binded properties-->
             <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource SharpNote} }"/>
@@ -61,10 +62,10 @@
         </Style>
 
     </Window.Resources>
-    
-    
-    
-    <!--Window Layout-->
+
+
+
+    <!--===================================Window Layout===================================-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -76,9 +77,10 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
+
+        <!--===================================Pianoroll===================================-->
         
-        
-        <!--Pianoroll-->
         <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True" Background="{StaticResource MenuColor}">
             <DockPanel.Resources>
                 <!--Radiobutton Style-->
@@ -95,24 +97,42 @@
             <Grid HorizontalAlignment="Center">
 
                 <Grid.Resources>
-                    <Style TargetType="i:NoteButton" BasedOn="{StaticResource MainNoteButtonStyle}">
-                        <Setter Property="Margin" Value="10"/>
-                        <Setter Property="Grid.ColumnSpan" Value="2"/>
-                    </Style>
-
+                    <!--Grid style-->
                     <Style TargetType="ColumnDefinition">
                         <Setter Property="Width" Value="20"/>
                     </Style>
 
-                    <Style TargetType="RowDefinition">
-                        <Setter Property="Height" Value="50"/>
+                    <!--Note button style-->
+                    <Style TargetType="i:NoteButton" BasedOn="{StaticResource MainNoteButtonStyle}">
+                        <Setter Property="Grid.ColumnSpan" Value="2"/>
                     </Style>
+                    
+                    <!--Piano key styles-->
+                    <Style x:Key="BigZone" TargetType="Border">
+                        <Setter Property="Grid.Row" Value="0"/>
+                        <Setter Property="Grid.RowSpan" Value="4"/>
+                        <Setter Property="Grid.ColumnSpan" Value="14"/>
+                    </Style>
+                    <Style x:Key="WhitePianoKey" TargetType="Border">
+                        <Setter Property="Grid.Row" Value="0"/>
+                        <Setter Property="Grid.RowSpan" Value="4"/>
+                        <Setter Property="Grid.ColumnSpan" Value="2"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="0.5"/>
+                    </Style>
+                    <Style x:Key="BlackPianoKeyOnWhite" TargetType="Border" BasedOn="{StaticResource WhitePianoKey}">
+                        <Setter Property="Grid.RowSpan" Value="2"/>
+                        <Setter Property="BorderBrush" Value="White"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                        <Setter Property="Background" Value="Black"/>
+                    </Style>
+                    <Style x:Key="BlackPianoKeyOnGray" TargetType="Border" BasedOn="{StaticResource BlackPianoKeyOnWhite}">
+                        <Setter Property="BorderBrush" Value="{StaticResource GrayedPianoKeyColor}"/>
+                    </Style>
+
                 </Grid.Resources>
                 
                 <Grid.ColumnDefinitions>
-                    
-                    <!--Border left-->
-                    <ColumnDefinition Width="*"/>
                     
                     <!--Left octave-->
                     <ColumnDefinition/>
@@ -164,67 +184,109 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <!--/Right octave-->
-
-                    <!--Border right-->
-                    <ColumnDefinition Width="*"/>
                     
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 
                 <!--Painting the big zones-->
-                <Border Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="14" Grid.RowSpan="4" Background="{StaticResource GrayedPianoKeyColor}"/>
-                <Border Grid.Column="15" Grid.Row="0" Grid.ColumnSpan="14" Grid.RowSpan="4" Background="White"/>
-                <Border Grid.Column="29" Grid.Row="0" Grid.ColumnSpan="14" Grid.RowSpan="4" Background="{StaticResource GrayedPianoKeyColor}"/>
+                <Border Style="{StaticResource BigZone}" Grid.Column="0"  Background="{StaticResource GrayedPianoKeyColor}"/>
+                <Border Style="{StaticResource BigZone}" Grid.Column="14" Background="White"/>
+                <Border Style="{StaticResource BigZone}" Grid.Column="28" Background="{StaticResource GrayedPianoKeyColor}"/>
 
+                <!--Painting the separate piano keys-->
+                <!--White keys-->
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="0"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="2"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="4"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="6"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="8"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="10"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="12"/>
+
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="14"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="16"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="18"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="20"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="22"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="24"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="26"/>
+
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="28"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="30"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="32"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="34"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="36"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="38"/>
+                <Border Style="{StaticResource WhitePianoKey}" Grid.Column="40"/>
+
+                <!--Black keys-->
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="1"/>
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="3"/>
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="7"/>
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="9"/>
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="11"/>
+
+                <Border Style="{StaticResource BlackPianoKeyOnWhite}" Grid.Column="15"/>
+                <Border Style="{StaticResource BlackPianoKeyOnWhite}" Grid.Column="17"/>
+                <Border Style="{StaticResource BlackPianoKeyOnWhite}" Grid.Column="21"/>
+                <Border Style="{StaticResource BlackPianoKeyOnWhite}" Grid.Column="23"/>
+                <Border Style="{StaticResource BlackPianoKeyOnWhite}" Grid.Column="25"/>
+
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="29"/>
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="31"/>
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="35"/>
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="37"/>
+                <Border Style="{StaticResource BlackPianoKeyOnGray}" Grid.Column="39"/>
+                <!--/Painting the separate piano keys-->
 
                 <!--Piano buttons-->
                 <!--Piano buttons left octave-->
-                <i:NoteButton Grid.Column="1"  Grid.Row="3" Note="{Binding Pianoroll[0]}"/>
-                <i:NoteButton Grid.Column="2"  Grid.Row="1" Note="{Binding Pianoroll[1]}"/>
-                <i:NoteButton Grid.Column="3"  Grid.Row="3" Note="{Binding Pianoroll[2]}"/>
-                <i:NoteButton Grid.Column="4"  Grid.Row="1" Note="{Binding Pianoroll[3]}"/>
-                <i:NoteButton Grid.Column="5"  Grid.Row="3" Note="{Binding Pianoroll[4]}"/>
-                <i:NoteButton Grid.Column="7"  Grid.Row="3" Note="{Binding Pianoroll[5]}"/>
-                <i:NoteButton Grid.Column="8"  Grid.Row="1" Note="{Binding Pianoroll[6]}"/>
-                <i:NoteButton Grid.Column="9"  Grid.Row="3" Note="{Binding Pianoroll[7]}"/>
-                <i:NoteButton Grid.Column="10" Grid.Row="1" Note="{Binding Pianoroll[8]}"/>
-                <i:NoteButton Grid.Column="11" Grid.Row="3" Note="{Binding Pianoroll[9]}"/>
-                <i:NoteButton Grid.Column="12" Grid.Row="1" Note="{Binding Pianoroll[10]}"/>
-                <i:NoteButton Grid.Column="13" Grid.Row="3" Note="{Binding Pianoroll[11]}"/>
+                <i:NoteButton Grid.Column="0"  Grid.Row="3" Note="{Binding Pianoroll[0]}"/>
+                <i:NoteButton Grid.Column="1"  Grid.Row="1" Note="{Binding Pianoroll[1]}"/>
+                <i:NoteButton Grid.Column="2"  Grid.Row="3" Note="{Binding Pianoroll[2]}"/>
+                <i:NoteButton Grid.Column="3"  Grid.Row="1" Note="{Binding Pianoroll[3]}"/>
+                <i:NoteButton Grid.Column="4"  Grid.Row="3" Note="{Binding Pianoroll[4]}"/>
+                <i:NoteButton Grid.Column="6"  Grid.Row="3" Note="{Binding Pianoroll[5]}"/>
+                <i:NoteButton Grid.Column="7"  Grid.Row="1" Note="{Binding Pianoroll[6]}"/>
+                <i:NoteButton Grid.Column="8"  Grid.Row="3" Note="{Binding Pianoroll[7]}"/>
+                <i:NoteButton Grid.Column="9" Grid.Row="1" Note="{Binding Pianoroll[8]}"/>
+                <i:NoteButton Grid.Column="10" Grid.Row="3" Note="{Binding Pianoroll[9]}"/>
+                <i:NoteButton Grid.Column="11" Grid.Row="1" Note="{Binding Pianoroll[10]}"/>
+                <i:NoteButton Grid.Column="12" Grid.Row="3" Note="{Binding Pianoroll[11]}"/>
 
                 <!--Piano buttons central octave-->
-                <i:NoteButton Grid.Column="15" Grid.Row="3" Note="{Binding Pianoroll[0]}"/>
-                <i:NoteButton Grid.Column="16" Grid.Row="1" Note="{Binding Pianoroll[1]}"/>
-                <i:NoteButton Grid.Column="17" Grid.Row="3" Note="{Binding Pianoroll[2]}"/>
-                <i:NoteButton Grid.Column="18" Grid.Row="1" Note="{Binding Pianoroll[3]}"/>
-                <i:NoteButton Grid.Column="19" Grid.Row="3" Note="{Binding Pianoroll[4]}"/>
-                <i:NoteButton Grid.Column="21" Grid.Row="3" Note="{Binding Pianoroll[5]}"/>
-                <i:NoteButton Grid.Column="22" Grid.Row="1" Note="{Binding Pianoroll[6]}"/>
-                <i:NoteButton Grid.Column="23" Grid.Row="3" Note="{Binding Pianoroll[7]}"/>
-                <i:NoteButton Grid.Column="24" Grid.Row="1" Note="{Binding Pianoroll[8]}"/>
-                <i:NoteButton Grid.Column="25" Grid.Row="3" Note="{Binding Pianoroll[9]}"/>
-                <i:NoteButton Grid.Column="26" Grid.Row="1" Note="{Binding Pianoroll[10]}"/>
-                <i:NoteButton Grid.Column="27" Grid.Row="3" Note="{Binding Pianoroll[11]}"/>
+                <i:NoteButton Grid.Column="14" Grid.Row="3" Note="{Binding Pianoroll[0]}"/>
+                <i:NoteButton Grid.Column="15" Grid.Row="1" Note="{Binding Pianoroll[1]}"/>
+                <i:NoteButton Grid.Column="16" Grid.Row="3" Note="{Binding Pianoroll[2]}"/>
+                <i:NoteButton Grid.Column="17" Grid.Row="1" Note="{Binding Pianoroll[3]}"/>
+                <i:NoteButton Grid.Column="18" Grid.Row="3" Note="{Binding Pianoroll[4]}"/>
+                <i:NoteButton Grid.Column="20" Grid.Row="3" Note="{Binding Pianoroll[5]}"/>
+                <i:NoteButton Grid.Column="21" Grid.Row="1" Note="{Binding Pianoroll[6]}"/>
+                <i:NoteButton Grid.Column="22" Grid.Row="3" Note="{Binding Pianoroll[7]}"/>
+                <i:NoteButton Grid.Column="23" Grid.Row="1" Note="{Binding Pianoroll[8]}"/>
+                <i:NoteButton Grid.Column="24" Grid.Row="3" Note="{Binding Pianoroll[9]}"/>
+                <i:NoteButton Grid.Column="25" Grid.Row="1" Note="{Binding Pianoroll[10]}"/>
+                <i:NoteButton Grid.Column="26" Grid.Row="3" Note="{Binding Pianoroll[11]}"/>
 
                 <!--Piano buttons right octave-->
-                <i:NoteButton Grid.Column="29" Grid.Row="3" Note="{Binding Pianoroll[0]}"/>
-                <i:NoteButton Grid.Column="30" Grid.Row="1" Note="{Binding Pianoroll[1]}"/>
-                <i:NoteButton Grid.Column="31" Grid.Row="3" Note="{Binding Pianoroll[2]}"/>
-                <i:NoteButton Grid.Column="32" Grid.Row="1" Note="{Binding Pianoroll[3]}"/>
-                <i:NoteButton Grid.Column="33" Grid.Row="3" Note="{Binding Pianoroll[4]}"/>
-                <i:NoteButton Grid.Column="35" Grid.Row="3" Note="{Binding Pianoroll[5]}"/>
-                <i:NoteButton Grid.Column="36" Grid.Row="1" Note="{Binding Pianoroll[6]}"/>
-                <i:NoteButton Grid.Column="37" Grid.Row="3" Note="{Binding Pianoroll[7]}"/>
-                <i:NoteButton Grid.Column="38" Grid.Row="1" Note="{Binding Pianoroll[8]}"/>
-                <i:NoteButton Grid.Column="39" Grid.Row="3" Note="{Binding Pianoroll[9]}"/>
-                <i:NoteButton Grid.Column="40" Grid.Row="1" Note="{Binding Pianoroll[10]}"/>
-                <i:NoteButton Grid.Column="41" Grid.Row="3" Note="{Binding Pianoroll[11]}"/>
+                <i:NoteButton Grid.Column="28" Grid.Row="3" Note="{Binding Pianoroll[0]}"/>
+                <i:NoteButton Grid.Column="29" Grid.Row="1" Note="{Binding Pianoroll[1]}"/>
+                <i:NoteButton Grid.Column="30" Grid.Row="3" Note="{Binding Pianoroll[2]}"/>
+                <i:NoteButton Grid.Column="31" Grid.Row="1" Note="{Binding Pianoroll[3]}"/>
+                <i:NoteButton Grid.Column="32" Grid.Row="3" Note="{Binding Pianoroll[4]}"/>
+                <i:NoteButton Grid.Column="34" Grid.Row="3" Note="{Binding Pianoroll[5]}"/>
+                <i:NoteButton Grid.Column="35" Grid.Row="1" Note="{Binding Pianoroll[6]}"/>
+                <i:NoteButton Grid.Column="36" Grid.Row="3" Note="{Binding Pianoroll[7]}"/>
+                <i:NoteButton Grid.Column="37" Grid.Row="1" Note="{Binding Pianoroll[8]}"/>
+                <i:NoteButton Grid.Column="38" Grid.Row="3" Note="{Binding Pianoroll[9]}"/>
+                <i:NoteButton Grid.Column="39" Grid.Row="1" Note="{Binding Pianoroll[10]}"/>
+                <i:NoteButton Grid.Column="40" Grid.Row="3" Note="{Binding Pianoroll[11]}"/>
                 <!--/Piano buttons-->
 
             </Grid>
