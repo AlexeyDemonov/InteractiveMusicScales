@@ -95,11 +95,11 @@
                         </Style>
                     </StackPanel.Resources>
 
-                    <RadioButton Margin="0,7,0,0" IsChecked="{Binding PianorollSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Sharp}"></RadioButton>
+                    <RadioButton Margin="0,7,0,0" IsChecked="{Binding FretboardSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Sharp}"></RadioButton>
                     <TextBlock>#</TextBlock>
-                    <RadioButton IsChecked="{Binding PianorollSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Flat}"></RadioButton>
+                    <RadioButton IsChecked="{Binding FretboardSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Flat}"></RadioButton>
                     <TextBlock >b</TextBlock>
-                    <RadioButton IsChecked="{Binding PianorollSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Hidden}"></RadioButton>
+                    <RadioButton IsChecked="{Binding FretboardSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Hidden}"></RadioButton>
                     <TextBlock>x</TextBlock>
                 </StackPanel>
 
@@ -113,7 +113,7 @@
             <!--/Menu on the left-->
             
             <!--Fretboard itself-->
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto">
                 <Grid HorizontalAlignment="Left">
 
                     <Grid.Resources>
