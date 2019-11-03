@@ -16,7 +16,8 @@
         <i:SemitoneToBoolConverter x:Key="SemitoneToBool"/>
 
         <!--Colors-->
-        <SolidColorBrush x:Key="MenuColor">#D3D3D3</SolidColorBrush>
+        <SolidColorBrush x:Key="MenuColor">#B4B4B4</SolidColorBrush>
+        <SolidColorBrush x:Key="Background">#D3D3D3</SolidColorBrush>
         <SolidColorBrush x:Key="GrayedPianoKeyColor">#E1E1E1</SolidColorBrush>
 
         <!--NoteButton Style and Triggers-->
@@ -81,8 +82,8 @@
 
 
         <!--===================================Pianoroll===================================-->
-        
-        <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True" Background="{StaticResource MenuColor}">
+
+        <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True" Background="{StaticResource Background}">
             <DockPanel.Resources>
                 <!--Radiobutton Style-->
                 <Style TargetType="RadioButton">
@@ -90,7 +91,7 @@
                 </Style>
             </DockPanel.Resources>
 
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{StaticResource MenuColor}">
                 <RadioButton IsChecked="{Binding PianorollSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Sharp}">#</RadioButton>
                 <RadioButton IsChecked="{Binding PianorollSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Flat}">b</RadioButton>
             </StackPanel>

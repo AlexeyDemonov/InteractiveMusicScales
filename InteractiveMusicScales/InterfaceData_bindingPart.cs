@@ -46,5 +46,27 @@ namespace InteractiveMusicScales
                 RaisePropertyChange();
             }
         }
+
+        Fretboard fretboard;
+        public Fretboard Fretboard
+        {
+            get => fretboard;
+            set
+            {
+                fretboard = value;
+                RaisePropertyChange();
+            }
+        }
+
+        Semitone fretboardSemitone;
+        public Semitone FretboardSemitone
+        {
+            get => fretboardSemitone;
+            set
+            {
+                fretboardSemitone = value;
+                RaisePropertyChange();
+            }
+        }
     }
 }
