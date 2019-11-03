@@ -19,6 +19,11 @@ namespace InteractiveMusicScales
             this.shifts = new int[ strings ];
         }
 
+
+
+        public event Action Event_RootNotesChanged;
+
+
         /// <summary>
         /// Returns the note from requested string at requested fret according to this string root note
         /// </summary>
@@ -50,7 +55,7 @@ namespace InteractiveMusicScales
         }
 
         /// <summary>
-        /// Sets the root note of the string
+        /// Sets the root note of the string and triggers corresponding event
         /// </summary>
         /// <param name="string"></param>
         /// <returns></returns>
@@ -81,6 +86,8 @@ namespace InteractiveMusicScales
                 /*post-check*/
                 if(!isSet)
                     throw new ArgumentException($"Fretboard.SetIndexer: Note value cannot be new in relation to what was provided to class constructor ( value was {value.ToString()} )");
+
+                Event_RootNotesChanged?.Invoke();
             }
         }
 

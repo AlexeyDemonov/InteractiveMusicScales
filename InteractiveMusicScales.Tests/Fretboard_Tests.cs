@@ -170,5 +170,16 @@ namespace InteractiveMusicScales.Tests
 
             Assert.AreEqual(new Note(Sound.C), returnedNote);
         }
+
+        [TestMethod]
+        public void SetIndexer_EventTriggers_True()
+        {
+            var catcher = new ActionEventCatcher();
+            testFretboard.Event_RootNotesChanged += catcher.CatchEvent;
+
+            testFretboard[0] = new Note(Sound.E);
+
+            Assert.AreEqual(true, catcher.EventWasTriggered);
+        }
     }
 }
