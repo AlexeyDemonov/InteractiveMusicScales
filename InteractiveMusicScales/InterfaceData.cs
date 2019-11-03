@@ -14,6 +14,8 @@ namespace InteractiveMusicScales
         //Constructor
         public InterfaceData()
         {
+            this.NoteCommand = new CommandParametrized( (arg) => ToggleNoteCheck((Note)arg) );
+
             var notes = new Note[]
             {
                 new Note(Sound.C),
@@ -33,7 +35,9 @@ namespace InteractiveMusicScales
             this.pianoroll = new Pianoroll(notes);
             this.pianorollSemitone = Semitone.Sharp;
 
-            this.NoteCommand = new CommandParametrized( (arg) => ToggleNoteCheck((Note)arg) );
+            this.fretboard = new Fretboard(notes, strings: 12);
+            this.fretboardSemitone = Semitone.Sharp;
+            this.fretboard.Event_RootNotesChanged += UpdateFretBoardNoteBindings;
         }
 
 
@@ -50,6 +54,15 @@ namespace InteractiveMusicScales
             var pianoSwap = this.Pianoroll;
             this.Pianoroll = null;
             this.Pianoroll = pianoSwap;
+
+            UpdateFretBoardNoteBindings();
+        }
+
+        void UpdateFretBoardNoteBindings()
+        {
+            var fretSwap = this.Fretboard;
+            this.Fretboard = null;
+            this.Fretboard = fretSwap;
         }
     }
 }
