@@ -36,7 +36,6 @@ namespace InteractiveMusicScales
         void CheckNote(Note note)
         {
             note.IsChecked = !note.IsChecked;
-            //note.IsKeynote = !note.IsKeynote;
 
             var pianoSwap = this.Pianoroll;
             this.Pianoroll = null;
