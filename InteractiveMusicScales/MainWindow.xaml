@@ -18,7 +18,7 @@
         <!--Colors-->
         <SolidColorBrush x:Key="MenuColor">#B4B4B4</SolidColorBrush>
         <SolidColorBrush x:Key="Background">#D3D3D3</SolidColorBrush>
-        <SolidColorBrush x:Key="GrayedPianoKeyColor">#E1E1E1</SolidColorBrush>
+
 
         <!--NoteButton Style and Triggers-->
         <Style x:Key="MainNoteButtonStyle" TargetType="i:NoteButton">
@@ -41,7 +41,6 @@
 
             <!--Static properties-->
             <Setter Property="Focusable" Value="False"/>
-            <Setter Property="Margin" Value="10"/>
 
             <!--Binded properties-->
             <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note}"/>
@@ -76,8 +75,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="1.4*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
         
@@ -103,10 +102,10 @@
                     <TextBlock>x</TextBlock>
                 </StackPanel>
 
-                <!--Show/Hide string-->
+                <!--Show/Hide string buttons-->
                 <StackPanel DockPanel.Dock="Bottom">
                     <Button>-</Button>
-                    <Button>+</Button>
+                    <Button Margin="0,0,0,30">+</Button>
                 </StackPanel>
                 
             </DockPanel>
@@ -117,7 +116,38 @@
                 <Grid HorizontalAlignment="Left">
 
                     <Grid.Resources>
+
+                        <!--Grid style-->
+                        <Style TargetType="RowDefinition">
+                            <Setter Property="Height" Value="30"/>
+                        </Style>
+
+                        <Style TargetType="ColumnDefinition">
+                            <Setter Property="Width" Value="100"/>
+                        </Style>
+                        
+                        <!--Colors-->
+                        <SolidColorBrush x:Key="FretBaseColor">#FFF1D1</SolidColorBrush>
+                        <SolidColorBrush x:Key="FretAddColor">#FFE9D2</SolidColorBrush>
+
+                        <!--TextBlock style-->
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                        
+                        <!--Border style-->
+                        <Style TargetType="Border">
+                            <Setter Property="Grid.Row" Value="1"/>
+                            <Setter Property="Grid.RowSpan" Value="12"/>
+                        </Style>
+                        
+                        <!--Notebutton style and triggers-->
                         <Style TargetType="i:NoteButton" BasedOn="{StaticResource MainNoteButtonStyle}">
+
+                            <!--<Setter Property="Margin" Value="0,17,0,17"/>-->
+                            <Setter Property="Height" Value="15"/>
+
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding FretboardSemitone}" Value="Sharp">
                                     <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource SharpNote}}"/>
@@ -139,7 +169,7 @@
                     <Grid.ColumnDefinitions>
 
                         <!--Root notes selection-->
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
 
                         <!--Root notes-->
                         <ColumnDefinition/>
@@ -170,12 +200,12 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <!--/Frets-->
-                        
+
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
                         <!--Numeration-->
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
 
                         <!--Strings-->
                         <RowDefinition/>
@@ -190,14 +220,52 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        
-                        <!--Lower border-->
-                        <RowDefinition Height="*"/>
+
                     </Grid.RowDefinitions>
+
+                    <!--Numeration-->
+                    <TextBlock Grid.Column="2">1</TextBlock>
+                    <TextBlock Grid.Column="3">2</TextBlock>
+                    <TextBlock Grid.Column="4" FontWeight="ExtraBold">3</TextBlock>
+                    <TextBlock Grid.Column="5">4</TextBlock>
+                    <TextBlock Grid.Column="6" FontWeight="ExtraBold">5</TextBlock>
+                    <TextBlock Grid.Column="7">6</TextBlock>
+                    <TextBlock Grid.Column="8" FontWeight="ExtraBold">7</TextBlock>
+                    <TextBlock Grid.Column="9">8</TextBlock>
+                    <TextBlock Grid.Column="10" FontWeight="ExtraBold">9</TextBlock>
+                    <TextBlock Grid.Column="11">10</TextBlock>
+                    <TextBlock Grid.Column="12">11</TextBlock>
+                    <TextBlock Grid.Column="13" FontWeight="ExtraBold">12</TextBlock>
+                    <TextBlock Grid.Column="14">13</TextBlock>
+                    <TextBlock Grid.Column="15">14</TextBlock>
+                    <TextBlock Grid.Column="16" FontWeight="ExtraBold">15</TextBlock>
+                    <TextBlock Grid.Column="17">16</TextBlock>
+                    <TextBlock Grid.Column="18" FontWeight="ExtraBold">17</TextBlock>
+                    <TextBlock Grid.Column="19">18</TextBlock>
+                    <TextBlock Grid.Column="20" FontWeight="ExtraBold">19</TextBlock>
+                    <TextBlock Grid.Column="21">20</TextBlock>
+                    <TextBlock Grid.Column="22" FontWeight="ExtraBold">21</TextBlock>
+                    <TextBlock Grid.Column="23">22</TextBlock>
+                    <TextBlock Grid.Column="24">23</TextBlock>
+                    <TextBlock Grid.Column="25" FontWeight="ExtraBold">24</TextBlock>
+                    
+                    <!--Fretboard painting-->
+                    <Border Grid.Column="1" Background="Black"/>
+                    <Border Grid.Column="2" Grid.ColumnSpan="23" Background="{StaticResource FretBaseColor}"/>
+                    <Border Grid.Column="4" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="6" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="8" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="10" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="13" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="16" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="18" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="20" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="22" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="25" Background="{StaticResource FretAddColor}"/>
 
                     <!--Notes-->
                     <!--1st string-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="1" Note="{ Binding Fretboard[0\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="1" Note="{ Binding Fretboard[0\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="1" Note="{ Binding Fretboard[0\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="1" Note="{ Binding Fretboard[0\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="1" Note="{ Binding Fretboard[0\, 3]}"/>
@@ -224,7 +292,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="1" Note="{ Binding Fretboard[0\, 0]}"/>
 
                     <!--2nd string-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="2" Note="{ Binding Fretboard[1\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="2" Note="{ Binding Fretboard[1\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="2" Note="{ Binding Fretboard[1\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="2" Note="{ Binding Fretboard[1\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="2" Note="{ Binding Fretboard[1\, 3]}"/>
@@ -251,7 +319,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="2" Note="{ Binding Fretboard[1\, 0]}"/>
 
                     <!--3rd String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="3" Note="{ Binding Fretboard[2\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="3" Note="{ Binding Fretboard[2\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="3" Note="{ Binding Fretboard[2\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="3" Note="{ Binding Fretboard[2\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="3" Note="{ Binding Fretboard[2\, 3]}"/>
@@ -278,7 +346,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="3" Note="{ Binding Fretboard[2\, 0]}"/>
                     
                     <!--4th String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="4" Note="{ Binding Fretboard[3\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="4" Note="{ Binding Fretboard[3\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="4" Note="{ Binding Fretboard[3\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="4" Note="{ Binding Fretboard[3\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="4" Note="{ Binding Fretboard[3\, 3]}"/>
@@ -305,7 +373,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="4" Note="{ Binding Fretboard[3\, 0]}"/>
 
                     <!--5th String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="5" Note="{ Binding Fretboard[4\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="5" Note="{ Binding Fretboard[4\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="5" Note="{ Binding Fretboard[4\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="5" Note="{ Binding Fretboard[4\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="5" Note="{ Binding Fretboard[4\, 3]}"/>
@@ -332,7 +400,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="5" Note="{ Binding Fretboard[4\, 0]}"/>
 
                     <!--6th String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="6" Note="{ Binding Fretboard[5\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="6" Note="{ Binding Fretboard[5\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="6" Note="{ Binding Fretboard[5\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="6" Note="{ Binding Fretboard[5\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="6" Note="{ Binding Fretboard[5\, 3]}"/>
@@ -359,7 +427,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="6" Note="{ Binding Fretboard[5\, 0]}"/>
 
                     <!--7th String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="7" Note="{ Binding Fretboard[6\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="7" Note="{ Binding Fretboard[6\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="7" Note="{ Binding Fretboard[6\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="7" Note="{ Binding Fretboard[6\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="7" Note="{ Binding Fretboard[6\, 3]}"/>
@@ -386,7 +454,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="7" Note="{ Binding Fretboard[6\, 0]}"/>
 
                     <!--8th String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="8" Note="{ Binding Fretboard[7\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="8" Note="{ Binding Fretboard[7\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="8" Note="{ Binding Fretboard[7\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="8" Note="{ Binding Fretboard[7\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="8" Note="{ Binding Fretboard[7\, 3]}"/>
@@ -413,7 +481,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="8" Note="{ Binding Fretboard[7\, 0]}"/>
 
                     <!--9th String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="9" Note="{ Binding Fretboard[8\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="9" Note="{ Binding Fretboard[8\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="9" Note="{ Binding Fretboard[8\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="9" Note="{ Binding Fretboard[8\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="9" Note="{ Binding Fretboard[8\, 3]}"/>
@@ -440,7 +508,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="9" Note="{ Binding Fretboard[8\, 0]}"/>
 
                     <!--10th String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="10" Note="{ Binding Fretboard[9\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="10" Note="{ Binding Fretboard[9\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="10" Note="{ Binding Fretboard[9\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="10" Note="{ Binding Fretboard[9\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="10" Note="{ Binding Fretboard[9\, 3]}"/>
@@ -467,7 +535,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="10" Note="{ Binding Fretboard[9\, 0]}"/>
 
                     <!--11th String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="11" Note="{ Binding Fretboard[10\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="11" Note="{ Binding Fretboard[10\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="11" Note="{ Binding Fretboard[10\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="11" Note="{ Binding Fretboard[10\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="11" Note="{ Binding Fretboard[10\, 3]}"/>
@@ -494,7 +562,7 @@
                     <i:NoteButton Grid.Column="25" Grid.Row="11" Note="{ Binding Fretboard[10\, 0]}"/>
                     
                     <!--12th String-->
-                    <i:NoteButton Grid.Column="1" Grid.Row="12" Note="{ Binding Fretboard[11\, 0]}"/>
+                    <i:NoteButton Grid.Column="1" Grid.Row="12" Note="{ Binding Fretboard[11\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="12" Note="{ Binding Fretboard[11\, 1]}"/>
                     <i:NoteButton Grid.Column="3" Grid.Row="12" Note="{ Binding Fretboard[11\, 2]}"/>
                     <i:NoteButton Grid.Column="4" Grid.Row="12" Note="{ Binding Fretboard[11\, 3]}"/>
@@ -557,9 +625,12 @@
                         <Setter Property="Width" Value="20"/>
                     </Style>
 
+                    <SolidColorBrush x:Key="GrayedPianoKeyColor">#E1E1E1</SolidColorBrush>
+
                     <!--Note button style-->
                     <Style TargetType="i:NoteButton" BasedOn="{StaticResource MainNoteButtonStyle}">
                         <Setter Property="Grid.ColumnSpan" Value="2"/>
+                        <Setter Property="Margin" Value="10"/>
 
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding PianorollSemitone}" Value="Sharp">
