@@ -128,7 +128,7 @@
                         
                         <!--Colors-->
                         <SolidColorBrush x:Key="FretBaseColor">#FFF1D1</SolidColorBrush>
-                        <SolidColorBrush x:Key="FretAddColor">#FFE9D2</SolidColorBrush>
+                        <SolidColorBrush x:Key="FretAddColor">#FFDFB0</SolidColorBrush>
 
                         <!--TextBlock style-->
                         <Style TargetType="TextBlock">
