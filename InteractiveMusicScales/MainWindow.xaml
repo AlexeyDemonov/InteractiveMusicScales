@@ -175,31 +175,34 @@
                         <ColumnDefinition Width="50"/>
 
                         <!--Frets-->
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="112"/>
+                        <ColumnDefinition Width="104"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="92"/>
+                        <ColumnDefinition Width="88"/>
+                        <ColumnDefinition Width="84"/>
+                        <ColumnDefinition Width="76"/>
+                        <ColumnDefinition Width="72"/>
+                        <ColumnDefinition Width="68"/>
+                        <ColumnDefinition Width="64"/>
+                        <ColumnDefinition Width="56"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="48"/>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
                         <!--/Frets-->
+                        
+                        <!--After frets-->
+                        <ColumnDefinition Width="30"/>
 
                     </Grid.ColumnDefinitions>
 
@@ -261,7 +264,7 @@
                     <Border Grid.Column="18" Background="{StaticResource FretAddColor}"/>
                     <Border Grid.Column="20" Background="{StaticResource FretAddColor}"/>
                     <Border Grid.Column="22" Background="{StaticResource FretAddColor}"/>
-                    <Border Grid.Column="25" Background="{StaticResource FretAddColor}"/>
+                    <Border Grid.Column="25" Grid.ColumnSpan="2" Background="{StaticResource FretAddColor}"/>
 
                     <!--Notes-->
                     <!--1st string-->
