@@ -98,6 +98,8 @@ namespace InteractiveMusicScales
             {
                 lastVisibleString++;
                 this.stringVisibility[lastVisibleString] = true;
+
+                UpdateStringsVisibility();
             }
         }
 
@@ -107,7 +109,16 @@ namespace InteractiveMusicScales
             {
                 this.stringVisibility[lastVisibleString] = false;
                 lastVisibleString--;
+
+                UpdateStringsVisibility();
             }
+        }
+
+        void UpdateStringsVisibility()
+        {
+            var stringsSwap = this.StringVisibility;
+            this.StringVisibility = null;
+            this.StringVisibility = stringsSwap;
         }
     }
 }

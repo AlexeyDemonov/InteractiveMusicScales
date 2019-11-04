@@ -80,7 +80,7 @@ namespace InteractiveMusicScales
             }
         }
 
-        ICommand AddStringCommand { get; }
-        ICommand RemoveStringCommand { get; }
+        public ICommand AddStringCommand { get; }
+        public ICommand RemoveStringCommand { get; }
     }
 }
