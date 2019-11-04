@@ -80,8 +80,29 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        
-        
+
+
+        <!--===================================Scales selector===================================-->
+        <DockPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" LastChildFill="True" Background="{StaticResource Background}">
+            <!--Menu on the top-->
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{StaticResource MenuColor}">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <Button>[R]</Button>
+                <Button>[S]</Button>
+                <Button>[D]</Button>
+            </StackPanel>
+
+            <!--Scale selector-->
+            <ListBox ItemsSource="{Binding ScalesToShow}" SelectedItem="{Binding CurrentScale, Mode=TwoWay}" SelectionMode="Single"/>
+
+        </DockPanel>
+
+
         <!--===================================Fretboard===================================-->
         <DockPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" LastChildFill="True" Background="{StaticResource Background}">
             

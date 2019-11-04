@@ -69,60 +69,24 @@ namespace InteractiveMusicScales
 
             this.AddStringCommand = new Command(AddString);
             this.RemoveStringCommand = new Command(RemoveString);
+
+
+            Scale[] scales = new Scale[]
+            {
+                new Scale("Test1", Sound.A | Sound.B | Sound.C, Sound.A),
+                new Scale("Test1", Sound.Fd | Sound.Gd | Sound.Dd, Sound.Fd),
+            };
+
+            this.ScalesAll = scales;
+            this.ScalesToShow = scales;
         }
 
 
         //==============================================================
         //Methods
-        void ToggleNoteCheck(Note note)
-        {
-            note.IsChecked = !note.IsChecked;
-            UpdateAllNoteBindings();
-        }
-
-        void UpdateAllNoteBindings()
-        {
-            var pianoSwap = this.Pianoroll;
-            this.Pianoroll = null;
-            this.Pianoroll = pianoSwap;
-
-            UpdateFretBoardNoteBindings();
-        }
-
-        void UpdateFretBoardNoteBindings()
-        {
-            var fretSwap = this.Fretboard;
-            this.Fretboard = null;
-            this.Fretboard = fretSwap;
-        }
-
-        void AddString()
-        {
-            if(lastVisibleString < MAX_STRING_INDEX)
-            {
-                lastVisibleString++;
-                this.stringVisibility[lastVisibleString] = true;
-
-                UpdateStringsVisibility();
-            }
-        }
-
-        void RemoveString()
-        {
-            if (lastVisibleString > MIN_STRING_INDEX)
-            {
-                this.stringVisibility[lastVisibleString] = false;
-                lastVisibleString--;
-
-                UpdateStringsVisibility();
-            }
-        }
-
-        void UpdateStringsVisibility()
-        {
-            var stringsSwap = this.StringVisibility;
-            this.StringVisibility = null;
-            this.StringVisibility = stringsSwap;
-        }
+        partial void ToggleNoteCheck(Note note);
+        partial void UpdateFretBoardNoteBindings();
+        partial void AddString();
+        partial void RemoveString();
     }
 }

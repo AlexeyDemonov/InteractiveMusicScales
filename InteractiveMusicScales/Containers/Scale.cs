@@ -18,5 +18,10 @@ namespace InteractiveMusicScales
             this.Sound = sound;
             this.Keynote = keynote;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

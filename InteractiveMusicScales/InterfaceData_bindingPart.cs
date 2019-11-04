@@ -11,7 +11,7 @@ namespace InteractiveMusicScales
 {
     partial class InterfaceData : INotifyPropertyChanged
     {
-        //==============================================================
+        //==========================================================================
         //Binder
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,12 +20,20 @@ namespace InteractiveMusicScales
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
 
-        //==============================================================
+        //==========================================================================
+        //==========================================================================
         //Binded properties
+
+        //==============================================================
+        //Buttons
         public ICommand NoteCommand { get; }
 
+        //==============================================================
+        //Notes
         public Note[] Notes { get; }
 
+        //==============================================================
+        //Pianoroll
         Pianoroll pianoroll;
         public Pianoroll Pianoroll
         {
@@ -48,6 +56,11 @@ namespace InteractiveMusicScales
                 RaisePropertyChange();
             }
         }
+
+        //==============================================================
+        //Fretboard
+        public ICommand AddStringCommand { get; }
+        public ICommand RemoveStringCommand { get; }
 
         Fretboard fretboard;
         public Fretboard Fretboard
@@ -82,7 +95,36 @@ namespace InteractiveMusicScales
             }
         }
 
-        public ICommand AddStringCommand { get; }
-        public ICommand RemoveStringCommand { get; }
+        //==============================================================
+        //Scale selector
+        Scale[] ScalesAll;
+
+        Scale[] scalesToShow;
+        public Scale[] ScalesToShow
+        {
+            get => scalesToShow;
+            set
+            {
+                scalesToShow = value;
+                RaisePropertyChange();
+            }
+        }
+
+        Scale currentScale;
+        public Scale CurrentScale
+        {
+            get => currentScale;
+            set
+            {
+                currentScale = value;
+                UpdateInterfaceWithScale(currentScale);
+                RaisePropertyChange();
+            }
+        }
+
+        //==========================================================================
+        //==========================================================================
+        //Methods
+        partial void UpdateInterfaceWithScale(Scale scale);
     }
 }
