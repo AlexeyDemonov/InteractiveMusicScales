@@ -128,7 +128,7 @@
                         
                         <!--Colors-->
                         <SolidColorBrush x:Key="FretBaseColor">#FFF1D1</SolidColorBrush>
-                        <SolidColorBrush x:Key="FretAddColor">#FFDFB0</SolidColorBrush>
+                        <SolidColorBrush x:Key="FretAddColor">#FFDFBF</SolidColorBrush>
 
                         <!--TextBlock style-->
                         <Style TargetType="TextBlock">
@@ -172,7 +172,7 @@
                         <ColumnDefinition Width="Auto"/>
 
                         <!--Root notes-->
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="50"/>
 
                         <!--Frets-->
                         <ColumnDefinition/>
