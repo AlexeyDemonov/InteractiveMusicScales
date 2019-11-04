@@ -15,7 +15,7 @@ namespace InteractiveMusicScales
         const int STRINGS_COUNT = 12;
         const int MIN_STRING_INDEX = 2;
         const int MAX_STRING_INDEX = 11;
-        int lastVisibleString = 5;
+        int lastVisibleString;
 
         //==============================================================
         //Constructor
@@ -38,6 +38,8 @@ namespace InteractiveMusicScales
                 new Note(Sound.Ad),
                 new Note(Sound.B)
             };
+
+            this.Notes = notes;
 
             this.pianoroll = new Pianoroll(notes);
             this.pianorollSemitone = Semitone.Sharp;
@@ -62,6 +64,8 @@ namespace InteractiveMusicScales
 
             this.stringVisibility = new bool[] {true, true, true, true, true, true,
                                               false, false, false, false, false, false};
+
+            this.lastVisibleString = 5;
 
             this.AddStringCommand = new Command(AddString);
             this.RemoveStringCommand = new Command(RemoveString);

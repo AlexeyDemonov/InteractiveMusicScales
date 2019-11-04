@@ -55,12 +55,17 @@ namespace InteractiveMusicScales
         }
 
         /// <summary>
-        /// Sets the root note of the string and triggers corresponding event
+        /// Gets the root note of the string or sets it and triggers corresponding event
         /// </summary>
         /// <param name="string"></param>
         /// <returns></returns>
         public Note this[int @string]
         {
+            get
+            {
+                return this[@string, 0];
+            }
+
             set
             {
                 /*guardians*/

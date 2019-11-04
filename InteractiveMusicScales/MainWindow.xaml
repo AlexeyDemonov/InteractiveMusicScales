@@ -127,6 +127,11 @@
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                         </Style>
                         
+                        <!--Combobox style-->
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding Notes}"/>
+                        </Style>
+                        
                         <!--Border style-->
                         <Style TargetType="Border">
                             <Setter Property="Grid.Row" Value="1"/>
@@ -217,7 +222,21 @@
                         <RowDefinition Height="{Binding StringVisibility[11], Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
 
                     </Grid.RowDefinitions>
-
+                    
+                    <!--Root note selection-->
+                    <ComboBox Grid.Row="1"  SelectedItem="{Binding Fretboard[0], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="2"  SelectedItem="{Binding Fretboard[1], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="3"  SelectedItem="{Binding Fretboard[2], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="4"  SelectedItem="{Binding Fretboard[3], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="5"  SelectedItem="{Binding Fretboard[4], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="6"  SelectedItem="{Binding Fretboard[5], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="7"  SelectedItem="{Binding Fretboard[6], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="8"  SelectedItem="{Binding Fretboard[7], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="9"  SelectedItem="{Binding Fretboard[8], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="10" SelectedItem="{Binding Fretboard[9], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="11" SelectedItem="{Binding Fretboard[10], Mode=TwoWay}"></ComboBox>
+                    <ComboBox Grid.Row="12" SelectedItem="{Binding Fretboard[11], Mode=TwoWay}"></ComboBox>
+                    
                     <!--Numeration-->
                     <TextBlock Grid.Column="2">1</TextBlock>
                     <TextBlock Grid.Column="3">2</TextBlock>

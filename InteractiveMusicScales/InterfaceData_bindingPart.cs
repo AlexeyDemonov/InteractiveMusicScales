@@ -24,6 +24,8 @@ namespace InteractiveMusicScales
         //Binded properties
         public ICommand NoteCommand { get; }
 
+        public Note[] Notes { get; }
+
         Pianoroll pianoroll;
         public Pianoroll Pianoroll
         {
