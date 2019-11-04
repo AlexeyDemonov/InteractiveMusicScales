@@ -66,7 +66,7 @@ namespace InteractiveMusicScales
                 /*guardians*/
                 if (@string < 0)
                     throw new ArgumentException($"Fretboard.SetIndexer: '@string' argument can not be negative (its value was {@string} )");
-                if (@string > shifts.Length)
+                if (@string >= shifts.Length)
                     throw new ArgumentException($"Fretboard.SetIndexer: '@string' argument can not be greater than strings last index (its value was {@string}, last index of strings is {shifts.Length} )");
                 if (value == null)
                     throw new ArgumentNullException($"Fretboard.SetIndexer: Note value can not be null");

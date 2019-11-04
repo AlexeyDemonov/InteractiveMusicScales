@@ -22,7 +22,7 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Binded properties
-        public ICommand NoteCommand { get; private set; }
+        public ICommand NoteCommand { get; }
 
         Pianoroll pianoroll;
         public Pianoroll Pianoroll
@@ -68,5 +68,19 @@ namespace InteractiveMusicScales
                 RaisePropertyChange();
             }
         }
+
+        bool[] stringVisibility;
+        public bool[] StringVisibility
+        {
+            get => stringVisibility;
+            set
+            {
+                stringVisibility = value;
+                RaisePropertyChange();
+            }
+        }
+
+        ICommand AddStringCommand { get; }
+        ICommand RemoveStringCommand { get; }
     }
 }

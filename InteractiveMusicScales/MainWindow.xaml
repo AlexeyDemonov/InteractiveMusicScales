@@ -14,6 +14,7 @@
         <i:FlatNoteNameConverter   x:Key="FlatNote"/>
         <i:HiddenNoteNameConverter x:Key="HiddenNote"/>
         <i:SemitoneToBoolConverter x:Key="SemitoneToBool"/>
+        <i:BoolToHeightConverter   x:Key="BoolToheight"/>
 
         <!--Colors-->
         <SolidColorBrush x:Key="MenuColor">#B4B4B4</SolidColorBrush>
@@ -104,8 +105,8 @@
 
                 <!--Show/Hide string buttons-->
                 <StackPanel DockPanel.Dock="Bottom">
-                    <Button>-</Button>
-                    <Button Margin="0,0,0,30">+</Button>
+                    <Button Command="{Binding RemoveStringCommand}">-</Button>
+                    <Button Command="{Binding AddStringCommand}" Margin="0,0,0,30">+</Button>
                 </StackPanel>
                 
             </DockPanel>
@@ -211,18 +212,18 @@
                         <RowDefinition Height="Auto"/>
 
                         <!--Strings-->
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="{Binding StringVisibility[0], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[1], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[2], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[3], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[4], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[5], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[6], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[7], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[8], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[9], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[10], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[11], Converter={StaticResource BoolToheight}}"/>
 
                     </Grid.RowDefinitions>
 

@@ -130,7 +130,7 @@ namespace InteractiveMusicScales.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void SetIndexer_String3_ArgumentException()
         {
-            testFretboard[-1] = testSingleNote;
+            testFretboard[3] = testSingleNote;
         }
 
         [TestMethod]
