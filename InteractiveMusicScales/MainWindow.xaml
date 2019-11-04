@@ -14,7 +14,7 @@
         <i:FlatNoteNameConverter   x:Key="FlatNote"/>
         <i:HiddenNoteNameConverter x:Key="HiddenNote"/>
         <i:SemitoneToBoolConverter x:Key="SemitoneToBool"/>
-        <i:BoolToHeightConverter   x:Key="BoolToheight"/>
+        <i:BoolToHeightConverter   x:Key="BoolToHeight"/>
 
         <!--Colors-->
         <SolidColorBrush x:Key="MenuColor">#B4B4B4</SolidColorBrush>
@@ -76,8 +76,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.4*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         
@@ -117,15 +117,6 @@
                 <Grid HorizontalAlignment="Left">
 
                     <Grid.Resources>
-
-                        <!--Grid style-->
-                        <Style TargetType="RowDefinition">
-                            <Setter Property="Height" Value="30"/>
-                        </Style>
-
-                        <Style TargetType="ColumnDefinition">
-                            <Setter Property="Width" Value="100"/>
-                        </Style>
                         
                         <!--Colors-->
                         <SolidColorBrush x:Key="FretBaseColor">#FFF1D1</SolidColorBrush>
@@ -212,18 +203,18 @@
                         <RowDefinition Height="Auto"/>
 
                         <!--Strings-->
-                        <RowDefinition Height="{Binding StringVisibility[0], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[1], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[2], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[3], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[4], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[5], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[6], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[7], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[8], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[9], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[10], Converter={StaticResource BoolToheight}}"/>
-                        <RowDefinition Height="{Binding StringVisibility[11], Converter={StaticResource BoolToheight}}"/>
+                        <RowDefinition Height="{Binding StringVisibility[0],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[1],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[2],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[3],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[4],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[5],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[6],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[7],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[8],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[9],  Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[10], Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
+                        <RowDefinition Height="{Binding StringVisibility[11], Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
 
                     </Grid.RowDefinitions>
 
