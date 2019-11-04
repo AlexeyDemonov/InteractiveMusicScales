@@ -16,6 +16,8 @@ namespace InteractiveMusicScales
         const int MIN_STRING_INDEX = 2;
         const int MAX_STRING_INDEX = 11;
         int lastVisibleString;
+        
+        Sound currentSound = 0;
 
         //==============================================================
         //Constructor
@@ -73,12 +75,13 @@ namespace InteractiveMusicScales
 
             Scale[] scales = new Scale[]
             {
-                new Scale("Test1", Sound.A | Sound.B | Sound.C, Sound.A),
-                new Scale("Test1", Sound.Fd | Sound.Gd | Sound.Dd, Sound.Fd),
+                new Scale("Test A", Sound.A | Sound.C | Sound.E | Sound.F, Sound.A),
+                new Scale("Test B", Sound.B | Sound.Cd | Sound.Dd, Sound.B),
+                new Scale("Test C", Sound.C | Sound.D | Sound.E | Sound.F | Sound.G | Sound.A | Sound.B, Sound.C),
             };
 
             this.ScalesAll = scales;
-            this.ScalesToShow = scales;
+            this.scalesToShow = scales;
         }
 
 
@@ -88,5 +91,6 @@ namespace InteractiveMusicScales
         partial void UpdateFretBoardNoteBindings();
         partial void AddString();
         partial void RemoveString();
+        partial void DropAllNotes();
     }
 }

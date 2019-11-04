@@ -116,9 +116,12 @@ namespace InteractiveMusicScales
             get => currentScale;
             set
             {
-                currentScale = value;
-                UpdateInterfaceWithScale(currentScale);
-                RaisePropertyChange();
+                if(value != null)
+                {
+                    currentScale = value;
+                    UpdateInterfaceWithScale(currentScale);
+                    RaisePropertyChange();
+                }
             }
         }
 

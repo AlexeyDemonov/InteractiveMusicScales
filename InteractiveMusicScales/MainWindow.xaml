@@ -70,7 +70,7 @@
     <!--===================================Window Layout===================================-->
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" MinWidth="100"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
@@ -98,7 +98,12 @@
             </StackPanel>
 
             <!--Scale selector-->
-            <ListBox ItemsSource="{Binding ScalesToShow}" SelectedItem="{Binding CurrentScale, Mode=TwoWay}" SelectionMode="Single"/>
+            <ListBox ItemsSource="{Binding ScalesToShow}"
+                     SelectedItem="{Binding CurrentScale, Mode=TwoWay}"
+                     SelectionMode="Single"
+                     Background="{StaticResource Background}"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
 
         </DockPanel>
 

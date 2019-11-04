@@ -11,6 +11,15 @@ namespace InteractiveMusicScales
         partial void ToggleNoteCheck(Note note)
         {
             note.IsChecked = !note.IsChecked;
+
+            for (int i = 0; i < Notes.Length; i++)
+            {
+                if(Notes[i].IsKeynote)
+                    Notes[i].IsKeynote = false;
+            }
+
+            FilterAvailableScales(note);
+
             UpdateAllNoteBindings();
         }
 
@@ -59,8 +68,39 @@ namespace InteractiveMusicScales
             this.StringVisibility = stringsSwap;
         }
 
+        void FilterAvailableScales(Note note)
+        {
+
+            if(note.IsChecked)
+                currentSound |= note.Sound;//Adds note to current sound
+            else
+                currentSound ^= note.Sound;//Removes note from current sound
+
+
+            if(currentSound == 0)
+            {
+                ScalesToShow = ScalesAll;
+            }
+            else
+            {
+                List<Scale> fittingScales = new List<Scale>();
+
+                foreach (var scale in ScalesAll)
+                {
+                    //The magic of bitwise comparison, if 'currentSound' - set of notes is a subset of a scale,
+                    //then at the output of the bitwise 'OR' operation we will get the same scale
+                    if( (scale.Sound | currentSound) == scale.Sound )
+                        fittingScales.Add(scale);
+                }
+
+                ScalesToShow = fittingScales.ToArray();
+            }
+        }
+
         partial void UpdateInterfaceWithScale(Scale scale)
         {
+            currentSound = scale.Sound;
+
             foreach (var note in Notes)
             {
                 if(note.Sound == scale.Keynote)
@@ -68,8 +108,8 @@ namespace InteractiveMusicScales
                 else
                     note.IsKeynote = false;
 
-                //The magic of bitwise comparison, if the sound of a note is included in the scale
-                //at the output of the bitwise OR we will get the same scale
+                //The magic of bitwise comparison, if the sound of a note is included to the scale,
+                //then at the output of the bitwise 'OR' operation we will get the same scale
                 if ( (scale.Sound | note.Sound) == scale.Sound)
                     note.IsChecked = true;
                 else
@@ -79,7 +119,7 @@ namespace InteractiveMusicScales
             UpdateAllNoteBindings();
         }
 
-        void DropAllNotes()
+        partial void DropAllNotes()
         {
             foreach (var note in Notes)
             {
