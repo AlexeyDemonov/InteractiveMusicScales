@@ -91,7 +91,7 @@ namespace InteractiveMusicScales
         {
             if(currentSound == 0)
             {
-                ScalesToShow = ScalesAll;
+                ScalesToShow = ScalesAll.ToArray();
             }
             else
             {

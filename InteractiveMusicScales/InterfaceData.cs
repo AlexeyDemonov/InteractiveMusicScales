@@ -15,8 +15,8 @@ namespace InteractiveMusicScales
         const int STRINGS_COUNT = 12;
         int lastVisibleString;
         Scale[] ScalesBasic;
-        Scale[] ScalesAll;
         Scale[] AdditionalScales;
+        List<Scale> ScalesAll;
 
         //==============================================================
         //Constructor
@@ -107,8 +107,10 @@ namespace InteractiveMusicScales
                 new Scale("D minor", keynote:Sound.D, sound:Sound.C | Sound.D | Sound.E | Sound.F | Sound.G | Sound.A | Sound.Ad),
             };
 
-            this.ScalesAll = ScalesBasic;
-            this.scalesToShow = ScalesBasic;
+            this.ScalesAll = new List<Scale>( ScalesBasic );
+            this.ScalesAll.Sort(new ScalesSorter());
+
+            this.scalesToShow = ScalesAll.ToArray();
 
             this.ScaleCommand = new CommandParametrized( (arg) => UpdateInterfaceWithScale( (Scale)arg ) );
         }
