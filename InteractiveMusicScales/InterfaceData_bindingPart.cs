@@ -25,11 +25,8 @@ namespace InteractiveMusicScales
         //Binded properties
 
         //==============================================================
-        //Buttons
+        //Common
         public ICommand NoteCommand { get; }
-
-        //==============================================================
-        //Notes
         public Note[] Notes { get; }
 
         //==============================================================
@@ -97,6 +94,8 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Scale selector
+        public ICommand ScaleCommand { get; }
+
         Scale[] ScalesAll;
 
         Scale[] scalesToShow;
@@ -124,10 +123,5 @@ namespace InteractiveMusicScales
                 }
             }
         }
-
-        //==========================================================================
-        //==========================================================================
-        //Methods
-        partial void UpdateInterfaceWithScale(Scale scale);
     }
 }

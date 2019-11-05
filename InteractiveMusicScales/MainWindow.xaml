@@ -98,12 +98,25 @@
             </StackPanel>
 
             <!--Scale selector-->
-            <ListBox ItemsSource="{Binding ScalesToShow}"
+            <ListBox Name="ScaleSelector"
+                     ItemsSource="{Binding ScalesToShow}"
                      SelectedItem="{Binding CurrentScale, Mode=TwoWay}"
                      SelectionMode="Single"
                      Background="{StaticResource Background}"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="MouseDown">
+                                <EventTrigger.Actions>
+
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Resources>
+            </ListBox>
 
         </DockPanel>
 

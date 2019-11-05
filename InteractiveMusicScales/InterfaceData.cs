@@ -82,6 +82,8 @@ namespace InteractiveMusicScales
 
             this.ScalesAll = scales;
             this.scalesToShow = scales;
+
+            this.ScaleCommand = new CommandParametrized( (arg) => UpdateInterfaceWithScale( (Scale)arg ) );
         }
 
 
@@ -91,6 +93,7 @@ namespace InteractiveMusicScales
         partial void UpdateFretBoardNoteBindings();
         partial void AddString();
         partial void RemoveString();
+        partial void UpdateInterfaceWithScale(Scale scale);
         partial void DropAllNotes();
     }
 }
