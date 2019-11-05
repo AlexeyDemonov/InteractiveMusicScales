@@ -113,6 +113,7 @@ namespace InteractiveMusicScales
             this.scalesToShow = ScalesAll.ToArray();
 
             this.ScaleCommand = new CommandParametrized( (arg) => UpdateInterfaceWithScale( (Scale)arg ) );
+            this.ClearUICommand = new Command(DropAllNotes);
         }
 
 

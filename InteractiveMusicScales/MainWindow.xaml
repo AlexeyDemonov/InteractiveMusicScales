@@ -106,7 +106,7 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Button>[R]</Button>
+                <Button Command="{Binding ClearUICommand}">[R]</Button>
                 <Button>[S]</Button>
                 <Button>[D]</Button>
             </StackPanel>
