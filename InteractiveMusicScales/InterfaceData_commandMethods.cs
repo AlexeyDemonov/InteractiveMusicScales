@@ -8,17 +8,31 @@ namespace InteractiveMusicScales
 {
     partial class InterfaceData
     {
+        //==============================================================
+        //Fields
+        Sound currentSound = 0;
+        Sound currentKeyNote = 0;
+        const int MIN_STRING_INDEX = 2;
+        const int MAX_STRING_INDEX = 11;
+
+        //==============================================================
+        //Common
         partial void ToggleNoteCheck(Note note)
         {
             note.IsChecked = !note.IsChecked;
 
-            for (int i = 0; i < Notes.Length; i++)
-            {
-                if(Notes[i].IsKeynote)
-                    Notes[i].IsKeynote = false;
-            }
+            if (note.IsChecked)
+                currentSound |= note.Sound;//Adds note to current sound
+            else
+                currentSound ^= note.Sound;//Removes note from current sound
 
-            FilterAvailableScales(note);
+            if(currentKeyNote != 0)
+                for (int i = 0; i < Notes.Length; i++)
+                        Notes[i].IsKeynote = false;
+
+            currentKeyNote = 0;
+
+            FilterAvailableScales();
 
             UpdateAllNoteBindings();
         }
@@ -39,6 +53,9 @@ namespace InteractiveMusicScales
             this.Fretboard = fretSwap;
         }
 
+
+        //==============================================================
+        //Fretboard part
         partial void AddString()
         {
             if (lastVisibleString < MAX_STRING_INDEX)
@@ -68,15 +85,10 @@ namespace InteractiveMusicScales
             this.StringVisibility = stringsSwap;
         }
 
-        void FilterAvailableScales(Note note)
+        //==============================================================
+        //Scale selection
+        void FilterAvailableScales()
         {
-
-            if(note.IsChecked)
-                currentSound |= note.Sound;//Adds note to current sound
-            else
-                currentSound ^= note.Sound;//Removes note from current sound
-
-
             if(currentSound == 0)
             {
                 ScalesToShow = ScalesAll;
@@ -99,7 +111,15 @@ namespace InteractiveMusicScales
 
         partial void UpdateInterfaceWithScale(Scale scale)
         {
+            //Clear interface if applying the same scale
+            if(scale.Sound == currentSound && scale.Keynote == currentKeyNote)
+            {
+                DropAllNotes();
+                return;
+            }
+
             currentSound = scale.Sound;
+            currentKeyNote = scale.Keynote;
 
             foreach (var note in Notes)
             {
@@ -121,12 +141,16 @@ namespace InteractiveMusicScales
 
         partial void DropAllNotes()
         {
+            currentSound = 0;
+            currentKeyNote = 0;
+
             foreach (var note in Notes)
             {
                 note.IsKeynote = false;
                 note.IsChecked = false;
             }
 
+            FilterAvailableScales();
             UpdateAllNoteBindings();
         }
     }
