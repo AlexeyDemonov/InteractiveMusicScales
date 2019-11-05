@@ -73,7 +73,7 @@
 
             <!--Binded properties-->
             <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale.Name}"/>
-            <!--<Setter Property="Command" Value="{Binding ScaleCommand}"/>-->
+            <Setter Property="Command" Value="{Binding ScaleCommand}"/>
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale}"/>
         </Style>
 
