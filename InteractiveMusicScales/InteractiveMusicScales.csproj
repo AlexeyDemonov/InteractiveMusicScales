@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="InterfaceSubClasses\Converters\BoolToHeightConverter.cs" />
     <Compile Include="InterfaceData_methods.cs" />
+    <Compile Include="InterfaceSubClasses\Converters\ScalesToScaleButtonsConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SemitoneToBoolConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\FlatNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\HiddenNoteNameConverter.cs" />

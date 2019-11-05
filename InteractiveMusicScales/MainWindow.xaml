@@ -15,6 +15,7 @@
         <i:HiddenNoteNameConverter x:Key="HiddenNote"/>
         <i:SemitoneToBoolConverter x:Key="SemitoneToBool"/>
         <i:BoolToHeightConverter   x:Key="BoolToHeight"/>
+        <i:ScalesToScaleButtonsConverter x:Key="ScalesToButtons"/>
 
         <!--Colors-->
         <SolidColorBrush x:Key="MenuColor">#B4B4B4</SolidColorBrush>
@@ -63,6 +64,19 @@
 
         </Style>
 
+
+        <!--ScaleButton Style and Triggers-->
+        <Style TargetType="i:ScaleButton">
+            
+            <!--Static properties-->
+            <Setter Property="Focusable" Value="False"/>
+
+            <!--Binded properties-->
+            <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale.Name}"/>
+            <!--<Setter Property="Command" Value="{Binding ScaleCommand}"/>-->
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale}"/>
+        </Style>
+
     </Window.Resources>
 
 
@@ -98,25 +112,15 @@
             </StackPanel>
 
             <!--Scale selector-->
-            <ListBox Name="ScaleSelector"
-                     ItemsSource="{Binding ScalesToShow}"
-                     SelectedItem="{Binding CurrentScale, Mode=TwoWay}"
-                     SelectionMode="Single"
-                     Background="{StaticResource Background}"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                <ListBox.Resources>
-                    <Style TargetType="ListBoxItem">
-                        <Style.Triggers>
-                            <EventTrigger RoutedEvent="MouseDown">
-                                <EventTrigger.Actions>
-
-                                </EventTrigger.Actions>
-                            </EventTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListBox.Resources>
-            </ListBox>
+            <ItemsControl ItemsSource="{Binding ScalesToShow, Converter={StaticResource ScalesToButtons}}" BorderBrush="Black" BorderThickness="0.5">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            
+            
 
         </DockPanel>
 
