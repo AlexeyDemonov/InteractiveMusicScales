@@ -112,15 +112,17 @@
             </StackPanel>
 
             <!--Scale selector-->
-            <ItemsControl ItemsSource="{Binding ScalesToShow, Converter={StaticResource ScalesToButtons}}" BorderBrush="Black" BorderThickness="0.5">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            
-            
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding ScalesToShow, Converter={StaticResource ScalesToButtons}}" BorderBrush="Black" BorderThickness="0.5">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+
+
 
         </DockPanel>
 

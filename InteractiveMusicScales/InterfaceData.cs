@@ -14,7 +14,10 @@ namespace InteractiveMusicScales
         //Fields
         const int STRINGS_COUNT = 12;
         int lastVisibleString;
-        
+        Scale[] ScalesBasic;
+        Scale[] ScalesAll;
+        Scale[] AdditionalScales;
+
         //==============================================================
         //Constructor
         public InterfaceData()
@@ -71,16 +74,41 @@ namespace InteractiveMusicScales
             this.AddStringCommand = new Command(AddString);
             this.RemoveStringCommand = new Command(RemoveString);
 
-
-            Scale[] scales = new Scale[]
+            ScalesBasic = new Scale[]
             {
-                new Scale("Test A", Sound.A, Sound.C | Sound.E | Sound.F | Sound.A),
-                new Scale("Test B", Sound.B, Sound.Cd | Sound.Dd | Sound.B),
-                new Scale("Test C", Sound.C, Sound.D | Sound.E | Sound.F | Sound.G | Sound.A | Sound.B | Sound.C),
+                new Scale("C major", keynote:Sound.C, sound:Sound.C | Sound.D | Sound.E | Sound.F | Sound.G | Sound.A | Sound.B),
+                new Scale("G major", keynote:Sound.G, sound:Sound.C | Sound.D | Sound.E | Sound.Fd| Sound.G | Sound.A | Sound.B),
+                new Scale("D major", keynote:Sound.D, sound:Sound.Cd| Sound.D | Sound.E | Sound.Fd| Sound.G | Sound.A | Sound.B),
+                new Scale("A major", keynote:Sound.A, sound:Sound.Cd| Sound.D | Sound.E | Sound.Fd| Sound.Gd| Sound.A | Sound.B),
+                new Scale("E major", keynote:Sound.E, sound:Sound.Cd| Sound.Dd| Sound.E | Sound.Fd| Sound.Gd| Sound.A | Sound.B),
+                new Scale("B major", keynote:Sound.B, sound:Sound.Cd| Sound.Dd| Sound.E | Sound.Fd| Sound.Gd| Sound.Ad| Sound.B),
+
+                new Scale("Gb major", keynote:Sound.Fd, sound:Sound.Cd| Sound.Dd| Sound.F | Sound.Fd| Sound.Gd| Sound.Ad| Sound.B),
+                new Scale("Db major", keynote:Sound.Cd, sound:Sound.C | Sound.Cd| Sound.Dd| Sound.F | Sound.Fd| Sound.Gd| Sound.Ad),
+                new Scale("Ab major", keynote:Sound.Gd, sound:Sound.C | Sound.Cd| Sound.Dd| Sound.F | Sound.G | Sound.Gd| Sound.Ad),
+                new Scale("Eb major", keynote:Sound.Dd, sound:Sound.C | Sound.D | Sound.Dd| Sound.F | Sound.G | Sound.Gd| Sound.Ad),
+                new Scale("Bb major", keynote:Sound.Ad, sound:Sound.C | Sound.D | Sound.Dd| Sound.F | Sound.G | Sound.A | Sound.Ad),
+
+                new Scale("F major", keynote:Sound.F, sound:Sound.C | Sound.D | Sound.E | Sound.F | Sound.G | Sound.A | Sound.Ad),
+
+                new Scale("A minor", keynote:Sound.A, sound:Sound.C | Sound.D | Sound.E | Sound.F | Sound.G | Sound.A | Sound.B),
+                new Scale("E minor", keynote:Sound.E, sound:Sound.C | Sound.D | Sound.E | Sound.Fd| Sound.G | Sound.A | Sound.B),
+                new Scale("B minor", keynote:Sound.B, sound:Sound.Cd| Sound.D | Sound.E | Sound.Fd| Sound.G | Sound.A | Sound.B),
+                new Scale("F# minor", keynote:Sound.Fd, sound:Sound.Cd| Sound.D | Sound.E | Sound.Fd| Sound.Gd| Sound.A | Sound.B),
+                new Scale("C# minor", keynote:Sound.Cd, sound:Sound.Cd| Sound.Dd| Sound.E | Sound.Fd| Sound.Gd| Sound.A | Sound.B),
+                new Scale("G# minor", keynote:Sound.Gd, sound:Sound.Cd| Sound.Dd| Sound.E | Sound.Fd| Sound.Gd| Sound.Ad| Sound.B),
+
+                new Scale("Eb minor", keynote:Sound.Dd, sound:Sound.Cd| Sound.Dd| Sound.F | Sound.Fd| Sound.Gd| Sound.Ad| Sound.B),
+                new Scale("Bb minor", keynote:Sound.Ad, sound:Sound.C | Sound.Cd| Sound.Dd| Sound.F | Sound.Fd| Sound.Gd| Sound.Ad),
+                new Scale("F minor", keynote:Sound.F, sound:Sound.C | Sound.Cd| Sound.Dd| Sound.F | Sound.G | Sound.Gd| Sound.Ad),
+                new Scale("C minor", keynote:Sound.C, sound:Sound.C | Sound.D | Sound.Dd| Sound.F | Sound.G | Sound.Gd| Sound.Ad),
+                new Scale("G minor", keynote:Sound.G, sound:Sound.C | Sound.D | Sound.Dd| Sound.F | Sound.G | Sound.A | Sound.Ad),
+
+                new Scale("D minor", keynote:Sound.D, sound:Sound.C | Sound.D | Sound.E | Sound.F | Sound.G | Sound.A | Sound.Ad),
             };
 
-            this.ScalesAll = scales;
-            this.scalesToShow = scales;
+            this.ScalesAll = ScalesBasic;
+            this.scalesToShow = ScalesBasic;
 
             this.ScaleCommand = new CommandParametrized( (arg) => UpdateInterfaceWithScale( (Scale)arg ) );
         }

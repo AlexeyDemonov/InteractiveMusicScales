@@ -96,8 +96,6 @@ namespace InteractiveMusicScales
         //Scale selector
         public ICommand ScaleCommand { get; }
 
-        Scale[] ScalesAll;
-
         Scale[] scalesToShow;
         public Scale[] ScalesToShow
         {
