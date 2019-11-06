@@ -22,7 +22,20 @@ namespace InteractiveMusicScales
         //Constructor
         public InterfaceData()
         {
-            this.NoteCommand = new CommandParametrized( (arg) => ToggleNoteCheck((Note)arg) );
+            Application.Current.Startup += Handle_ApplicationStart;
+        }
+
+        //==============================================================
+        //Events
+        public Func<Scale[]> Request_LoadAdditionalScales;
+        public Action<Scale[]> Request_SaveAdditionalScales;
+        public Func<SettingsRequestEventArgs> Request_LoadSettings;
+
+        //==============================================================
+        //Loading
+        void Handle_ApplicationStart(object sender, EventArgs args)
+        {
+            this.NoteCommand = new CommandParametrized((arg) => ToggleNoteCheck((Note)arg));
 
             var notes = new Note[]
             {
@@ -41,29 +54,44 @@ namespace InteractiveMusicScales
             };
 
             this.Notes = notes;
-
             this.pianoroll = new Pianoroll(notes);
-            this.pianorollSemitone = Semitone.Sharp;
-
             this.fretboard = new Fretboard(notes, strings: STRINGS_COUNT);
-            this.fretboardSemitone = Semitone.Sharp;
 
-            this.fretboard[0] = notes[4]; //E
-            this.fretboard[1] = notes[11];//B
-            this.fretboard[2] = notes[7]; //G
-            this.fretboard[3] = notes[2]; //D
-            this.fretboard[4] = notes[9]; //A
-            this.fretboard[5] = notes[4]; //E
-            this.fretboard[6] = notes[11];//B
-            this.fretboard[7] = notes[7]; //G
-            this.fretboard[8] = notes[2]; //D
-            this.fretboard[9] = notes[9]; //A
-            this.fretboard[10] = notes[4];//E
-            this.fretboard[11] = notes[11];//B
+            var loadedSettings = Request_LoadSettings?.Invoke();
+
+            if(loadedSettings != null)
+            {
+                this.pianorollSemitone = loadedSettings.PianorollSemitone;
+                this.fretboardSemitone = loadedSettings.FretboardSemitone;
+                this.lastVisibleString = loadedSettings.LastVisibleString;
+
+                for (int i = 0; i < STRINGS_COUNT; i++)
+                {
+                    this.fretboard[i] = loadedSettings.FretboardStrings[i];
+                }
+            }
+            else
+            {
+                this.pianorollSemitone = Semitone.Sharp;
+                this.fretboardSemitone = Semitone.Sharp;
+                this.lastVisibleString = 5;
+
+                this.fretboard[0] = notes[4]; //E
+                this.fretboard[1] = notes[11];//B
+                this.fretboard[2] = notes[7]; //G
+                this.fretboard[3] = notes[2]; //D
+                this.fretboard[4] = notes[9]; //A
+                this.fretboard[5] = notes[4]; //E
+                this.fretboard[6] = notes[11];//B
+                this.fretboard[7] = notes[7]; //G
+                this.fretboard[8] = notes[2]; //D
+                this.fretboard[9] = notes[9]; //A
+                this.fretboard[10] = notes[4];//E
+                this.fretboard[11] = notes[11];//B
+            }
 
             this.fretboard.Event_RootNotesChanged += UpdateFretBoardNoteBindings;
 
-            this.lastVisibleString = 5;
             this.stringVisibility = new bool[STRINGS_COUNT];
 
             for (int i = 0; i <= lastVisibleString; i++)
@@ -107,18 +135,22 @@ namespace InteractiveMusicScales
                 new Scale("D minor", keynoteSound:Sound.D, scaleSound:Sound.C | Sound.D | Sound.E | Sound.F | Sound.G | Sound.A | Sound.Ad),
             };
 
-            this.ScalesAll = new List<Scale>( ScalesBasic );
-            this.ScalesAll.Sort(new ScalesSorter());
+            this.ScalesAll = new List<Scale>(ScalesBasic);
 
+            AdditionalScales = Request_LoadAdditionalScales?.Invoke() ?? new Scale[0];
+
+            if(AdditionalScales.Length > 0)
+                ScalesAll.AddRange(AdditionalScales);
+
+            this.ScalesAll.Sort(new ScalesSorter());
             this.scalesToShow = ScalesAll.ToArray();
 
-            this.ScaleCommand = new CommandParametrized( (arg) => UpdateInterfaceWithScale( (Scale)arg ) );
+            this.ScaleCommand = new CommandParametrized((arg) => UpdateInterfaceWithScale((Scale)arg));
             this.ClearUICommand = new Command(ClearUI);
         }
 
-
         //==============================================================
-        //Methods
+        //Partial Methods
         partial void ToggleNoteCheck(Note note);
         partial void UpdateFretBoardNoteBindings();
         partial void AddString();

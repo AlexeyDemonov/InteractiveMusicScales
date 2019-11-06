@@ -59,6 +59,7 @@
     <Compile Include="InterfaceSubClasses\Converters\HiddenNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SharpNoteNameConverter.cs" />
     <Compile Include="Subclasses\ScalesSorter.cs" />
+    <Compile Include="Subclasses\SettingsRequestEventArgs.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

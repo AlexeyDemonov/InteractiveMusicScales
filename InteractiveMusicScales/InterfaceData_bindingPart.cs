@@ -26,8 +26,8 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Common
-        public ICommand NoteCommand { get; }
-        public Note[] Notes { get; }
+        public ICommand NoteCommand { get; private set; }
+        public Note[] Notes { get; private set; }
 
         //==============================================================
         //Pianoroll
@@ -56,8 +56,8 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Fretboard
-        public ICommand AddStringCommand { get; }
-        public ICommand RemoveStringCommand { get; }
+        public ICommand AddStringCommand { get; private set; }
+        public ICommand RemoveStringCommand { get; private set; }
 
         Fretboard fretboard;
         public Fretboard Fretboard
@@ -94,8 +94,8 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Scale selector
-        public ICommand ScaleCommand { get; }
-        public ICommand ClearUICommand { get; }
+        public ICommand ScaleCommand { get; private set; }
+        public ICommand ClearUICommand { get; private set; }
 
         Scale[] scalesToShow;
         public Scale[] ScalesToShow
