@@ -107,5 +107,10 @@ namespace InteractiveMusicScales
                 RaisePropertyChange();
             }
         }
+
+        //==============================================================
+        //Scale save/delete
+        public ICommand SaveScaleCommand { get; private set; }
+        public ICommand DeleteScaleCommand { get; private set; }
     }
 }

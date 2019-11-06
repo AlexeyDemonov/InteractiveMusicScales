@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InteractiveMusicScales
 {
@@ -94,8 +95,6 @@ namespace InteractiveMusicScales
             var scaleSwap = this.ScalesToShow;
             this.ScalesToShow = null;
             this.ScalesToShow = scaleSwap;
-
-            UpdateFretBoardNoteBindings();
         }
 
         //==============================================================
@@ -199,6 +198,103 @@ namespace InteractiveMusicScales
             var stringsSwap = this.StringVisibility;
             this.StringVisibility = null;
             this.StringVisibility = stringsSwap;
+        }
+
+        //==============================================================
+        //Scale Add/Delete
+        partial void RunSaveScaleDialog()
+        {
+            /*guardians*/
+            if(currentShowScale != null)
+            {
+                WarnUser("Cannot save the new scale while other scale is in display");
+                return;
+            }
+
+            if (currentSound == 0)
+            {
+                WarnUser("Cannot save empty scale");
+                return;
+            }
+
+
+            var selectedNotes = new List<Note>();
+
+            foreach (var note in Notes)
+            {
+                if(note.IsChecked)
+                    selectedNotes.Add(note);
+            }
+
+            var dialogWindow = new ScaleSaveDialogWindow( selectedNotes.ToArray() );
+            dialogWindow.DataContext = this;
+            var result = dialogWindow.ShowDialog();
+
+            if(result == true)
+            {
+                /*guardians*/
+                if(dialogWindow.ScaleName == null)
+                    throw new ArgumentNullException("dialogWindow.ScaleName");
+                if(dialogWindow.KeynoteOfChoice == null)
+                    throw new ArgumentNullException("dialogWindow.KeynoteOfChoice");
+
+                string scaleName = dialogWindow.ScaleName;
+                Sound keynoteSound = dialogWindow.KeynoteOfChoice.Sound;
+
+                Scale newScale = new Scale(scaleName, keynoteSound, currentSound);
+
+                AdditionalScales.Add(newScale);
+
+                ScalesAll.Add(newScale);
+                ScalesAll.Sort(new ScalesSorter());
+
+                Request_SaveAdditionalScales?.Invoke(AdditionalScales.ToArray());
+
+                MessageBox.Show($"Scale {scaleName} successfully saved");
+
+                ClearUI();
+            }
+        }
+
+        void WarnUser(string warning)
+        {
+            MessageBox.Show(warning, string.Empty, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
+        partial void DeleteSelectedScale()
+        {
+            if(currentShowScale == null)
+            {
+                WarnUser("To delete the scale one must first select it");
+                return;
+            }
+
+            var scaleToDelete = currentShowScale;
+            bool itIsBasicScale = default(bool);
+
+            foreach (var scale in ScalesBasic)
+            {
+                if( Object.ReferenceEquals(scaleToDelete, scale) )
+                {
+                    itIsBasicScale = true;
+                    break;
+                }
+            }
+            
+            if(itIsBasicScale)
+            {
+                WarnUser("Cannot delete basic scale");
+                return;
+            }
+
+            AdditionalScales.Remove(scaleToDelete);
+            ScalesAll.Remove(scaleToDelete);
+
+            Request_SaveAdditionalScales?.Invoke(AdditionalScales.ToArray());
+
+            MessageBox.Show("Scale deleted");
+
+            ClearUI();
         }
     }
 }

@@ -53,11 +53,15 @@
   <ItemGroup>
     <Compile Include="InterfaceSubClasses\Converters\BoolToHeightConverter.cs" />
     <Compile Include="InterfaceData_commandMethods.cs" />
+    <Compile Include="InterfaceSubClasses\Converters\NotesToStringConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\ScalesToScaleButtonsConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SemitoneToBoolConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\FlatNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\HiddenNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SharpNoteNameConverter.cs" />
+    <Compile Include="ScaleSaveDialogWindow.xaml.cs">
+      <DependentUpon>ScaleSaveDialogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Subclasses\ScalesSorter.cs" />
     <Compile Include="Subclasses\SettingsRequestEventArgs.cs" />
     <Page Include="App.xaml">
@@ -85,6 +89,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ScaleSaveDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Sound.cs" />

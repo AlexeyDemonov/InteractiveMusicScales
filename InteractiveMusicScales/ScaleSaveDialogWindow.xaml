@@ -1,0 +1,62 @@
+﻿<Window x:Class="InteractiveMusicScales.ScaleSaveDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InteractiveMusicScales"
+        xmlns:i="clr-namespace:InteractiveMusicScales.Interface"
+        mc:Ignorable="d"
+        Title="ScaleSaveDialogWindow" Height="450" Width="800">
+    <Window.Resources>
+        
+        <!--Converters-->
+        <i:NotesToStringConverter x:Key="NotesToString"/>
+        <i:SharpNoteNameConverter x:Key="SharpNotes"/>
+        <i:FlatNoteNameConverter x:Key="FlatNotes"/>
+        
+        <!--Colors-->
+        <SolidColorBrush x:Key="Background">#D3D3D3</SolidColorBrush>
+        
+        <!--Selected notes panel-->
+        <Style x:Key="SelectedNotes" TargetType="TextBlock">
+
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding PianorollSemitone}" Value="Sharp">
+                    <Setter Property="Text" Value="{Binding CurrentlySelectedNotes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource SharpNotes}}"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding PianorollSemitone}" Value="Flat">
+                    <Setter Property="Text" Value="{Binding CurrentlySelectedNotes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource FlatNotes}}"/>
+                </DataTrigger>
+
+            </Style.Triggers>
+            
+        </Style>
+
+    </Window.Resources>
+    
+    <Grid Background="{StaticResource Background}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Notes to show-->
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBlock>Notes:</TextBlock>
+            <TextBlock Style="{StaticResource SelectedNotes}"/>
+        </StackPanel>
+        
+        <!--Buttons-->
+        <Button Grid.Row="2" Grid.Column="0" Command="{Binding ConfirmScaleSaveCommand}">OK</Button>
+        <Button Grid.Row="2" Grid.Column="1" Command="{Binding ConfirmScaleSaveCommand}">Cancel</Button>
+        
+    </Grid>
+</Window>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    class Note
+    public class Note
     {
         public Sound Sound { get; }
 

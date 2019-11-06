@@ -15,7 +15,7 @@ namespace InteractiveMusicScales
         const int STRINGS_COUNT = 12;
         int lastVisibleString;
         Scale[] ScalesBasic;
-        Scale[] AdditionalScales;
+        List<Scale> AdditionalScales;
         List<Scale> ScalesAll;
 
         //==============================================================
@@ -137,16 +137,26 @@ namespace InteractiveMusicScales
 
             this.ScalesAll = new List<Scale>(ScalesBasic);
 
-            AdditionalScales = Request_LoadAdditionalScales?.Invoke() ?? new Scale[0];
+            var loadedScales = Request_LoadAdditionalScales?.Invoke();
 
-            if(AdditionalScales.Length > 0)
-                ScalesAll.AddRange(AdditionalScales);
+            if (loadedScales != null && loadedScales.Length > 0)
+            {
+                AdditionalScales = new List<Scale>( loadedScales );
+                ScalesAll.AddRange( AdditionalScales );
+            }
+            else
+            {
+                AdditionalScales = new List<Scale>();
+            }
 
             this.ScalesAll.Sort(new ScalesSorter());
             this.scalesToShow = ScalesAll.ToArray();
 
             this.ScaleCommand = new CommandParametrized((arg) => UpdateInterfaceWithScale((Scale)arg));
+
             this.ClearUICommand = new Command(ClearUI);
+            this.SaveScaleCommand = new Command(RunSaveScaleDialog);
+            this.DeleteScaleCommand = new Command(DeleteSelectedScale);
         }
 
         //==============================================================
@@ -157,5 +167,7 @@ namespace InteractiveMusicScales
         partial void RemoveString();
         partial void UpdateInterfaceWithScale(Scale scale);
         partial void ClearUI();
+        partial void RunSaveScaleDialog();
+        partial void DeleteSelectedScale();
     }
 }

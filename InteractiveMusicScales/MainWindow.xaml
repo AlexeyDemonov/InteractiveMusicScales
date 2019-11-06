@@ -116,8 +116,8 @@
                 </StackPanel.Resources>
 
                 <Button Command="{Binding ClearUICommand}">[R]</Button>
-                <Button>[S]</Button>
-                <Button>[D]</Button>
+                <Button Command="{Binding SaveScaleCommand}">[S]</Button>
+                <Button Command="{Binding DeleteScaleCommand}">[D]</Button>
             </StackPanel>
 
             <!--Scale selector-->
