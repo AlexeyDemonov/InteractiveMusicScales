@@ -21,25 +21,29 @@
         <SolidColorBrush x:Key="MenuColor">#B4B4B4</SolidColorBrush>
         <SolidColorBrush x:Key="Background">#D3D3D3</SolidColorBrush>
 
-
-        <!--NoteButton Style and Triggers-->
-        <Style x:Key="MainNoteButtonStyle" TargetType="i:NoteButton">
-
+        <!--Base Note/Scale button style-->
+        <Style x:Key="BaseForNoteAndScaleButtons" TargetType="Button">
+            
             <!--Template rework for changing 'mouse over' highlight effect-->
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="i:NoteButton">
+                    <ControlTemplate TargetType="Button">
                         <Border BorderThickness="0.5" BorderBrush="Black" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" Value="0.75"/>
+                                <Setter Property="Opacity" Value="0.5"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            
+        </Style>
+        
+        <!--NoteButton Style and Triggers-->
+        <Style x:Key="MainNoteButtonStyle" TargetType="i:NoteButton" BasedOn="{StaticResource BaseForNoteAndScaleButtons}">
 
             <!--Static properties-->
             <Setter Property="Focusable" Value="False"/>
@@ -66,15 +70,20 @@
 
 
         <!--ScaleButton Style and Triggers-->
-        <Style TargetType="i:ScaleButton">
-            
-            <!--Static properties-->
-            <Setter Property="Focusable" Value="False"/>
+        <Style TargetType="i:ScaleButton" BasedOn="{StaticResource BaseForNoteAndScaleButtons}">
 
             <!--Binded properties-->
             <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale.Name}"/>
             <Setter Property="Command" Value="{Binding ScaleCommand}"/>
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale}"/>
+            
+            <!--Trigger-->
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Scale.IsChecked}" Value="True">
+                    <Setter Property="Background" Value="LightCoral"/>
+                </DataTrigger>
+            </Style.Triggers>
+            
         </Style>
 
     </Window.Resources>
@@ -97,7 +106,7 @@
 
 
         <!--===================================Scales selector===================================-->
-        <DockPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" LastChildFill="True" Background="{StaticResource Background}">
+        <DockPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" LastChildFill="True" Background="{StaticResource MenuColor}">
             <!--Menu on the top-->
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{StaticResource MenuColor}">
                 <StackPanel.Resources>

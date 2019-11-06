@@ -43,7 +43,7 @@ namespace InteractiveMusicScales
             currentSound = 0;
 
             FilterAvailableScales();
-            UpdateAllNoteBindings();
+            UpdateUI();
         }
 
         partial void ToggleNoteCheck(Note note)
@@ -63,18 +63,23 @@ namespace InteractiveMusicScales
                 currentSound ^= note.Sound;//Removes note from current sound
 
             FilterAvailableScales();
-            UpdateAllNoteBindings();
+            UpdateUI();
         }
 
         //==============================================================
         //UI update
-        void UpdateAllNoteBindings()
+        void UpdateUI()
+        {
+            UpdatePianorollNoteBindings();
+            UpdateFretBoardNoteBindings();
+            UpdateScaleBindings();
+        }
+
+        void UpdatePianorollNoteBindings()
         {
             var pianoSwap = this.Pianoroll;
             this.Pianoroll = null;
             this.Pianoroll = pianoSwap;
-
-            UpdateFretBoardNoteBindings();
         }
 
         partial void UpdateFretBoardNoteBindings()
@@ -84,6 +89,14 @@ namespace InteractiveMusicScales
             this.Fretboard = fretSwap;
         }
 
+        void UpdateScaleBindings()
+        {
+            var scaleSwap = this.ScalesToShow;
+            this.ScalesToShow = null;
+            this.ScalesToShow = scaleSwap;
+
+            UpdateFretBoardNoteBindings();
+        }
 
         //==============================================================
         //Scale selection
@@ -152,8 +165,10 @@ namespace InteractiveMusicScales
                 MarkIncludedNotes(currentSound);
             }
 
-            UpdateAllNoteBindings();
+            UpdateUI();
         }
+
+
 
         //==============================================================
         //Fretboard part
