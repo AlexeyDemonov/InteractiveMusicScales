@@ -10,33 +10,64 @@ namespace InteractiveMusicScales
     {
         //==============================================================
         //Fields
+        Note currentKeynote;
+        Scale currentShowScale;
         Sound currentSound = 0;
-        Sound currentKeyNote = 0;
         const int MIN_STRING_INDEX = 2;
         const int MAX_STRING_INDEX = 11;
 
         //==============================================================
         //Common
+        void MarkIncludedNotes(Sound sound)
+        {
+            foreach (var note in Notes)
+            {
+                //The magic of bitwise comparison, if the sound of a note is included to the 'sound' - combination of notes,
+                //then at the output of the bitwise 'OR' operation we will get the same 'sound'
+                if ((sound | note.Sound) == sound)
+                    note.IsChecked = true;
+                else
+                    note.IsChecked = false;
+            }
+        }
+
+        partial void ClearUI()
+        {
+            RemoveScaleIfAny();
+
+            foreach (var note in Notes)
+            {
+                note.IsChecked = false;
+            }
+
+            currentSound = 0;
+
+            FilterAvailableScales();
+            UpdateAllNoteBindings();
+        }
+
         partial void ToggleNoteCheck(Note note)
         {
-            note.IsChecked = !note.IsChecked;
+            if(currentShowScale != null)
+            {
+                //Restore UI before Scale was selected
+                RemoveScaleIfAny();
+                MarkIncludedNotes(currentSound);
+            }
+
+            note.IsChecked = !note.IsChecked;//Will be used in UI to mark note as checked/unchecked
 
             if (note.IsChecked)
                 currentSound |= note.Sound;//Adds note to current sound
             else
                 currentSound ^= note.Sound;//Removes note from current sound
 
-            if(currentKeyNote != 0)
-                for (int i = 0; i < Notes.Length; i++)
-                        Notes[i].IsKeynote = false;
-
-            currentKeyNote = 0;
-
             FilterAvailableScales();
-
             UpdateAllNoteBindings();
         }
 
+        //==============================================================
+        //UI update
         void UpdateAllNoteBindings()
         {
             var pianoSwap = this.Pianoroll;
@@ -53,6 +84,76 @@ namespace InteractiveMusicScales
             this.Fretboard = fretSwap;
         }
 
+
+        //==============================================================
+        //Scale selection
+        void RemoveScaleIfAny()
+        {
+            if (currentShowScale != null)
+            {
+                currentShowScale.IsChecked = false;
+                currentShowScale = null;
+            }
+
+            if (currentKeynote != null)
+            {
+                currentKeynote.IsKeynote = false;
+                currentKeynote = null;
+            }
+        }
+
+        void FilterAvailableScales()
+        {
+            if(currentSound == 0)
+            {
+                ScalesToShow = ScalesAll.ToArray();
+            }
+            else
+            {
+                List<Scale> fittingScales = new List<Scale>();
+
+                foreach (var scale in ScalesAll)
+                {
+                    //The magic of bitwise comparison, if 'currentSound' - set of notes is a subset of a scale,
+                    //then at the output of the bitwise 'OR' operation we will get the same scale
+                    if( (scale.Sound | currentSound) == scale.Sound )
+                        fittingScales.Add(scale);
+                }
+
+                ScalesToShow = fittingScales.ToArray();
+            }
+        }
+
+        partial void UpdateInterfaceWithScale(Scale scale)
+        {
+            if(scale != currentShowScale)
+            {
+                RemoveScaleIfAny();//Clear previous scale
+
+                currentShowScale = scale;
+                scale.IsChecked = true;
+
+                foreach (var note in Notes)
+                {
+                    if( note.Sound == scale.KeynoteSound )
+                    {
+                        note.IsKeynote = true;
+                        currentKeynote = note;
+                        break;
+                    }
+                }
+
+                MarkIncludedNotes(scale.Sound);
+            }
+            else/* if (scale == currentShowScale)*/
+            {
+                //Just remove current scale and go back to custom mode
+                RemoveScaleIfAny();
+                MarkIncludedNotes(currentSound);
+            }
+
+            UpdateAllNoteBindings();
+        }
 
         //==============================================================
         //Fretboard part
@@ -83,75 +184,6 @@ namespace InteractiveMusicScales
             var stringsSwap = this.StringVisibility;
             this.StringVisibility = null;
             this.StringVisibility = stringsSwap;
-        }
-
-        //==============================================================
-        //Scale selection
-        void FilterAvailableScales()
-        {
-            if(currentSound == 0)
-            {
-                ScalesToShow = ScalesAll.ToArray();
-            }
-            else
-            {
-                List<Scale> fittingScales = new List<Scale>();
-
-                foreach (var scale in ScalesAll)
-                {
-                    //The magic of bitwise comparison, if 'currentSound' - set of notes is a subset of a scale,
-                    //then at the output of the bitwise 'OR' operation we will get the same scale
-                    if( (scale.Sound | currentSound) == scale.Sound )
-                        fittingScales.Add(scale);
-                }
-
-                ScalesToShow = fittingScales.ToArray();
-            }
-        }
-
-        partial void UpdateInterfaceWithScale(Scale scale)
-        {
-            //Clear interface if applying the same scale
-            if(scale.Sound == currentSound && scale.Keynote == currentKeyNote)
-            {
-                DropAllNotes();
-                return;
-            }
-
-            currentSound = scale.Sound;
-            currentKeyNote = scale.Keynote;
-
-            foreach (var note in Notes)
-            {
-                if(note.Sound == scale.Keynote)
-                    note.IsKeynote = true;
-                else
-                    note.IsKeynote = false;
-
-                //The magic of bitwise comparison, if the sound of a note is included to the scale,
-                //then at the output of the bitwise 'OR' operation we will get the same scale
-                if ( (scale.Sound | note.Sound) == scale.Sound)
-                    note.IsChecked = true;
-                else
-                    note.IsChecked = false;
-            }
-
-            UpdateAllNoteBindings();
-        }
-
-        partial void DropAllNotes()
-        {
-            currentSound = 0;
-            currentKeyNote = 0;
-
-            foreach (var note in Notes)
-            {
-                note.IsKeynote = false;
-                note.IsChecked = false;
-            }
-
-            FilterAvailableScales();
-            UpdateAllNoteBindings();
         }
     }
 }

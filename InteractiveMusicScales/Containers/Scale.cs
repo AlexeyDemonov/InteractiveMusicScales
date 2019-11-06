@@ -10,13 +10,14 @@ namespace InteractiveMusicScales
     {
         public string Name { get; }
         public Sound Sound { get; }
-        public Sound Keynote { get; }
+        public Sound KeynoteSound { get; }
+        public bool IsChecked { get; set; }
 
-        public Scale(string name, Sound keynote, Sound sound)
+        public Scale(string name, Sound keynoteSound, Sound scaleSound)
         {
             this.Name = name;
-            this.Keynote = keynote;
-            this.Sound = sound;
+            this.KeynoteSound = keynoteSound;
+            this.Sound = scaleSound;
         }
 
         public override string ToString()
