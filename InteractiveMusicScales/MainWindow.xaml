@@ -192,33 +192,23 @@
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding Notes}"/>
 
-                            <Style.Triggers>
+                            <!--Default item style-->
+                            <Setter Property="ItemTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource SharpNotes}}"/>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
 
-                                <DataTrigger Binding="{Binding FretboardSemitone}" Value="Sharp">
-                                    <Setter Property="ItemTemplate">
-                                        <Setter.Value>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Converter={StaticResource SharpNotes}}"/>
-                                            </DataTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
+                            <!--Change to flat if 'b' is chosen-->
+                            <Style.Triggers>
 
                                 <DataTrigger Binding="{Binding FretboardSemitone}" Value="Flat">
                                     <Setter Property="ItemTemplate">
                                         <Setter.Value>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Converter={StaticResource FlatNotes}}"/>
-                                            </DataTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
-
-                                <DataTrigger Binding="{Binding FretboardSemitone}" Value="Hidden">
-                                    <Setter Property="ItemTemplate">
-                                        <Setter.Value>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Converter={StaticResource SharpNotes}}"/>
                                             </DataTemplate>
                                         </Setter.Value>
                                     </Setter>
