@@ -10,8 +10,8 @@
     <Window.Resources>
 
         <!--Converters-->
-        <i:SharpNoteNameConverter  x:Key="SharpNotes"/>
-        <i:FlatNoteNameConverter   x:Key="FlatNotes"/>
+        <i:SharpNoteNameConverter x:Key="SharpNotes"/>
+        <i:FlatNoteNameConverter  x:Key="FlatNotes"/>
         <i:HiddenNoteNameConverter x:Key="HiddenNotes"/>
         <i:SemitoneToBoolConverter x:Key="SemitoneToBool"/>
         <i:BoolToHeightConverter   x:Key="BoolToHeight"/>

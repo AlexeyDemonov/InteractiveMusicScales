@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,9 +30,9 @@ namespace InteractiveMusicScales
     {
         //==============================================================
         //Properties
-        public string ScaleName { get; set; }
         public Note[] Notes { get; }
         public Note KeynoteOfChoice { get; set; }
+        public string ScaleName { get; set; }
 
         //==============================================================
         //Constructor
@@ -41,14 +43,69 @@ namespace InteractiveMusicScales
             InitializeComponent();
         }
 
-        //==============================================================
-        //Handlers
-        private void OKButton_Click(object sender, RoutedEventArgs e)
+        
+
+        protected override void OnInitialized(EventArgs e)
         {
-            
+            base.OnInitialized(e);
+
+            this.ScaleNameInputText.Focus();
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        //==============================================================
+        //Handlers
+        private void OKButton_Click(object sender, RoutedEventArgs e) => TryToApplyChoice();
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e) => CancelDialog();
+
+        private void Preview_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                e.Handled = true;
+
+                //Trigger databinding so that inserted scale name would be delivered
+                this.ScaleNameInputText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
+                TryToApplyChoice();
+            }
+            else if (e.Key == Key.Escape)
+            {
+                e.Handled = true;
+                CancelDialog();
+            }
+        }
+
+        //==============================================================
+        //Methods
+        void TryToApplyChoice()
+        {
+            bool allIsGood = true;
+
+            if(string.IsNullOrEmpty(ScaleName))
+            {
+                this.ScaleNameInputText.Background = new SolidColorBrush(Colors.LightCoral);
+                allIsGood = false;
+            }
+
+            if(KeynoteOfChoice == null)
+            {
+                this.ComboBoxSelectionBack.Background = new SolidColorBrush(Colors.LightCoral);
+                allIsGood = false;
+            }
+
+            if(allIsGood)
+            {
+                this.DialogResult = true;
+                this.Close();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        void CancelDialog()
         {
             this.DialogResult = false;
             this.Close();

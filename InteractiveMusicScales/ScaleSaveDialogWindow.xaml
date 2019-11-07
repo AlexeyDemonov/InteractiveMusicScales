@@ -10,13 +10,14 @@
         Title="New scale"
         WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        PreviewKeyDown="Preview_KeyDown">
     <Window.Resources>
 
         <!--Converters-->
         <i:NotesToStringConverter x:Key="NotesToString"/>
         <i:SharpNoteNameConverter x:Key="SharpNotes"/>
-        <i:FlatNoteNameConverter x:Key="FlatNotes"/>
+        <i:FlatNoteNameConverter  x:Key="FlatNotes"/>
         
         <!--Colors-->
         <SolidColorBrush x:Key="Background">#D3D3D3</SolidColorBrush>
@@ -39,7 +40,7 @@
         </Style>
 
         <!--Combobox style-->
-        <Style TargetType="ComboBox" x:Key="KeynoteSelection">
+        <Style TargetType="ComboBox">
             <Style.Triggers>
 
                 <DataTrigger Binding="{Binding PianorollSemitone}" Value="Sharp">
@@ -69,36 +70,53 @@
 
     </Window.Resources>
 
-    <Grid Margin="15">
+    <Grid Background="{StaticResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*" MinWidth="70" SharedSizeGroup="A"/>
+            <ColumnDefinition Width="*" MinWidth="70" SharedSizeGroup="A"/>
         </Grid.ColumnDefinitions>
 
         <!--Notes to show-->
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SelectedNotes}"/>
+        <TextBlock Margin="5" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SelectedNotes}"/>
 
         <!--Keynote selection-->
-        <TextBlock Grid.Row="2">Keynote:</TextBlock>
+        <TextBlock Margin="5" Grid.Row="2" VerticalAlignment="Center">Keynote:</TextBlock>
 
-        <ComboBox 
-            
+        <Border
+            Margin="5"
+            Name="ComboBoxSelectionBack"
+            Background="{StaticResource Background}"
+            Grid.Row="2"
+            Grid.Column="1">
+
+            <ComboBox
             Grid.Row="2"
             Grid.Column="1"
             HorizontalAlignment="Left"
+            Margin="3"
             ItemsSource="{Binding ElementName=thisWindow, Path=Notes}"
             SelectedItem="{Binding ElementName=thisWindow, Path=KeynoteOfChoice, Mode=OneWayToSource}"/>
+        </Border>
 
-
+        <!--Scale name-->
+        <TextBox
+            Name="ScaleNameInputText"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Margin="5,10,5,10"
+            Text="{Binding ElementName=thisWindow, Path=ScaleName, Mode=OneWayToSource}" MaxLength="16" MaxLines="1"/>
+        
+        <!--Buttons-->
+        <Button Margin="5" Grid.Row="4" Grid.Column="0" Click="OKButton_Click">OK</Button>
+        <Button Margin="5" Grid.Row="4" Grid.Column="1" Click="CancelButton_Click">Cancel</Button>
 
     </Grid>
 </Window>
