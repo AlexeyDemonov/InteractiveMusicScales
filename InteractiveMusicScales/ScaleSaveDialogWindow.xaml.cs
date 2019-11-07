@@ -43,8 +43,6 @@ namespace InteractiveMusicScales
             InitializeComponent();
         }
 
-        
-
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
@@ -58,28 +56,13 @@ namespace InteractiveMusicScales
 
         private void CancelButton_Click(object sender, RoutedEventArgs e) => CancelDialog();
 
-        private void Preview_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Enter)
-            {
-                e.Handled = true;
-
-                //Trigger databinding so that inserted scale name would be delivered
-                this.ScaleNameInputText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-
-                TryToApplyChoice();
-            }
-            else if (e.Key == Key.Escape)
-            {
-                e.Handled = true;
-                CancelDialog();
-            }
-        }
-
         //==============================================================
         //Methods
         void TryToApplyChoice()
         {
+            //Trigger databinding so that inserted scale name would be delivered
+            this.ScaleNameInputText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
             bool allIsGood = true;
 
             if(string.IsNullOrEmpty(ScaleName))

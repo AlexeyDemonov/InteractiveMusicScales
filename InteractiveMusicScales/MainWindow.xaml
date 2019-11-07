@@ -76,7 +76,7 @@
             <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale.Name}"/>
             <Setter Property="Command" Value="{Binding ScaleCommand}"/>
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale}"/>
-            
+
             <!--Trigger-->
             <Style.Triggers>
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Scale.IsChecked}" Value="True">
@@ -107,6 +107,7 @@
 
         <!--===================================Scales selector===================================-->
         <DockPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" LastChildFill="True" Background="{StaticResource MenuColor}">
+            
             <!--Menu on the top-->
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{StaticResource MenuColor}">
                 <StackPanel.Resources>
