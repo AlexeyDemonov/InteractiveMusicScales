@@ -83,10 +83,16 @@
                     <Setter Property="Background" Value="LightCoral"/>
                 </DataTrigger>
             </Style.Triggers>
-            
+
         </Style>
 
     </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding ClearUICommand}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveScaleCommand}" />
+        <KeyBinding Key="Delete" Command="{Binding DeleteScaleCommand}" />
+    </Window.InputBindings>
 
 
 
