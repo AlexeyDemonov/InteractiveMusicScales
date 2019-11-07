@@ -16,9 +16,7 @@ namespace InteractiveMusicScales
 {
     //==============================================================
     // Reasons why this class breaks MVVM's 'no code-behind' rule:
-    // 1) Main reason is to give user 'Esc' and 'Enter' hotkeys - ability to close this window or apply their choice by hitting one keyboard button, as we used to in other web and desktop apps
-    // I, in my heart, strongly believe that user experience, usability and flexibility must be prioritized over patterns.
-    // I could be wrong or missing something to make it possible even without code-behind and this decision wasn't easy, but I made it that way
+    // 1) To give user 'Esc' and 'Enter' hotkeys - ability to close this window or apply their choice by hitting one keyboard button, as we used to in other web and desktop apps
     // 2) InterfaceData class is already sized enough, small code allocation to other classes, especially code that specific for this exact functionality seems like a necessity to me
     // 3) Ease of management over this dialog result - all management is now may be concentrated in a single method body of InterfaceData class
     //==============================================================
@@ -34,11 +32,26 @@ namespace InteractiveMusicScales
         public Note[] Notes { get; }
         public Note KeynoteOfChoice { get; set; }
 
+        //==============================================================
+        //Constructor
         public ScaleSaveDialogWindow(Note[] notes)
         {
             this.Notes = notes;
 
             InitializeComponent();
+        }
+
+        //==============================================================
+        //Handlers
+        private void OKButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
         }
     }
 }

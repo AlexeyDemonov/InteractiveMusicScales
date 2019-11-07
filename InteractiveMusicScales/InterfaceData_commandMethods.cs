@@ -228,9 +228,9 @@ namespace InteractiveMusicScales
 
             var dialogWindow = new ScaleSaveDialogWindow( selectedNotes.ToArray() );
             dialogWindow.DataContext = this;
-            var result = dialogWindow.ShowDialog();
+            var dialogResult = dialogWindow.ShowDialog();
 
-            if(result == true)
+            if(dialogResult == true)
             {
                 /*guardians*/
                 if(dialogWindow.ScaleName == null)

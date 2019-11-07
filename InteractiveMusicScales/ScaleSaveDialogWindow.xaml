@@ -6,9 +6,13 @@
         xmlns:local="clr-namespace:InteractiveMusicScales"
         xmlns:i="clr-namespace:InteractiveMusicScales.Interface"
         mc:Ignorable="d"
-        Title="ScaleSaveDialogWindow" Height="450" Width="800">
+        Name="thisWindow"
+        Title="New scale"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight">
     <Window.Resources>
-        
+
         <!--Converters-->
         <i:NotesToStringConverter x:Key="NotesToString"/>
         <i:SharpNoteNameConverter x:Key="SharpNotes"/>
@@ -17,46 +21,84 @@
         <!--Colors-->
         <SolidColorBrush x:Key="Background">#D3D3D3</SolidColorBrush>
         
-        <!--Selected notes panel-->
+        <!--Selected notes textpanel style-->
         <Style x:Key="SelectedNotes" TargetType="TextBlock">
 
             <Style.Triggers>
 
                 <DataTrigger Binding="{Binding PianorollSemitone}" Value="Sharp">
-                    <Setter Property="Text" Value="{Binding CurrentlySelectedNotes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource SharpNotes}}"/>
+                    <Setter Property="Text" Value="{Binding ElementName=thisWindow, Path=Notes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource SharpNotes}}"/>
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding PianorollSemitone}" Value="Flat">
-                    <Setter Property="Text" Value="{Binding CurrentlySelectedNotes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource FlatNotes}}"/>
+                    <Setter Property="Text" Value="{Binding ElementName=thisWindow, Path=Notes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource FlatNotes}}"/>
                 </DataTrigger>
 
             </Style.Triggers>
             
         </Style>
 
+        <!--Combobox style-->
+        <Style TargetType="ComboBox" x:Key="KeynoteSelection">
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding PianorollSemitone}" Value="Sharp">
+                    <Setter Property="ItemTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource SharpNotes}}"/>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding PianorollSemitone}" Value="Flat">
+                    <Setter Property="ItemTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource FlatNotes}}"/>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+
     </Window.Resources>
-    
-    <Grid Background="{StaticResource Background}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+
+    <Grid Margin="15">
         <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
         <!--Notes to show-->
-        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBlock>Notes:</TextBlock>
-            <TextBlock Style="{StaticResource SelectedNotes}"/>
-        </StackPanel>
-        
-        <!--Buttons-->
-        <Button Grid.Row="2" Grid.Column="0" Command="{Binding ConfirmScaleSaveCommand}">OK</Button>
-        <Button Grid.Row="2" Grid.Column="1" Command="{Binding ConfirmScaleSaveCommand}">Cancel</Button>
-        
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SelectedNotes}"/>
+
+        <!--Keynote selection-->
+        <TextBlock Grid.Row="2">Keynote:</TextBlock>
+
+        <ComboBox 
+            
+            Grid.Row="2"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            ItemsSource="{Binding ElementName=thisWindow, Path=Notes}"
+            SelectedItem="{Binding ElementName=thisWindow, Path=KeynoteOfChoice, Mode=OneWayToSource}"/>
+
+
+
     </Grid>
 </Window>

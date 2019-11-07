@@ -10,9 +10,9 @@
     <Window.Resources>
 
         <!--Converters-->
-        <i:SharpNoteNameConverter  x:Key="SharpNote"/>
-        <i:FlatNoteNameConverter   x:Key="FlatNote"/>
-        <i:HiddenNoteNameConverter x:Key="HiddenNote"/>
+        <i:SharpNoteNameConverter  x:Key="SharpNotes"/>
+        <i:FlatNoteNameConverter   x:Key="FlatNotes"/>
+        <i:HiddenNoteNameConverter x:Key="HiddenNotes"/>
         <i:SemitoneToBoolConverter x:Key="SemitoneToBool"/>
         <i:BoolToHeightConverter   x:Key="BoolToHeight"/>
         <i:ScalesToScaleButtonsConverter x:Key="ScalesToButtons"/>
@@ -184,6 +184,41 @@
                         <!--Combobox style-->
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding Notes}"/>
+
+                            <Style.Triggers>
+
+                                <DataTrigger Binding="{Binding FretboardSemitone}" Value="Sharp">
+                                    <Setter Property="ItemTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Converter={StaticResource SharpNotes}}"/>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding FretboardSemitone}" Value="Flat">
+                                    <Setter Property="ItemTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Converter={StaticResource FlatNotes}}"/>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding FretboardSemitone}" Value="Hidden">
+                                    <Setter Property="ItemTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Converter={StaticResource SharpNotes}}"/>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+
+                            </Style.Triggers>
+                            
                         </Style>
                         
                         <!--Border style-->
@@ -201,20 +236,21 @@
 
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding FretboardSemitone}" Value="Sharp">
-                                    <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource SharpNote}}"/>
+                                    <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource SharpNotes}}"/>
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding FretboardSemitone}" Value="Flat">
-                                    <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource FlatNote}}"/>
+                                    <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource FlatNotes}}"/>
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding FretboardSemitone}" Value="Hidden">
-                                    <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource HiddenNote}}"/>
+                                    <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource HiddenNotes}}"/>
                                 </DataTrigger>
 
                             </Style.Triggers>
 
                         </Style>
+
                     </Grid.Resources>
 
                     <Grid.ColumnDefinitions>
@@ -702,11 +738,11 @@
 
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding PianorollSemitone}" Value="Sharp">
-                                <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource SharpNote}}"/>
+                                <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource SharpNotes}}"/>
                             </DataTrigger>
 
                             <DataTrigger Binding="{Binding PianorollSemitone}" Value="Flat">
-                                <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource FlatNote}}"/>
+                                <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource FlatNotes}}"/>
                             </DataTrigger>
                             
                         </Style.Triggers>
