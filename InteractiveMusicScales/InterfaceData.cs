@@ -102,7 +102,7 @@ namespace InteractiveMusicScales
             this.AddStringCommand = new Command(AddString);
             this.RemoveStringCommand = new Command(RemoveString);
 
-            ScalesBasic = new Scale[]
+            this.ScalesBasic = new Scale[]
             {
                 new Scale("C major", keynoteSound:Sound.C, scaleSound:Sound.C | Sound.D | Sound.E | Sound.F | Sound.G | Sound.A | Sound.B),
                 new Scale("G major", keynoteSound:Sound.G, scaleSound:Sound.C | Sound.D | Sound.E | Sound.Fd| Sound.G | Sound.A | Sound.B),

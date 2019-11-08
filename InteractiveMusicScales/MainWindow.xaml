@@ -20,6 +20,7 @@
         <!--Colors-->
         <SolidColorBrush x:Key="MenuColor">#B4B4B4</SolidColorBrush>
         <SolidColorBrush x:Key="Background">#D3D3D3</SolidColorBrush>
+        <SolidColorBrush x:Key="MarkColor">LightCoral</SolidColorBrush>
 
         <!--Base Note/Scale button style-->
         <Style x:Key="BaseForNoteAndScaleButtons" TargetType="Button">
@@ -57,7 +58,7 @@
             <Style.Triggers>
 
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Note.IsChecked}" Value="True">
-                    <Setter Property="Background" Value="LightCoral"/>
+                    <Setter Property="Background" Value="{StaticResource MarkColor}"/>
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Note.IsKeynote}" Value="True">
@@ -80,7 +81,7 @@
             <!--Trigger-->
             <Style.Triggers>
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Scale.IsChecked}" Value="True">
-                    <Setter Property="Background" Value="LightCoral"/>
+                    <Setter Property="Background" Value="{StaticResource MarkColor}"/>
                 </DataTrigger>
             </Style.Triggers>
 
