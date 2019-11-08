@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace InteractiveMusicScales.Interface
 {
-    abstract class AbstractNoteNameConverter : IValueConverter
+    abstract class AbstractTextValueConverter : IValueConverter
     {
         protected Dictionary<string,string> dictionary;
 

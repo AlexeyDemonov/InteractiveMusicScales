@@ -58,12 +58,14 @@
     <Compile Include="Containers\ScalesCirclesHolder.cs" />
     <Compile Include="InterfaceSubClasses\Converters\BoolToHeightConverter.cs" />
     <Compile Include="InterfaceData_commandMethods.cs" />
+    <Compile Include="InterfaceSubClasses\Converters\FlatScaleNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\NotesToStringConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\ScalesToScaleButtonsConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SemitoneToBoolConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\FlatNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\HiddenNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SharpNoteNameConverter.cs" />
+    <Compile Include="InterfaceSubClasses\Converters\SharpScaleNameConverter.cs" />
     <Compile Include="ScaleSaveDialogWindow.xaml.cs">
       <DependentUpon>ScaleSaveDialogWindow.xaml</DependentUpon>
     </Compile>
@@ -104,7 +106,7 @@
     <Compile Include="Containers\Note.cs" />
     <Compile Include="Containers\Pianoroll.cs" />
     <Compile Include="InterfaceSubClasses\NoteButton.cs" />
-    <Compile Include="InterfaceSubClasses\Converters\AbstractNoteNameConverter.cs" />
+    <Compile Include="InterfaceSubClasses\Converters\AbstractTextValueConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

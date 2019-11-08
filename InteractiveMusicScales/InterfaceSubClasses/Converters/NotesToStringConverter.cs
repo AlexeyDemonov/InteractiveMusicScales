@@ -13,9 +13,9 @@ namespace InteractiveMusicScales.Interface
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value != null && value is Note[] && parameter != null && parameter is AbstractNoteNameConverter)
+            if(value != null && value is Note[] && parameter != null && parameter is AbstractTextValueConverter)
             {
-                var converter = (AbstractNoteNameConverter)parameter;
+                var converter = (AbstractTextValueConverter)parameter;
                 var builder = new StringBuilder();
 
                 foreach (var note in (Note[])value)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InteractiveMusicScales.Interface
 {
-    class HiddenNoteNameConverter : AbstractNoteNameConverter
+    class HiddenNoteNameConverter : AbstractTextValueConverter
     {
         public HiddenNoteNameConverter()
         {

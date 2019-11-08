@@ -16,6 +16,8 @@
         <i:SemitoneToBoolConverter x:Key="SemitoneToBool"/>
         <i:BoolToHeightConverter   x:Key="BoolToHeight"/>
         <i:ScalesToScaleButtonsConverter x:Key="ScalesToButtons"/>
+        <i:FlatScaleNameConverter x:Key="FlatScale"/>
+        <i:SharpScaleNameConverter x:Key="SharpScale"/>
 
         <!--Colors-->
         <SolidColorBrush x:Key="MenuColor">#B4B4B4</SolidColorBrush>
@@ -24,7 +26,7 @@
 
         <!--Base Note/Scale button style-->
         <Style x:Key="BaseForNoteAndScaleButtons" TargetType="Button">
-            
+
             <!--Template rework for changing 'mouse over' highlight effect-->
             <Setter Property="Template">
                 <Setter.Value>
@@ -40,9 +42,9 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
+
         </Style>
-        
+
         <!--NoteButton Style and Triggers-->
         <Style x:Key="MainNoteButtonStyle" TargetType="i:NoteButton" BasedOn="{StaticResource BaseForNoteAndScaleButtons}">
 
@@ -101,15 +103,18 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MaxWidth="300"/>
-            <ColumnDefinition Width="5"/><!--Splitter-->
+            <ColumnDefinition Width="5"/>
+            <!--Splitter-->
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5"/><!--Splitter-->
+            <ColumnDefinition Width="5"/>
+            <!--Splitter-->
             <ColumnDefinition Width="265"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="5"/><!--Splitter-->
+            <RowDefinition Height="5"/>
+            <!--Splitter-->
             <RowDefinition Height="285"/>
         </Grid.RowDefinitions>
 
@@ -137,7 +142,7 @@
                 </Style>
 
                 <ImageBrush x:Key="Circle" ImageSource="Images\circle.png"/>
-                
+
             </DockPanel.Resources>
 
             <!--Menu-->
@@ -153,22 +158,34 @@
             <!--Circle itself-->
             <Canvas Margin="5">
                 <Canvas.Resources>
-                    <Style TargetType="i:ScaleButton" BasedOn="{StaticResource MainScaleButtonStyle}"/>
+                    <!--Scale buttons additional style-->
+                    <Style TargetType="i:ScaleButton" BasedOn="{StaticResource MainScaleButtonStyle}">
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CircleSemitone}" Value="Sharp">
+                                <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale.Name, Converter={StaticResource SharpScale}}"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding CircleSemitone}" Value="Flat">
+                                <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale.Name, Converter={StaticResource FlatScale}}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
                 </Canvas.Resources>
 
                 <Image Source="Images\circle.png" Height="256" Width="256"/>
 
                 <!--Outer circle-->
-                <i:ScaleButton Scale="{Binding ScalesCirclesHolder[0\,0]}" Height="104" Width="176" Canvas.Left="34" Canvas.Top="66"/>
+                <i:ScaleButton Scale="{Binding ScalesCirclesHolder[0\,0]}" Height="73" Width="138" Canvas.Left="107" Canvas.Top="5"/>
 
             </Canvas>
-            
+
         </DockPanel>
 
 
         <!--===================================Scales selector===================================-->
         <DockPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" LastChildFill="True" Background="{StaticResource MenuColor}">
-            
+
             <!--Menu on the top-->
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{StaticResource MenuColor}">
                 <StackPanel.Resources>
@@ -180,9 +197,15 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Button Command="{Binding ClearUICommand}" ToolTip="Clear UI [Esc]"><Image Source="Images\arrow.png"/></Button>
-                <Button Command="{Binding SaveScaleCommand}" ToolTip="Save current scale [Ctrl+S]"><Image Source="Images\diskette.png"/></Button>
-                <Button Command="{Binding DeleteScaleCommand}" ToolTip="Delete selected scale [Delete]"><Image Source="Images\bin.png"/></Button>
+                <Button Command="{Binding ClearUICommand}" ToolTip="Clear UI [Esc]">
+                    <Image Source="Images\arrow.png"/>
+                </Button>
+                <Button Command="{Binding SaveScaleCommand}" ToolTip="Save current scale [Ctrl+S]">
+                    <Image Source="Images\diskette.png"/>
+                </Button>
+                <Button Command="{Binding DeleteScaleCommand}" ToolTip="Delete selected scale [Delete]">
+                    <Image Source="Images\bin.png"/>
+                </Button>
             </StackPanel>
 
             <!--Scale selector-->
@@ -190,7 +213,7 @@
                 <ScrollViewer.Resources>
                     <Style TargetType="i:ScaleButton" BasedOn="{StaticResource MainScaleButtonStyle}"/>
                 </ScrollViewer.Resources>
-                
+
                 <ItemsControl ItemsSource="{Binding ScalesToShow, Converter={StaticResource ScalesToButtons}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -207,7 +230,7 @@
 
         <!--===================================Fretboard===================================-->
         <DockPanel Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" LastChildFill="True" Background="{StaticResource Background}">
-            
+
             <!--Menu on the left-->
             <DockPanel DockPanel.Dock="Left" LastChildFill="False" Background="{StaticResource MenuColor}">
                 <!--Semitone radiobuttons-->
@@ -231,16 +254,16 @@
                     <Button Command="{Binding RemoveStringCommand}">-</Button>
                     <Button Command="{Binding AddStringCommand}" Margin="0,0,0,30">+</Button>
                 </StackPanel>
-                
+
             </DockPanel>
             <!--/Menu on the left-->
-            
+
             <!--Fretboard itself-->
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto">
                 <Grid HorizontalAlignment="Left">
 
                     <Grid.Resources>
-                        
+
                         <!--Colors-->
                         <SolidColorBrush x:Key="FretBaseColor">#FFF1D1</SolidColorBrush>
                         <SolidColorBrush x:Key="FretAddColor">#FFDFBF</SolidColorBrush>
@@ -249,7 +272,7 @@
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                         </Style>
-                        
+
                         <!--Combobox style-->
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding Notes}"/>
@@ -277,15 +300,15 @@
                                 </DataTrigger>
 
                             </Style.Triggers>
-                            
+
                         </Style>
-                        
+
                         <!--Border style-->
                         <Style TargetType="Border">
                             <Setter Property="Grid.Row" Value="1"/>
                             <Setter Property="Grid.RowSpan" Value="12"/>
                         </Style>
-                        
+
                         <!--Notebutton style and triggers-->
                         <Style TargetType="i:NoteButton" BasedOn="{StaticResource MainNoteButtonStyle}">
 
@@ -346,7 +369,7 @@
                         <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="40"/>
                         <!--/Frets-->
-                        
+
                         <!--After frets-->
                         <ColumnDefinition Width="30"/>
 
@@ -371,7 +394,7 @@
                         <RowDefinition Height="{Binding StringVisibility[11], Converter={StaticResource BoolToHeight}, ConverterParameter=30}"/>
 
                     </Grid.RowDefinitions>
-                    
+
                     <!--Root note selection-->
                     <ComboBox Grid.Row="1"  SelectedItem="{Binding Fretboard[0], Mode=TwoWay}"></ComboBox>
                     <ComboBox Grid.Row="2"  SelectedItem="{Binding Fretboard[1], Mode=TwoWay}"></ComboBox>
@@ -385,7 +408,7 @@
                     <ComboBox Grid.Row="10" SelectedItem="{Binding Fretboard[9], Mode=TwoWay}"></ComboBox>
                     <ComboBox Grid.Row="11" SelectedItem="{Binding Fretboard[10], Mode=TwoWay}"></ComboBox>
                     <ComboBox Grid.Row="12" SelectedItem="{Binding Fretboard[11], Mode=TwoWay}"></ComboBox>
-                    
+
                     <!--Numeration-->
                     <TextBlock Grid.Column="2">1</TextBlock>
                     <TextBlock Grid.Column="3">2</TextBlock>
@@ -411,7 +434,7 @@
                     <TextBlock Grid.Column="23">22</TextBlock>
                     <TextBlock Grid.Column="24">23</TextBlock>
                     <TextBlock Grid.Column="25" FontWeight="ExtraBold">24</TextBlock>
-                    
+
                     <!--Fretboard painting-->
                     <Border Grid.Column="1" Background="Black"/>
                     <Border Grid.Column="2" Grid.ColumnSpan="23" Background="{StaticResource FretBaseColor}"/>
@@ -507,7 +530,7 @@
                     <i:NoteButton Grid.Column="23" Grid.Row="3" Note="{ Binding Fretboard[2\, 10]}"/>
                     <i:NoteButton Grid.Column="24" Grid.Row="3" Note="{ Binding Fretboard[2\, 11]}"/>
                     <i:NoteButton Grid.Column="25" Grid.Row="3" Note="{ Binding Fretboard[2\, 0]}"/>
-                    
+
                     <!--4th String-->
                     <i:NoteButton Grid.Column="1" Grid.Row="4" Note="{ Binding Fretboard[3\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="4" Note="{ Binding Fretboard[3\, 1]}"/>
@@ -723,7 +746,7 @@
                     <i:NoteButton Grid.Column="23" Grid.Row="11" Note="{ Binding Fretboard[10\, 10]}"/>
                     <i:NoteButton Grid.Column="24" Grid.Row="11" Note="{ Binding Fretboard[10\, 11]}"/>
                     <i:NoteButton Grid.Column="25" Grid.Row="11" Note="{ Binding Fretboard[10\, 0]}"/>
-                    
+
                     <!--12th String-->
                     <i:NoteButton Grid.Column="1" Grid.Row="12" Note="{ Binding Fretboard[11\, 0]}" Width="30"/>
                     <i:NoteButton Grid.Column="2" Grid.Row="12" Note="{ Binding Fretboard[11\, 1]}"/>
@@ -759,11 +782,11 @@
                 </Grid>
             </ScrollViewer>
             <!--/Fretboard itself-->
-            
+
         </DockPanel>
-        
-        
-        
+
+
+
 
         <!--===================================Pianoroll===================================-->
 
@@ -803,10 +826,10 @@
                             <DataTrigger Binding="{Binding PianorollSemitone}" Value="Flat">
                                 <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Note, Converter={StaticResource FlatNotes}}"/>
                             </DataTrigger>
-                            
+
                         </Style.Triggers>
                     </Style>
-                    
+
                     <!--Piano key styles-->
                     <Style x:Key="BigZone" TargetType="Border">
                         <Setter Property="Grid.Row" Value="0"/>
@@ -831,9 +854,9 @@
                     </Style>
 
                 </Grid.Resources>
-                
+
                 <Grid.ColumnDefinitions>
-                    
+
                     <!--Left octave-->
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -884,7 +907,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <!--/Right octave-->
-                    
+
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -893,7 +916,7 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--Painting the big zones-->
                 <Border Style="{StaticResource BigZone}" Grid.Column="0"  Background="{StaticResource GrayedPianoKeyColor}"/>
                 <Border Style="{StaticResource BigZone}" Grid.Column="14" Background="White"/>
@@ -993,9 +1016,9 @@
 
         </DockPanel>
         <!--/Pianoroll-->
-        
-        
+
+
     </Grid>
-    <!--/Window Layout-->    
-    
+    <!--/Window Layout-->
+
 </Window>
