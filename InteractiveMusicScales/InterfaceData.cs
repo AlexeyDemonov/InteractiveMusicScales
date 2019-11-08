@@ -63,6 +63,7 @@ namespace InteractiveMusicScales
             {
                 this.pianorollSemitone = loadedSettings.PianorollSemitone;
                 this.fretboardSemitone = loadedSettings.FretboardSemitone;
+                this.circleSemitone = loadedSettings.CircleSemitone;
                 this.lastVisibleString = loadedSettings.LastVisibleString;
 
                 for (int i = 0; i < STRINGS_COUNT; i++)
@@ -74,6 +75,7 @@ namespace InteractiveMusicScales
             {
                 this.pianorollSemitone = Semitone.Sharp;
                 this.fretboardSemitone = Semitone.Sharp;
+                this.circleSemitone = Semitone.Flat;
                 this.lastVisibleString = 5;
 
                 this.fretboard[0] = notes[4]; //E
@@ -157,6 +159,11 @@ namespace InteractiveMusicScales
             this.ClearUICommand = new Command(ClearUI);
             this.SaveScaleCommand = new Command(RunSaveScaleDialog);
             this.DeleteScaleCommand = new Command(DeleteSelectedScale);
+
+            
+            this.bigCircle = new ScalesCirclesHolder(ScalesBasic, divideToNumberOfCircles: 2);
+            this.TurnCircleLeftCommand = new Command(TurnCircleLeft);
+            this.TurnCircleRightCommand = new Command(TurnCircleRight);
         }
 
         //==============================================================
@@ -169,5 +176,7 @@ namespace InteractiveMusicScales
         partial void ClearUI();
         partial void RunSaveScaleDialog();
         partial void DeleteSelectedScale();
+        partial void TurnCircleLeft();
+        partial void TurnCircleRight();
     }
 }

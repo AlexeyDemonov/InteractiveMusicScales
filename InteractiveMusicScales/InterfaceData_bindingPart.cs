@@ -112,5 +112,32 @@ namespace InteractiveMusicScales
         //Scale save/delete
         public ICommand SaveScaleCommand { get; private set; }
         public ICommand DeleteScaleCommand { get; private set; }
+
+        //==============================================================
+        //Scales circle
+        public ICommand TurnCircleLeftCommand { get; private set; }
+        public ICommand TurnCircleRightCommand { get; private set; }
+
+        public Semitone circleSemitone;
+        public Semitone CircleSemitone
+        {
+            get => circleSemitone;
+            set
+            {
+                circleSemitone = value;
+                RaisePropertyChange();
+            }
+        }
+
+        ScalesCirclesHolder bigCircle;
+        public ScalesCirclesHolder BigCircle
+        {
+            get => bigCircle;
+            set
+            {
+                bigCircle = value;
+                RaisePropertyChange();
+            }
+        }
     }
 }

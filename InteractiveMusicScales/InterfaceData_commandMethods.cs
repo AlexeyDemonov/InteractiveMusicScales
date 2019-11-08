@@ -74,6 +74,7 @@ namespace InteractiveMusicScales
             UpdatePianorollNoteBindings();
             UpdateFretBoardNoteBindings();
             UpdateScaleBindings();
+            UpdateCircleBindings();
         }
 
         void UpdatePianorollNoteBindings()
@@ -95,6 +96,13 @@ namespace InteractiveMusicScales
             var scaleSwap = this.ScalesToShow;
             this.ScalesToShow = null;
             this.ScalesToShow = scaleSwap;
+        }
+
+        void UpdateCircleBindings()
+        {
+            var circleSwap = this.BigCircle;
+            this.BigCircle = null;
+            this.BigCircle = circleSwap;
         }
 
         //==============================================================
@@ -303,6 +311,20 @@ namespace InteractiveMusicScales
             MessageBox.Show("Scale deleted");
 
             ClearUI();
+        }
+
+        //==============================================================
+        //Scales Circle
+        partial void TurnCircleLeft()
+        {
+            this.bigCircle.ShiftLeft();
+            UpdateCircleBindings();
+        }
+
+        partial void TurnCircleRight()
+        {
+            this.BigCircle.ShiftRight();
+            UpdateCircleBindings();
         }
     }
 }
