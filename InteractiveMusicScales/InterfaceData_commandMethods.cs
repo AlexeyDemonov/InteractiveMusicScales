@@ -261,6 +261,7 @@ namespace InteractiveMusicScales
             MessageBox.Show(warning, string.Empty, MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
+
         partial void DeleteSelectedScale()
         {
             if(currentShowScale == null)
@@ -287,6 +288,12 @@ namespace InteractiveMusicScales
                 return;
             }
 
+            var confirmation = MessageBox.Show("Delete this scale? Are you sure?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if(confirmation != MessageBoxResult.Yes)
+                return;
+
+            
+            //Point of no return
             AdditionalScales.Remove(scaleToDelete);
             ScalesAll.Remove(scaleToDelete);
 
