@@ -100,19 +100,32 @@
     <!--===================================Window Layout===================================-->
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="100"/>
+            <ColumnDefinition Width="Auto" MaxWidth="300"/>
+            <ColumnDefinition Width="5"/><!--Splitter-->
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="256"/>
+            <ColumnDefinition Width="5"/><!--Splitter-->
+            <ColumnDefinition Width="265"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="276"/>
+            <RowDefinition Height="5"/><!--Splitter-->
+            <RowDefinition Height="285"/>
         </Grid.RowDefinitions>
+
+        <GridSplitter ResizeDirection="Columns" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+        <GridSplitter ResizeDirection="Rows" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+        <GridSplitter ResizeDirection="Columns" Grid.Column="3" Grid.Row="2"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
 
 
         <!--===================================Scales Circle===================================-->
-        <DockPanel Grid.Column="2" Grid.Row="1" LastChildFill="True" Background="{StaticResource Background}">
+        <DockPanel Grid.Column="4" Grid.Row="2" LastChildFill="True" Background="{StaticResource Background}">
             <DockPanel.Resources>
                 <Style TargetType="RadioButton">
                     <Setter Property="Margin" Value="15,2,5,2"/>
@@ -120,7 +133,7 @@
 
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5,0,0,0"/>
-                    <Setter Property="Padding" Value="2,0,2,0"/>
+                    <Setter Property="Padding" Value="7,0,7,0"/>
                 </Style>
 
                 <ImageBrush x:Key="Circle" ImageSource="Images\circle.png"/>
@@ -138,11 +151,12 @@
             </StackPanel>
 
             <!--Circle itself-->
-            <Canvas Background="{StaticResource Circle}" Margin="5">
+            <Canvas Margin="5">
                 <Canvas.Resources>
                     <Style TargetType="i:ScaleButton" BasedOn="{StaticResource MainScaleButtonStyle}"/>
                 </Canvas.Resources>
 
+                <Image Source="Images\circle.png" Height="256" Width="256"/>
 
                 <!--Outer circle-->
                 
@@ -152,7 +166,7 @@
 
 
         <!--===================================Scales selector===================================-->
-        <DockPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" LastChildFill="True" Background="{StaticResource MenuColor}">
+        <DockPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" LastChildFill="True" Background="{StaticResource MenuColor}">
             
             <!--Menu on the top-->
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{StaticResource MenuColor}">
@@ -176,7 +190,7 @@
                     <Style TargetType="i:ScaleButton" BasedOn="{StaticResource MainScaleButtonStyle}"/>
                 </ScrollViewer.Resources>
                 
-                <ItemsControl ItemsSource="{Binding ScalesToShow, Converter={StaticResource ScalesToButtons}}" BorderBrush="Black" BorderThickness="0.5">
+                <ItemsControl ItemsSource="{Binding ScalesToShow, Converter={StaticResource ScalesToButtons}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical"/>
@@ -191,7 +205,7 @@
 
 
         <!--===================================Fretboard===================================-->
-        <DockPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" LastChildFill="True" Background="{StaticResource Background}">
+        <DockPanel Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" LastChildFill="True" Background="{StaticResource Background}">
             
             <!--Menu on the left-->
             <DockPanel DockPanel.Dock="Left" LastChildFill="False" Background="{StaticResource MenuColor}">
@@ -752,7 +766,7 @@
 
         <!--===================================Pianoroll===================================-->
 
-        <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="True" Background="{StaticResource Background}">
+        <DockPanel Grid.Column="2" Grid.Row="3" LastChildFill="True" Background="{StaticResource Background}">
             <DockPanel.Resources>
                 <!--Radiobutton Style-->
                 <Style TargetType="RadioButton">
