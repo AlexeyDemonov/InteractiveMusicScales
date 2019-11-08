@@ -55,6 +55,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Containers\ScalesCirclesHolder.cs" />
     <Compile Include="InterfaceSubClasses\Converters\BoolToHeightConverter.cs" />
     <Compile Include="InterfaceData_commandMethods.cs" />
     <Compile Include="InterfaceSubClasses\Converters\NotesToStringConverter.cs" />
@@ -132,6 +133,12 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\bin.png" />
+    <Resource Include="Images\diskette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -119,12 +119,15 @@
                 <StackPanel.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Margin" Value="5"/>
+                        <Setter Property="Width" Value="32"/>
+                        <Setter Property="Height" Value="32"/>
+                        <Setter Property="Padding" Value="7"/>
                     </Style>
                 </StackPanel.Resources>
 
-                <Button Command="{Binding ClearUICommand}" ToolTip="Clear UI [Esc]">[R]</Button>
-                <Button Command="{Binding SaveScaleCommand}" ToolTip="Save current scale [Ctrl+S]">[S]</Button>
-                <Button Command="{Binding DeleteScaleCommand}" ToolTip="Delete selected scale [Delete]">[D]</Button>
+                <Button Command="{Binding ClearUICommand}" ToolTip="Clear UI [Esc]"><Image Source="Images\arrow.png"/></Button>
+                <Button Command="{Binding SaveScaleCommand}" ToolTip="Save current scale [Ctrl+S]"><Image Source="Images\diskette.png"/></Button>
+                <Button Command="{Binding DeleteScaleCommand}" ToolTip="Delete selected scale [Delete]"><Image Source="Images\bin.png"/></Button>
             </StackPanel>
 
             <!--Scale selector-->
