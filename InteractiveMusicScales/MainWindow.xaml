@@ -71,7 +71,7 @@
 
 
         <!--ScaleButton Style and Triggers-->
-        <Style TargetType="i:ScaleButton" BasedOn="{StaticResource BaseForNoteAndScaleButtons}">
+        <Style x:Key="MainScaleButtonStyle" TargetType="i:ScaleButton" BasedOn="{StaticResource BaseForNoteAndScaleButtons}">
 
             <!--Binded properties-->
             <Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Scale.Name}"/>
@@ -102,14 +102,53 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="100"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="256"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="276"/>
         </Grid.RowDefinitions>
 
+
+        <!--===================================Scales Circle===================================-->
+        <DockPanel Grid.Column="2" Grid.Row="1" LastChildFill="True" Background="{StaticResource Background}">
+            <DockPanel.Resources>
+                <Style TargetType="RadioButton">
+                    <Setter Property="Margin" Value="15,2,5,2"/>
+                </Style>
+
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5,0,0,0"/>
+                    <Setter Property="Padding" Value="2,0,2,0"/>
+                </Style>
+
+                <ImageBrush x:Key="Circle" ImageSource="Images\circle.png"/>
+                
+            </DockPanel.Resources>
+
+            <!--Menu-->
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{StaticResource MenuColor}">
+
+                <Button Command="{Binding TurnCircleLeftCommand}">&lt;</Button>
+                <Button Command="{Binding TurnCircleRightCommand}">&gt;</Button>
+
+                <RadioButton IsChecked="{Binding CircleSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Sharp}">#</RadioButton>
+                <RadioButton IsChecked="{Binding CircleSemitone, Converter={StaticResource SemitoneToBool}, Mode=TwoWay, ConverterParameter=Flat}">b</RadioButton>
+            </StackPanel>
+
+            <!--Circle itself-->
+            <Canvas Background="{StaticResource Circle}" Margin="5">
+                <Canvas.Resources>
+                    <Style TargetType="i:ScaleButton" BasedOn="{StaticResource MainScaleButtonStyle}"/>
+                </Canvas.Resources>
+
+
+                <!--Outer circle-->
+                
+            </Canvas>
+            
+        </DockPanel>
 
 
         <!--===================================Scales selector===================================-->
@@ -133,6 +172,10 @@
 
             <!--Scale selector-->
             <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer.Resources>
+                    <Style TargetType="i:ScaleButton" BasedOn="{StaticResource MainScaleButtonStyle}"/>
+                </ScrollViewer.Resources>
+                
                 <ItemsControl ItemsSource="{Binding ScalesToShow, Converter={StaticResource ScalesToButtons}}" BorderBrush="Black" BorderThickness="0.5">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
