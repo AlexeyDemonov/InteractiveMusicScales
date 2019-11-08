@@ -122,9 +122,9 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Button Command="{Binding ClearUICommand}">[R]</Button>
-                <Button Command="{Binding SaveScaleCommand}">[S]</Button>
-                <Button Command="{Binding DeleteScaleCommand}">[D]</Button>
+                <Button Command="{Binding ClearUICommand}" ToolTip="Clear UI [Esc]">[R]</Button>
+                <Button Command="{Binding SaveScaleCommand}" ToolTip="Save current scale [Ctrl+S]">[S]</Button>
+                <Button Command="{Binding DeleteScaleCommand}" ToolTip="Delete selected scale [Delete]">[D]</Button>
             </StackPanel>
 
             <!--Scale selector-->
