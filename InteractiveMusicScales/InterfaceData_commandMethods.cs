@@ -100,9 +100,9 @@ namespace InteractiveMusicScales
 
         void UpdateCircleBindings()
         {
-            var circleSwap = this.BigCircle;
-            this.BigCircle = null;
-            this.BigCircle = circleSwap;
+            var circleSwap = this.ScalesCirclesHolder;
+            this.ScalesCirclesHolder = null;
+            this.ScalesCirclesHolder = circleSwap;
         }
 
         //==============================================================
@@ -317,13 +317,13 @@ namespace InteractiveMusicScales
         //Scales Circle
         partial void TurnCircleLeft()
         {
-            this.bigCircle.ShiftLeft();
+            this.scalesCirclesHolder.ShiftLeft();
             UpdateCircleBindings();
         }
 
         partial void TurnCircleRight()
         {
-            this.BigCircle.ShiftRight();
+            this.ScalesCirclesHolder.ShiftRight();
             UpdateCircleBindings();
         }
     }

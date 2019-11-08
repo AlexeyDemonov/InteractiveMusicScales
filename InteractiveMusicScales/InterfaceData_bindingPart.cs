@@ -129,13 +129,13 @@ namespace InteractiveMusicScales
             }
         }
 
-        ScalesCirclesHolder bigCircle;
-        public ScalesCirclesHolder BigCircle
+        ScalesCirclesHolder scalesCirclesHolder;
+        public ScalesCirclesHolder ScalesCirclesHolder
         {
-            get => bigCircle;
+            get => scalesCirclesHolder;
             set
             {
-                bigCircle = value;
+                scalesCirclesHolder = value;
                 RaisePropertyChange();
             }
         }

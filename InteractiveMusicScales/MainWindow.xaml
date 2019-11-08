@@ -159,7 +159,8 @@
                 <Image Source="Images\circle.png" Height="256" Width="256"/>
 
                 <!--Outer circle-->
-                
+                <i:ScaleButton Scale="{Binding ScalesCirclesHolder[0\,0]}" Height="104" Width="176" Canvas.Left="34" Canvas.Top="66"/>
+
             </Canvas>
             
         </DockPanel>

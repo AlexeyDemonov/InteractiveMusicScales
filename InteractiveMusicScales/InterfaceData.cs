@@ -161,7 +161,7 @@ namespace InteractiveMusicScales
             this.DeleteScaleCommand = new Command(DeleteSelectedScale);
 
             
-            this.bigCircle = new ScalesCirclesHolder(ScalesBasic, divideToNumberOfCircles: 2);
+            this.scalesCirclesHolder = new ScalesCirclesHolder(ScalesBasic, divideToNumberOfCircles: 2);
             this.TurnCircleLeftCommand = new Command(TurnCircleLeft);
             this.TurnCircleRightCommand = new Command(TurnCircleRight);
         }
