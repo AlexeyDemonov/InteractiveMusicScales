@@ -39,8 +39,8 @@ namespace InteractiveMusicScales
             shift = 0;
         }
 
-        public void ShiftRight() => shift++;
-        public void ShiftLeft() => shift--;
+        public void ShiftRight() => shift--;
+        public void ShiftLeft() => shift++;
 
         public Scale this[int circle, int index]
         {
