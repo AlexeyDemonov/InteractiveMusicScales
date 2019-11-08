@@ -122,7 +122,8 @@ namespace InteractiveMusicScales
             }
             else
             {
-                List<Scale> fittingScales = new List<Scale>();
+                int initialCapacity = ScalesAll.Count >> 1; // equals to ScalesAll.Count / 2
+                List<Scale> fittingScales = new List<Scale>( initialCapacity );
 
                 foreach (var scale in ScalesAll)
                 {
