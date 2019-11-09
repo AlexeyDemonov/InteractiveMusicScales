@@ -139,5 +139,9 @@ namespace InteractiveMusicScales
                 RaisePropertyChange();
             }
         }
+
+        //==============================================================
+        //Localization
+
     }
 }
