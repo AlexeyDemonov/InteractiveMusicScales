@@ -188,23 +188,23 @@ namespace InteractiveMusicScales.Tests
         }
 
         [TestMethod]
-        public void Indexer_TwoCircles_ShiftR_0_0_Gmajor()
+        public void Indexer_TwoCircles_ShiftR_0_0_Dmajor()
         {
             var test = new ScalesCirclesHolder(testScales, 2);
             test.ShiftRight();
             var recievedScale = test[0, 0];
 
-            Assert.AreEqual(testScales[1], recievedScale);
+            Assert.AreEqual(testScales[2], recievedScale);
         }
 
         [TestMethod]
-        public void Indexer_TwoCircles_ShiftL_1_10_Amajor()
+        public void Indexer_TwoCircles_ShiftL_1_10_Bmajor()
         {
             var test = new ScalesCirclesHolder(testScales, 2);
             test.ShiftLeft();
             var recievedScale = test[1, 10];
 
-            Assert.AreEqual(testScales[3], recievedScale);
+            Assert.AreEqual(testScales[5], recievedScale);
         }
 
         [TestMethod]

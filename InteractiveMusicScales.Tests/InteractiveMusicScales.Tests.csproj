@@ -55,6 +55,7 @@
     <Compile Include="Pianoroll_Tests.cs" />
     <Compile Include="ScalesSorter_Tests.cs" />
     <Compile Include="ScalesCirclesHolder_Tests.cs" />
+    <Compile Include="Localizer_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
