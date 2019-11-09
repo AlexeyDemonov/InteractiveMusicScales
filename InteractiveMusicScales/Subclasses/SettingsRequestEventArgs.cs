@@ -15,13 +15,14 @@ namespace InteractiveMusicScales
         public readonly Note[] FretboardStrings;
         public readonly int LastVisibleString;
 
-        public SettingsRequestEventArgs(Semitone pianorollSemitone, Semitone fretboardSemitone, Semitone CircleSemitone, Note[] fretboardStrings, int lastVisibleString)
+        public SettingsRequestEventArgs(Semitone pianorollSemitone, Semitone fretboardSemitone, Semitone circleSemitone, Note[] fretboardStrings, int lastVisibleString)
         {
             if(fretboardStrings == null)
                 throw new ArgumentNullException(nameof(fretboardStrings));
 
             this.PianorollSemitone = pianorollSemitone;
             this.FretboardSemitone = fretboardSemitone;
+            this.CircleSemitone = circleSemitone;
             this.FretboardStrings = fretboardStrings;
             this.LastVisibleString = lastVisibleString;
         }

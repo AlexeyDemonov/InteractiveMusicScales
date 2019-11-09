@@ -23,6 +23,7 @@ namespace InteractiveMusicScales
         public InterfaceData()
         {
             Application.Current.Startup += Handle_ApplicationStart;
+            Application.Current.Exit += Handle_ApplicationExit;
         }
 
         //==============================================================
@@ -30,6 +31,7 @@ namespace InteractiveMusicScales
         public Func<Scale[]> Request_LoadAdditionalScales;
         public Action<Scale[]> Request_SaveAdditionalScales;
         public Func<SettingsRequestEventArgs> Request_LoadSettings;
+        public Action<SettingsRequestEventArgs> Request_SaveSettings;
 
         //==============================================================
         //Loading
@@ -178,5 +180,28 @@ namespace InteractiveMusicScales
         partial void DeleteSelectedScale();
         partial void TurnCircleLeft();
         partial void TurnCircleRight();
+
+        //==============================================================
+        //Closing the app
+        void Handle_ApplicationExit(object sender, EventArgs args)
+        {
+            var fretboardStrings = new Note[STRINGS_COUNT];
+
+            for (int i = 0; i < fretboardStrings.Length; i++)
+            {
+                fretboardStrings[i] = this.fretboard[i];
+            }
+
+            var settingsToSave = new SettingsRequestEventArgs
+                (
+                    pianorollSemitone: this.pianorollSemitone,
+                    fretboardSemitone: this.fretboardSemitone,
+                    circleSemitone: this.circleSemitone,
+                    fretboardStrings: fretboardStrings,
+                    lastVisibleString: this.lastVisibleString
+                );
+
+            Request_SaveSettings?.Invoke(settingsToSave);
+        }
     }
 }
