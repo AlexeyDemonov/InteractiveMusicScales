@@ -32,6 +32,7 @@ namespace InteractiveMusicScales
         public Action<Scale[]> Request_SaveAdditionalScales;
         public Func<SettingsRequestEventArgs> Request_LoadSettings;
         public Action<SettingsRequestEventArgs> Request_SaveSettings;
+        public Func<Dictionary<string,string>> Request_LoadLocalization;
 
         //==============================================================
         //Loading
@@ -166,6 +167,8 @@ namespace InteractiveMusicScales
             this.scalesCirclesHolder = new ScalesCirclesHolder(ScalesBasic, divideToNumberOfCircles: 2);
             this.TurnCircleLeftCommand = new Command(TurnCircleLeft);
             this.TurnCircleRightCommand = new Command(TurnCircleRight);
+
+            this.Localizer = new Localizer( Request_LoadLocalization?.Invoke() );
         }
 
         //==============================================================

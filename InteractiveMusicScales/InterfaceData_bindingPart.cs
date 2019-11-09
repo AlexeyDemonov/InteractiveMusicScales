@@ -142,6 +142,6 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Localization
-
+        public Localizer Localizer { get; private set;}
     }
 }

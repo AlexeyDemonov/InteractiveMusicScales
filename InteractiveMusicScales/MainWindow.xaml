@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InteractiveMusicScales"
         xmlns:i="clr-namespace:InteractiveMusicScales.Interface"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1400">
+        Title="{Binding Localizer[Interactive Music Scales]}" Height="650" Width="1400">
     <Window.Resources>
 
         <!--Converters-->
@@ -144,13 +144,13 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Button Command="{Binding ClearUICommand}" ToolTip="Clear UI [Esc]">
+                <Button Command="{Binding ClearUICommand}" ToolTip="{Binding Localizer[Clear UI [Esc]]}">
                     <Image Source="Images\arrow.png"/>
                 </Button>
-                <Button Command="{Binding SaveScaleCommand}" ToolTip="Save current scale [Ctrl+S]">
+                <Button Command="{Binding SaveScaleCommand}" ToolTip="{Binding Localizer[Save current scale [Ctrl+S]]}">
                     <Image Source="Images\diskette.png"/>
                 </Button>
-                <Button Command="{Binding DeleteScaleCommand}" ToolTip="Delete selected scale [Delete]">
+                <Button Command="{Binding DeleteScaleCommand}" ToolTip="{Binding Localizer[Delete selected scale [Delete]]}">
                     <Image Source="Images\bin.png"/>
                 </Button>
             </StackPanel>

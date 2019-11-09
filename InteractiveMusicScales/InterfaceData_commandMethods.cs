@@ -216,13 +216,13 @@ namespace InteractiveMusicScales
             /*guardians*/
             if(currentShowScale != null)
             {
-                WarnUser("Cannot save the new scale while other scale is in display");
+                WarnUser( this.Localizer["Cannot save the new scale while other scale is in display"] );
                 return;
             }
 
             if (currentSound == 0)
             {
-                WarnUser("Cannot save empty scale");
+                WarnUser( this.Localizer["Cannot save empty scale"] );
                 return;
             }
 
@@ -259,7 +259,7 @@ namespace InteractiveMusicScales
 
                 Request_SaveAdditionalScales?.Invoke(AdditionalScales.ToArray());
 
-                MessageBox.Show($"Scale {scaleName} successfully saved");
+                MessageBox.Show( this.Localizer["Scale successfully saved"] );
 
                 ClearUI();
             }
@@ -275,7 +275,7 @@ namespace InteractiveMusicScales
         {
             if(currentShowScale == null)
             {
-                WarnUser("To delete the scale one must first select it");
+                WarnUser( this.Localizer["To delete the scale one must first select it"] );
                 return;
             }
 
@@ -293,11 +293,11 @@ namespace InteractiveMusicScales
             
             if(itIsBasicScale)
             {
-                WarnUser("Cannot delete basic scale");
+                WarnUser( this.Localizer["Cannot delete basic scale"] );
                 return;
             }
 
-            var confirmation = MessageBox.Show("Delete this scale? Are you sure?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var confirmation = MessageBox.Show( this.Localizer["Delete this scale? Are you sure?"] , "", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if(confirmation != MessageBoxResult.Yes)
                 return;
 
@@ -308,7 +308,7 @@ namespace InteractiveMusicScales
 
             Request_SaveAdditionalScales?.Invoke(AdditionalScales.ToArray());
 
-            MessageBox.Show("Scale deleted");
+            MessageBox.Show( this.Localizer["Scale deleted"] );
 
             ClearUI();
         }
