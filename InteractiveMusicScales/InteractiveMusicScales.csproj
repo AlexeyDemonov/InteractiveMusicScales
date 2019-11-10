@@ -66,6 +66,8 @@
     <Compile Include="InterfaceSubClasses\Converters\HiddenNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SharpNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SharpScaleNameConverter.cs" />
+    <Compile Include="Managers\ManagersSubClasses\ScalesXmlContainer.cs" />
+    <Compile Include="Managers\ManagersSubClasses\ScaleXmlRepack.cs" />
     <Compile Include="ScaleSaveDialogWindow.xaml.cs">
       <DependentUpon>ScaleSaveDialogWindow.xaml</DependentUpon>
     </Compile>
@@ -148,8 +150,6 @@
   <ItemGroup>
     <Resource Include="Images\circle.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Managers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

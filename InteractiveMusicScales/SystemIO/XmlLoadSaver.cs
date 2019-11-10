@@ -10,6 +10,13 @@ namespace InteractiveMusicScales
 {
     class XmlLoadSaver
     {
+        bool catchAndLogExceptions;
+
+        public XmlLoadSaver(bool catchAndLogExceptions = true)
+        {
+            this.catchAndLogExceptions = catchAndLogExceptions;
+        }
+
         //==============================================================
         //Handlers
         public void Handle_SaveRequest(string filename, object instance)
@@ -24,7 +31,15 @@ namespace InteractiveMusicScales
             }
             catch (Exception ex)
             {
-                Logger.LogTheError($"XmlFileLoadSaver.Handle_SaveFileRequest: Error while saving '{filename}' file: {ex.Message}");
+                if(catchAndLogExceptions)
+                {
+                    Logger.LogTheError($"XmlFileLoadSaver.Handle_SaveRequest: Error while saving '{filename}' file");
+                    Logger.LogTheException(ex);
+                }
+                else
+                {
+                    throw;//Rethrow exception
+                }
             }
         }
 
@@ -42,8 +57,17 @@ namespace InteractiveMusicScales
             }
             catch (Exception ex)
             {
-                Logger.LogTheError($"XmlFileLoadSaver.Handle_LoadFileRequest: Error while loading '{filename}' file: {ex.Message}");
-                result = null;
+                if(catchAndLogExceptions)
+                {
+                    Logger.LogTheError($"XmlFileLoadSaver.Handle_LoadRequest: Error while loading '{filename}' file");
+                    Logger.LogTheException(ex);
+                    result = null;
+                }
+                else
+                {
+                    throw;//Rethrow exception
+                }
+
             }
 
             return result;
