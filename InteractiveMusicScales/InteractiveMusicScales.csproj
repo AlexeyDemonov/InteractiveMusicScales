@@ -73,7 +73,7 @@
     <Compile Include="Subclasses\Logger.cs" />
     <Compile Include="Subclasses\ScalesSorter.cs" />
     <Compile Include="Subclasses\SettingsRequestEventArgs.cs" />
-    <Compile Include="SystemIO\XmlFileLoadSaver.cs" />
+    <Compile Include="SystemIO\XmlLoadSaver.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

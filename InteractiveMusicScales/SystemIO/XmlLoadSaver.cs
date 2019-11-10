@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    class XmlFileLoadSaver
+    class XmlLoadSaver
     {
         //==============================================================
         //Handlers
-        public void Handle_SaveFileRequest(string filename, dynamic instance)
+        public void Handle_SaveRequest(string filename, object instance)
         {
             try
             {
@@ -25,11 +25,10 @@ namespace InteractiveMusicScales
             catch (Exception ex)
             {
                 Logger.LogTheError($"XmlFileLoadSaver.Handle_SaveFileRequest: Error while saving '{filename}' file: {ex.Message}");
-                DeleteFile(filename);
             }
         }
 
-        public object Handle_LoadFileRequest(string filename, Type type)
+        public object Handle_LoadRequest(string filename, Type type)
         {
             object result = null;
 
@@ -44,28 +43,10 @@ namespace InteractiveMusicScales
             catch (Exception ex)
             {
                 Logger.LogTheError($"XmlFileLoadSaver.Handle_LoadFileRequest: Error while loading '{filename}' file: {ex.Message}");
-                DeleteFile(filename);
                 result = null;
             }
 
             return result;
-        }
-
-        //==============================================================
-        //Methods
-        void DeleteFile(string filename)
-        {
-            if (File.Exists(filename))
-            {
-                try
-                {
-                    File.Delete(filename);
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogTheError($"XmlFileLoadSaver.DeleteCorruptedFile: Error while trying to delete '{filename}': {ex.Message}");
-                }
-            }
         }
     }
 }
