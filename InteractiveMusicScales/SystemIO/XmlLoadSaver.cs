@@ -23,6 +23,13 @@ namespace InteractiveMusicScales
         {
             try
             {
+                string foldername = Path.GetDirectoryName(filename);
+
+                if (!string.IsNullOrEmpty(foldername) && !Directory.Exists(foldername))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(filename));
+                }
+
                 using (var stream = File.Create(filename))
                 {
                     var serializer = new XmlSerializer( instance.GetType() );
