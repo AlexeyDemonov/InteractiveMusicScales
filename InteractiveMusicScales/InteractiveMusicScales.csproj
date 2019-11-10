@@ -70,8 +70,10 @@
       <DependentUpon>ScaleSaveDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Subclasses\Localizer.cs" />
+    <Compile Include="Subclasses\Logger.cs" />
     <Compile Include="Subclasses\ScalesSorter.cs" />
     <Compile Include="Subclasses\SettingsRequestEventArgs.cs" />
+    <Compile Include="SystemIO\XmlFileLoadSaver.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -145,6 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Managers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
