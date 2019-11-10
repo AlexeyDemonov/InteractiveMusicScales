@@ -19,32 +19,32 @@ namespace InteractiveMusicScales.Tests
                 new Scale("D major", keynoteSound:Sound.D, scaleSound:Sound.Cd| Sound.D | Sound.E | Sound.Fd| Sound.G | Sound.A | Sound.B),
             };
 
-            ScaleXmlRepack[] scalesPacked = new ScaleXmlRepack[originalScales.Length];
+            ScaleXmlRepack[] packedScales = new ScaleXmlRepack[originalScales.Length];
 
             for (int i = 0; i < originalScales.Length; i++)
             {
                 var scale = originalScales[i];
-                scalesPacked[i] = new ScaleXmlRepack() { Name = scale.Name, Sound = (int)scale.Sound, Keynote = (int)scale.KeynoteSound };
+                packedScales[i] = new ScaleXmlRepack() { Name = scale.Name, Sound = (int)scale.Sound, Keynote = (int)scale.KeynoteSound };
             }
 
-            var container = new ScalesXmlContainer() { Scales = scalesPacked };
+            var container = new ScalesXmlContainer() { Scales = packedScales };
 
             var xmlLoadSaver = new XmlLoadSaver(catchAndLogExceptions: false);
 
-            xmlLoadSaver.Handle_SaveRequest("TEST.xml", container);
+            xmlLoadSaver.Handle_SaveRequest("TestScales.xml", container);
 
 
 
             //Load and unpack
-            var loadedContainer = (ScalesXmlContainer)xmlLoadSaver.Handle_LoadRequest("TEST.xml", typeof(ScalesXmlContainer));
+            var loadedContainer = (ScalesXmlContainer)xmlLoadSaver.Handle_LoadRequest("TestScales.xml", typeof(ScalesXmlContainer));
 
-            scalesPacked = loadedContainer.Scales;
+            packedScales = loadedContainer.Scales;
+            int length = loadedContainer.Scales.Length;
+            Scale[] loadedScales = new Scale[length];
 
-            Scale[] loadedScales = new Scale[scalesPacked.Length];
-
-            for (int i = 0; i < scalesPacked.Length; i++)
+            for (int i = 0; i < length; i++)
             {
-                var packedScale = scalesPacked[i];
+                var packedScale = loadedContainer.Scales[i];
                 loadedScales[i] = new Scale( packedScale.Name, (Sound)packedScale.Keynote, (Sound)packedScale.Sound );
             }
 

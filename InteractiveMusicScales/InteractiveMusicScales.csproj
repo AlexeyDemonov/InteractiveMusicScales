@@ -68,6 +68,7 @@
     <Compile Include="InterfaceSubClasses\Converters\SharpScaleNameConverter.cs" />
     <Compile Include="Managers\ManagersSubClasses\ScalesXmlContainer.cs" />
     <Compile Include="Managers\ManagersSubClasses\ScaleXmlRepack.cs" />
+    <Compile Include="Managers\ManagersSubClasses\SettingsXmlRepack.cs" />
     <Compile Include="ScaleSaveDialogWindow.xaml.cs">
       <DependentUpon>ScaleSaveDialogWindow.xaml</DependentUpon>
     </Compile>
