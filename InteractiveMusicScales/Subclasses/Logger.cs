@@ -9,7 +9,7 @@ namespace InteractiveMusicScales
 {
     class Logger
     {
-        static string errorLogName = "errors.log";
+        static string errorLogName = "Errors.log";
 
         public static void LogTheError(string errorMessage)
         {
