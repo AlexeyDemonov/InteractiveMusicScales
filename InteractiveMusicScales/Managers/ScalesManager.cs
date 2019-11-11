@@ -41,7 +41,6 @@ namespace InteractiveMusicScales
             _ = SaveAdditionalScalesAsync(scales);
         }
 
-        //Purely for testing purposes
         public Task Handle_SaveAdditionalScalesRequestAwaitable(Scale[] scales)
         {
             return SaveAdditionalScalesAsync(scales);

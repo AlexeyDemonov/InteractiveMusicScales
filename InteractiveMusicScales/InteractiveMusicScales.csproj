@@ -67,6 +67,7 @@
     <Compile Include="InterfaceSubClasses\Converters\SharpNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SharpScaleNameConverter.cs" />
     <Compile Include="Managers\AbstractLoadSaveRequester.cs" />
+    <Compile Include="Managers\LocalizationManager.cs" />
     <Compile Include="Managers\ManagersSubClasses\LocalizationXmlRepack.cs" />
     <Compile Include="Managers\ManagersSubClasses\LocalizationXmlEntry.cs" />
     <Compile Include="Managers\ManagersSubClasses\ScalesXmlContainer.cs" />
