@@ -7,7 +7,7 @@
         xmlns:i="clr-namespace:InteractiveMusicScales.Interface"
         mc:Ignorable="d"
         Name="thisWindow"
-        Title="New scale"
+        Title="{Binding Localizer[New scale]}"
         WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight">
@@ -89,7 +89,7 @@
             Text="{Binding ElementName=thisWindow, Path=ScaleName, Mode=OneWayToSource}" MaxLength="16" MaxLines="1" />
 
         <!--Keynote selection-->
-        <TextBlock Margin="5" Grid.Row="2" VerticalAlignment="Center">Keynote:</TextBlock>
+        <TextBlock Margin="5" Grid.Row="2" VerticalAlignment="Center" Text="{Binding Localizer[Keynote]}"/>
 
         <Border
             Margin="5"
