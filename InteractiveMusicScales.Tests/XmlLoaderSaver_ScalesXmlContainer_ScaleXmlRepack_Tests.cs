@@ -39,12 +39,12 @@ namespace InteractiveMusicScales.Tests
             var loadedContainer = (ScalesXmlContainer)xmlLoaderSaver.Handle_LoadRequest("TestScales.xml", typeof(ScalesXmlContainer));
 
             packedScales = loadedContainer.Scales;
-            int length = loadedContainer.Scales.Length;
+            int length = packedScales.Length;
             Scale[] loadedScales = new Scale[length];
 
             for (int i = 0; i < length; i++)
             {
-                var packedScale = loadedContainer.Scales[i];
+                var packedScale = packedScales[i];
                 loadedScales[i] = new Scale( packedScale.Name, (Sound)packedScale.Keynote, (Sound)packedScale.Sound );
             }
 
