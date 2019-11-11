@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    abstract class AbstractNotesHolder
+    internal abstract class AbstractNotesHolder
     {
         protected readonly Note[] notes;
         protected readonly int notescount;

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using InteractiveMusicScales.Managers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InteractiveMusicScales.Tests
 {
@@ -28,10 +26,8 @@ namespace InteractiveMusicScales.Tests
 
             settingsManager.Handle_SaveSettingsRequest(originalSettings);
 
-
             //Load and unpack
             var loadedSettings = settingsManager.Handle_LoadSettingsRequest();
-
 
             //Compare
             Assert.AreEqual(originalSettings.PianorollSemitone, loadedSettings.PianorollSemitone);

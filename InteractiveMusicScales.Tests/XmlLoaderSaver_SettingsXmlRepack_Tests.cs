@@ -1,6 +1,5 @@
-﻿using System;
+﻿using InteractiveMusicScales.Managers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using InteractiveMusicScales.Managers;
 
 namespace InteractiveMusicScales.Tests
 {
@@ -10,7 +9,6 @@ namespace InteractiveMusicScales.Tests
         [TestMethod]
         public void Write_Load_Compare_Equal_NoException()
         {
-
             //Pack and save
             Note[] originalNotes = new Note[]
             {
@@ -42,8 +40,6 @@ namespace InteractiveMusicScales.Tests
 
             xmlLoaderSaver.Handle_SaveRequest("TestSettings.xml", container);
 
-
-
             //Load and unpack
             container = (SettingsXmlRepack)xmlLoaderSaver.Handle_LoadRequest("TestSettings.xml", typeof(SettingsXmlRepack));
 
@@ -51,7 +47,7 @@ namespace InteractiveMusicScales.Tests
             var unpackedNotes = new Note[length];
             for (int i = 0; i < length; i++)
             {
-                unpackedNotes[i] = new Note( (Sound)container.FretboardStrings[i] );
+                unpackedNotes[i] = new Note((Sound)container.FretboardStrings[i]);
             }
 
             var loadedSettings = new SettingsRequestEventArgs
@@ -63,7 +59,6 @@ namespace InteractiveMusicScales.Tests
                     container.LastVisibleString
                 );
 
-
             //Compare
             Assert.AreEqual(originalSettings.PianorollSemitone, loadedSettings.PianorollSemitone);
             Assert.AreEqual(originalSettings.FretboardSemitone, loadedSettings.FretboardSemitone);
@@ -72,7 +67,7 @@ namespace InteractiveMusicScales.Tests
 
             for (int i = 0; i < length; i++)
             {
-                Assert.AreEqual( originalSettings.FretboardStrings[i], loadedSettings.FretboardStrings[i] );
+                Assert.AreEqual(originalSettings.FretboardStrings[i], loadedSettings.FretboardStrings[i]);
             }
         }
     }

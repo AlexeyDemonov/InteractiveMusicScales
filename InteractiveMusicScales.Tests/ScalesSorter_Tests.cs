@@ -1,13 +1,13 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace InteractiveMusicScales.Tests
 {
     [TestClass]
     public class ScalesSorter_Tests
     {
-        static ScalesSorter test;
-        static Sound _;
+        private static ScalesSorter test;
+        private static Sound _;
 
         [ClassInitialize]
         public static void InitializeFields(TestContext arg)
@@ -24,7 +24,7 @@ namespace InteractiveMusicScales.Tests
 
             try
             {
-                test.Compare(null, new Scale("smth",_,_));
+                test.Compare(null, new Scale("smth", _, _));
             }
             catch (ArgumentException ex)
             {
@@ -91,9 +91,9 @@ namespace InteractiveMusicScales.Tests
         [TestMethod]
         public void Compare_EqualCorrectValues_0()
         {
-            int result = test.Compare( new Scale("C major",_,_) , new Scale("C major", _, _) );
+            int result = test.Compare(new Scale("C major", _, _), new Scale("C major", _, _));
 
-            Assert.AreEqual(0 , result);
+            Assert.AreEqual(0, result);
         }
 
         [TestMethod]

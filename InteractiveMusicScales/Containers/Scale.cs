@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InteractiveMusicScales
+﻿namespace InteractiveMusicScales
 {
-    class Scale
+    internal class Scale
     {
         public string Name { get; }
         public Sound Sound { get; }

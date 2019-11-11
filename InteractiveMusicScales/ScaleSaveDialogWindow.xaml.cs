@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace InteractiveMusicScales
 {
@@ -31,6 +20,7 @@ namespace InteractiveMusicScales
         //==============================================================
         //Properties
         public Note[] Notes { get; }
+
         public Note KeynoteOfChoice { get; set; }
         public string ScaleName { get; set; }
 
@@ -58,26 +48,26 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Methods
-        void TryToApplyChoice()
+        private void TryToApplyChoice()
         {
             //Trigger databinding so that inserted scale name would be delivered
             this.ScaleNameInputText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
             bool allIsGood = true;
 
-            if(string.IsNullOrEmpty(ScaleName))
+            if (string.IsNullOrEmpty(ScaleName))
             {
                 this.ScaleNameInputText.Background = new SolidColorBrush(Colors.LightCoral);
                 allIsGood = false;
             }
 
-            if(KeynoteOfChoice == null)
+            if (KeynoteOfChoice == null)
             {
                 this.ComboBoxSelectionBack.Background = new SolidColorBrush(Colors.LightCoral);
                 allIsGood = false;
             }
 
-            if(allIsGood)
+            if (allIsGood)
             {
                 this.DialogResult = true;
                 this.Close();
@@ -88,7 +78,7 @@ namespace InteractiveMusicScales
             }
         }
 
-        void CancelDialog()
+        private void CancelDialog()
         {
             this.DialogResult = false;
             this.Close();

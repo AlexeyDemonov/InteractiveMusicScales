@@ -1,14 +1,14 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace InteractiveMusicScales.Tests
 {
     [TestClass]
     public class Fretboard_Tests
     {
-        static Note testSingleNote;
-        static Note[] testNotes;
-        static Fretboard testFretboard;
+        private static Note testSingleNote;
+        private static Note[] testNotes;
+        private static Fretboard testFretboard;
 
         [ClassInitialize]
         public static void InitializeFields(TestContext arg)
@@ -24,9 +24,8 @@ namespace InteractiveMusicScales.Tests
             testFretboard[0] = new Note(Sound.C);
         }
 
-
         [TestMethod]
-        [ExpectedException (typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void Ctor_NotesNull_ArgumentNullException()
         {
             new Fretboard(null, 0);
@@ -157,7 +156,7 @@ namespace InteractiveMusicScales.Tests
         public void SetIndexer_String0NoteE_GetFret0_E()
         {
             testFretboard[0] = new Note(Sound.E);
-            var returnedNote = testFretboard[0,0];
+            var returnedNote = testFretboard[0, 0];
 
             Assert.AreEqual(new Note(Sound.E), returnedNote);
         }

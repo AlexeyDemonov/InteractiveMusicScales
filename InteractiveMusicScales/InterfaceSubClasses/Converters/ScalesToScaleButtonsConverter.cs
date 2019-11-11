@@ -1,25 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
 namespace InteractiveMusicScales.Interface
 {
-    class ScalesToScaleButtonsConverter : IValueConverter
+    internal class ScalesToScaleButtonsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value != null && value is Scale[])
+            if (value != null && value is Scale[])
             {
                 var scales = (Scale[])value;
                 int length = scales.Length;
 
-                var buttons = new ScaleButton[ length ];
-
+                var buttons = new ScaleButton[length];
 
                 for (int i = 0; i < length; i++)
                 {

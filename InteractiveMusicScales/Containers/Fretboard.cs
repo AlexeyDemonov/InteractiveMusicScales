@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    class Fretboard : AbstractNotesHolder
+    internal class Fretboard : AbstractNotesHolder
     {
-        int[] shifts;
+        private int[] shifts;
 
         public Fretboard(Note[] notes, int strings) : base(notes, "Fretboard")
         {
@@ -16,13 +12,10 @@ namespace InteractiveMusicScales
             if (strings < 1)
                 throw new ArgumentException($"Fretboard.Ctor: 'strings' argument can not be zero or negative (its value was {strings} )");
 
-            this.shifts = new int[ strings ];
+            this.shifts = new int[strings];
         }
 
-
-
         public event Action Event_RootNotesChanged;
-
 
         /// <summary>
         /// Returns the note from requested string at requested fret according to this string root note
@@ -41,7 +34,6 @@ namespace InteractiveMusicScales
                     throw new ArgumentException($"Fretboard.GetIndexer: '@string' argument can not be greater than strings last index (its value was {@string}, last index of strings is {shifts.Length} )");
                 if (fret < 0)
                     throw new ArgumentException($"Fretboard.GetIndexer: 'fret' argument can not be negative (its value was {fret} )");
-
 
                 int index = fret + shifts[@string];
 
@@ -80,7 +72,7 @@ namespace InteractiveMusicScales
 
                 for (int i = 0; i < base.notescount; i++)
                 {
-                    if(base.notes[i].Sound == value.Sound)
+                    if (base.notes[i].Sound == value.Sound)
                     {
                         shifts[@string] = i;
                         isSet = true;
@@ -89,13 +81,11 @@ namespace InteractiveMusicScales
                 }
 
                 /*post-check*/
-                if(!isSet)
+                if (!isSet)
                     throw new ArgumentException($"Fretboard.SetIndexer: Note value cannot be new in relation to what was provided to class constructor ( value was {value.ToString()} )");
 
                 Event_RootNotesChanged?.Invoke();
             }
         }
-
-
     }
 }

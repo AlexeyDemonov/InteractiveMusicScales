@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace InteractiveMusicScales
@@ -12,11 +8,12 @@ namespace InteractiveMusicScales
     {
         //==============================================================
         //Fields
-        const int STRINGS_COUNT = 12;
-        int lastVisibleString;
-        Scale[] ScalesBasic;
-        List<Scale> AdditionalScales;
-        List<Scale> ScalesAll;
+        private const int STRINGS_COUNT = 12;
+
+        private int lastVisibleString;
+        private Scale[] ScalesBasic;
+        private List<Scale> AdditionalScales;
+        private List<Scale> ScalesAll;
 
         //==============================================================
         //Constructor
@@ -29,14 +26,15 @@ namespace InteractiveMusicScales
         //==============================================================
         //Events
         public Func<Scale[]> Request_LoadAdditionalScales;
+
         public Action<Scale[]> Request_SaveAdditionalScales;
         public Func<SettingsRequestEventArgs> Request_LoadSettings;
         public Action<SettingsRequestEventArgs> Request_SaveSettings;
-        public Func<Dictionary<string,string>> Request_LoadLocalization;
+        public Func<Dictionary<string, string>> Request_LoadLocalization;
 
         //==============================================================
         //Loading
-        void Handle_ApplicationStart(object sender, EventArgs args)
+        private void Handle_ApplicationStart(object sender, EventArgs args)
         {
             this.NoteCommand = new CommandParametrized((arg) => ToggleNoteCheck((Note)arg));
 
@@ -62,7 +60,7 @@ namespace InteractiveMusicScales
 
             var loadedSettings = Request_LoadSettings?.Invoke();
 
-            if(loadedSettings != null)
+            if (loadedSettings != null)
             {
                 this.pianorollSemitone = loadedSettings.PianorollSemitone;
                 this.fretboardSemitone = loadedSettings.FretboardSemitone;
@@ -146,8 +144,8 @@ namespace InteractiveMusicScales
 
             if (loadedScales != null && loadedScales.Length > 0)
             {
-                AdditionalScales = new List<Scale>( loadedScales );
-                ScalesAll.AddRange( AdditionalScales );
+                AdditionalScales = new List<Scale>(loadedScales);
+                ScalesAll.AddRange(AdditionalScales);
             }
             else
             {
@@ -163,30 +161,38 @@ namespace InteractiveMusicScales
             this.SaveScaleCommand = new Command(RunSaveScaleDialog);
             this.DeleteScaleCommand = new Command(DeleteSelectedScale);
 
-            
             this.scalesCirclesHolder = new ScalesCirclesHolder(ScalesBasic, divideToNumberOfCircles: 2);
             this.TurnCircleLeftCommand = new Command(TurnCircleLeft);
             this.TurnCircleRightCommand = new Command(TurnCircleRight);
 
-            this.Localizer = new Localizer( Request_LoadLocalization?.Invoke() );
+            this.Localizer = new Localizer(Request_LoadLocalization?.Invoke());
         }
 
         //==============================================================
         //Partial Methods
         partial void ToggleNoteCheck(Note note);
+
         partial void UpdateFretBoardNoteBindings();
+
         partial void AddString();
+
         partial void RemoveString();
+
         partial void UpdateInterfaceWithScale(Scale scale);
+
         partial void ClearUI();
+
         partial void RunSaveScaleDialog();
+
         partial void DeleteSelectedScale();
+
         partial void TurnCircleLeft();
+
         partial void TurnCircleRight();
 
         //==============================================================
         //Closing the app
-        void Handle_ApplicationExit(object sender, EventArgs args)
+        private void Handle_ApplicationExit(object sender, EventArgs args)
         {
             var fretboardStrings = new Note[STRINGS_COUNT];
 

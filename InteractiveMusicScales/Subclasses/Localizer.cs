@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace InteractiveMusicScales
 {
-    class Localizer
+    internal class Localizer
     {
-        Dictionary<string,string> localization;
+        private Dictionary<string, string> localization;
 
-        public Localizer(Dictionary<string,string> localization)
+        public Localizer(Dictionary<string, string> localization)
         {
             this.localization = localization;
         }
@@ -20,7 +15,7 @@ namespace InteractiveMusicScales
         {
             get
             {
-                if(this.localization != null && this.localization.TryGetValue(key, out string localization) == true)
+                if (this.localization != null && this.localization.TryGetValue(key, out string localization) == true)
                     return localization;
                 else
                     return key;

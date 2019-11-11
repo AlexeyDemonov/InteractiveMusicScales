@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    class Logger
+    internal class Logger
     {
-        static string errorLogName = "Errors.log";
+        private static string errorLogName = "Errors.log";
 
         public static void LogTheError(string errorMessage)
         {
@@ -19,20 +15,20 @@ namespace InteractiveMusicScales
         public static void LogTheException(Exception exception)
         {
             if (exception == null)
-            { 
+            {
                 AppendToLog($"Logger.AppendToLog: something is trying to write a null Exception to log");
                 return;
             }
 
             AppendToLog(exception.GetType().ToString());
 
-            if(!string.IsNullOrEmpty(exception.Message))
+            if (!string.IsNullOrEmpty(exception.Message))
                 AppendToLog(exception.Message);
 
             if (!string.IsNullOrEmpty(exception.StackTrace))
                 AppendToLog(exception.StackTrace);
 
-            if(exception.InnerException != null)
+            if (exception.InnerException != null)
             {
                 AppendToLog($"Inner exception: {exception.InnerException.GetType().ToString()}");
 
@@ -41,9 +37,9 @@ namespace InteractiveMusicScales
             }
         }
 
-        static void AppendToLog(string line)
+        private static void AppendToLog(string line)
         {
-            if(string.IsNullOrEmpty(line))
+            if (string.IsNullOrEmpty(line))
             {
                 AppendToLog($"Logger.AppendToLog: something is trying to write an empty or null line to log");
                 return;

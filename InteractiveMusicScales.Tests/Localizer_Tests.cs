@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InteractiveMusicScales.Tests
 {
@@ -16,7 +15,7 @@ namespace InteractiveMusicScales.Tests
         [TestMethod]
         public void Ctor_Dictionary_NoException()
         {
-            var test = new Localizer( new Dictionary<string, string>() );
+            var test = new Localizer(new Dictionary<string, string>());
         }
 
         [TestMethod]
@@ -38,7 +37,7 @@ namespace InteractiveMusicScales.Tests
         [TestMethod]
         public void Indexer_Dictionary_IncorrectKey_ReturnsKey()
         {
-            var test = new Localizer(new Dictionary<string, string>() { {"key", "value" } });
+            var test = new Localizer(new Dictionary<string, string>() { { "key", "value" } });
             string key = "image";
             Assert.AreEqual(key, test[key]);
         }
@@ -51,5 +50,4 @@ namespace InteractiveMusicScales.Tests
             Assert.AreEqual("value", test[key]);
         }
     }
-
 }

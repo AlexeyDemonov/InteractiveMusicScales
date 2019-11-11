@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InteractiveMusicScales
+﻿namespace InteractiveMusicScales
 {
     public class Note
     {
@@ -14,12 +8,10 @@ namespace InteractiveMusicScales
 
         public bool IsKeynote { get; set; } = false;
 
-
         public Note(Sound sound)
         {
             this.Sound = sound;
         }
-
 
         public override int GetHashCode()
         {

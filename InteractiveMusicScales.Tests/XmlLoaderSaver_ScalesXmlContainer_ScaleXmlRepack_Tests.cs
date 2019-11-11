@@ -1,6 +1,5 @@
-﻿using System;
+﻿using InteractiveMusicScales.Managers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using InteractiveMusicScales.Managers;
 
 namespace InteractiveMusicScales.Tests
 {
@@ -10,7 +9,6 @@ namespace InteractiveMusicScales.Tests
         [TestMethod]
         public void Write_Load_Compare_Equal_NoException()
         {
-
             //Pack and save
             Scale[] originalScales = new Scale[]
             {
@@ -33,8 +31,6 @@ namespace InteractiveMusicScales.Tests
 
             xmlLoaderSaver.Handle_SaveRequest("TestScales.xml", container);
 
-
-
             //Load and unpack
             var loadedContainer = (ScalesXmlContainer)xmlLoaderSaver.Handle_LoadRequest("TestScales.xml", typeof(ScalesXmlContainer));
 
@@ -45,10 +41,8 @@ namespace InteractiveMusicScales.Tests
             for (int i = 0; i < length; i++)
             {
                 var packedScale = packedScales[i];
-                loadedScales[i] = new Scale( packedScale.Name, (Sound)packedScale.Keynote, (Sound)packedScale.Sound );
+                loadedScales[i] = new Scale(packedScale.Name, (Sound)packedScale.Keynote, (Sound)packedScale.Sound);
             }
-
-
 
             //Compare
             for (int i = 0; i < originalScales.Length; i++)
@@ -56,9 +50,9 @@ namespace InteractiveMusicScales.Tests
                 Scale originalScale = originalScales[i];
                 Scale loadedScale = loadedScales[i];
 
-                Assert.AreEqual( originalScale.Name, loadedScale.Name );
-                Assert.AreEqual( originalScale.Sound, loadedScale.Sound );
-                Assert.AreEqual( originalScale.KeynoteSound, loadedScale.KeynoteSound);
+                Assert.AreEqual(originalScale.Name, loadedScale.Name);
+                Assert.AreEqual(originalScale.Sound, loadedScale.Sound);
+                Assert.AreEqual(originalScale.KeynoteSound, loadedScale.KeynoteSound);
             }
         }
     }

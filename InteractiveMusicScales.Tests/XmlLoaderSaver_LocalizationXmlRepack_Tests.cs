@@ -1,6 +1,5 @@
-﻿using System;
+﻿using InteractiveMusicScales.Managers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using InteractiveMusicScales.Managers;
 using System.Collections.Generic;
 
 namespace InteractiveMusicScales.Tests
@@ -11,9 +10,8 @@ namespace InteractiveMusicScales.Tests
         [TestMethod]
         public void Write_Load_Compare_Equal_NoException()
         {
-
             //Pack and save
-            var originalDictionary = new Dictionary<string,string>()
+            var originalDictionary = new Dictionary<string, string>()
             {
                 {"apple","яблоко"},
                 {"orange","апельсинка"},
@@ -23,7 +21,7 @@ namespace InteractiveMusicScales.Tests
             var packedEntries = new List<LocalizationXmlEntry>();
             foreach (var pair in originalDictionary)
             {
-                packedEntries.Add(new LocalizationXmlEntry() { Key=pair.Key, Value=pair.Value });
+                packedEntries.Add(new LocalizationXmlEntry() { Key = pair.Key, Value = pair.Value });
             }
 
             var container = new LocalizationXmlRepack() { Entries = packedEntries.ToArray() };
@@ -31,8 +29,6 @@ namespace InteractiveMusicScales.Tests
             var xmlLoaderSaver = new XmlLoaderSaver(catchAndLogExceptions: false);
 
             xmlLoaderSaver.Handle_SaveRequest("Localization\\Test\\TestLocalization.xml", container);
-
-
 
             //Load and unpack
             container = (LocalizationXmlRepack)xmlLoaderSaver.Handle_LoadRequest("Localization\\Test\\TestLocalization.xml", typeof(LocalizationXmlRepack));
@@ -45,8 +41,6 @@ namespace InteractiveMusicScales.Tests
             {
                 loadedDictionary[entry.Key] = entry.Value;
             }
-
-
 
             //Compare
             foreach (var pair in originalDictionary)

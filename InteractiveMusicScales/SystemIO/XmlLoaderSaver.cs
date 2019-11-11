@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Xml.Serialization;
-using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    class XmlLoaderSaver
+    internal class XmlLoaderSaver
     {
-        bool catchAndLogExceptions;
+        private bool catchAndLogExceptions;
 
         public XmlLoaderSaver(bool catchAndLogExceptions = true)
         {
@@ -32,13 +28,13 @@ namespace InteractiveMusicScales
 
                 using (var stream = File.Create(filename))
                 {
-                    var serializer = new XmlSerializer( instance.GetType() );
+                    var serializer = new XmlSerializer(instance.GetType());
                     serializer.Serialize(stream, instance);
                 }
             }
             catch (Exception ex)
             {
-                if(catchAndLogExceptions)
+                if (catchAndLogExceptions)
                 {
                     Logger.LogTheError($"XmlFileLoadSaver.Handle_SaveRequest: Error while saving '{filename}' file");
                     Logger.LogTheException(ex);
@@ -58,13 +54,13 @@ namespace InteractiveMusicScales
             {
                 using (var stream = File.OpenRead(filename))
                 {
-                    var serializer = new XmlSerializer( type );
+                    var serializer = new XmlSerializer(type);
                     result = serializer.Deserialize(stream);
                 }
             }
             catch (Exception ex)
             {
-                if(catchAndLogExceptions)
+                if (catchAndLogExceptions)
                 {
                     Logger.LogTheError($"XmlFileLoadSaver.Handle_LoadRequest: Error while loading '{filename}' file");
                     Logger.LogTheException(ex);
@@ -74,7 +70,6 @@ namespace InteractiveMusicScales
                 {
                     throw;//Rethrow exception
                 }
-
             }
 
             return result;

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace InteractiveMusicScales.Interface
 {
-    class FlatScaleNameConverter : AbstractTextValueConverter
+    internal class FlatScaleNameConverter : AbstractTextValueConverter
     {
         public FlatScaleNameConverter()
         {

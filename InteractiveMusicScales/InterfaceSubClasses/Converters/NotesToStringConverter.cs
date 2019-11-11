@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
 namespace InteractiveMusicScales.Interface
 {
-    class NotesToStringConverter : IValueConverter
+    internal class NotesToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value != null && value is Note[] && parameter != null && parameter is AbstractTextValueConverter)
+            if (value != null && value is Note[] && parameter != null && parameter is AbstractTextValueConverter)
             {
                 var converter = (AbstractTextValueConverter)parameter;
                 var builder = new StringBuilder();
@@ -22,7 +19,7 @@ namespace InteractiveMusicScales.Interface
                 {
                     builder.Append
                         (
-                        converter.Convert( note.Sound.ToString(), null, null, null)
+                        converter.Convert(note.Sound.ToString(), null, null, null)
                         )
                         .Append(" ");
                 }

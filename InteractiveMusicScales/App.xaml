@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:InteractiveMusicScales"
              Startup="Handle_Startup">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

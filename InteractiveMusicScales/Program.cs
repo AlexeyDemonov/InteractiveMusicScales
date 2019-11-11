@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Globalization;
 using System.Threading;
 
 namespace InteractiveMusicScales
 {
-    class Program
+    internal class Program
     {
         [STAThread]
         public static void Main(string[] args)
         {
             //Apply culture parameter if any
-            if(args != null && args.Length > 0)
+            if (args != null && args.Length > 0)
             {
-                string cultureName = args[0].Remove(0,1);
+                string cultureName = args[0].Remove(0, 1);
 
                 try
                 {
@@ -28,7 +25,6 @@ namespace InteractiveMusicScales
                     Logger.LogTheException(ex);
                 }
             }
-
 
             //Run the app
             var app = new App();
@@ -50,7 +46,7 @@ namespace InteractiveMusicScales
             interfacedata.Request_LoadSettings += settingsmanager.Handle_LoadSettingsRequest;
             interfacedata.Request_SaveSettings += settingsmanager.Handle_SaveSettingsRequest;
 
-            var localizationmanager = new LocalizationManager(defaultCultureName:"en-US");
+            var localizationmanager = new LocalizationManager(defaultCultureName: "en-US");
             interfacedata.Request_LoadLocalization += localizationmanager.Handle_LoadLocalizationRequest;
 
             var xmlLoaderSaver = new XmlLoaderSaver();

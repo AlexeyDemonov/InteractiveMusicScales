@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    class ScalesCirclesHolder
+    internal class ScalesCirclesHolder
     {
-        Scale[] allScales;
-        int[] circlesStartIndexes;
+        private Scale[] allScales;
+        private int[] circlesStartIndexes;
 
-        int circleLength;
-        int shift;
+        private int circleLength;
+        private int shift;
 
         public ScalesCirclesHolder(Scale[] scales, int divideToNumberOfCircles = 1)
         {
-            if(scales == null)
+            if (scales == null)
                 throw new ArgumentNullException(nameof(scales));
-            if(scales.Length == 0)
+            if (scales.Length == 0)
                 throw new ArgumentException("ScalesCirclesHolder.Ctor: 'scales' array can not be empty (its length was zero)");
-            if(divideToNumberOfCircles < 1)
+            if (divideToNumberOfCircles < 1)
                 throw new ArgumentException($"ScalesCirclesHolder.Ctor: 'divideToNumberOfCircles' argument can not be zero or negative (its value was {divideToNumberOfCircles} )");
 
             this.allScales = scales;
@@ -40,15 +36,16 @@ namespace InteractiveMusicScales
         }
 
         public void ShiftRight() => shift--;
+
         public void ShiftLeft() => shift++;
 
         public Scale this[int circle, int index]
         {
             get
             {
-                if(circle < 0)
+                if (circle < 0)
                     throw new ArgumentException($"ScalesCirclesHolder.Indexer: 'circle' argument cannot be negative (its value was {circle} )");
-                if(circle >= circlesStartIndexes.Length)
+                if (circle >= circlesStartIndexes.Length)
                     throw new ArgumentException($"ScalesCirclesHolder.Indexer: 'circle' argument cannot be greater or equal to number of circles (its value was {circle} )");
 
                 int lowerBound = circlesStartIndexes[circle];

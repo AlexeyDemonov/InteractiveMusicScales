@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace InteractiveMusicScales
@@ -11,15 +8,16 @@ namespace InteractiveMusicScales
     {
         //==============================================================
         //Fields
-        Note currentKeynote;
-        Scale currentShowScale;
-        Sound currentSound = 0;
-        const int MIN_STRING_INDEX = 2;
-        const int MAX_STRING_INDEX = 11;
+        private Note currentKeynote;
+
+        private Scale currentShowScale;
+        private Sound currentSound = 0;
+        private const int MIN_STRING_INDEX = 2;
+        private const int MAX_STRING_INDEX = 11;
 
         //==============================================================
         //Common
-        void MarkIncludedNotes(Sound sound)
+        private void MarkIncludedNotes(Sound sound)
         {
             foreach (var note in Notes)
             {
@@ -49,7 +47,7 @@ namespace InteractiveMusicScales
 
         partial void ToggleNoteCheck(Note note)
         {
-            if(currentShowScale != null)
+            if (currentShowScale != null)
             {
                 //Restore UI before Scale was selected
                 RemoveScaleIfAny();
@@ -69,7 +67,7 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //UI update
-        void UpdateUI()
+        private void UpdateUI()
         {
             UpdatePianorollNoteBindings();
             UpdateFretBoardNoteBindings();
@@ -77,7 +75,7 @@ namespace InteractiveMusicScales
             UpdateCircleBindings();
         }
 
-        void UpdatePianorollNoteBindings()
+        private void UpdatePianorollNoteBindings()
         {
             var pianoSwap = this.Pianoroll;
             this.Pianoroll = null;
@@ -91,14 +89,14 @@ namespace InteractiveMusicScales
             this.Fretboard = fretSwap;
         }
 
-        void UpdateScaleBindings()
+        private void UpdateScaleBindings()
         {
             var scaleSwap = this.ScalesToShow;
             this.ScalesToShow = null;
             this.ScalesToShow = scaleSwap;
         }
 
-        void UpdateCircleBindings()
+        private void UpdateCircleBindings()
         {
             var circleSwap = this.ScalesCirclesHolder;
             this.ScalesCirclesHolder = null;
@@ -107,7 +105,7 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Scale selection
-        void RemoveScaleIfAny()
+        private void RemoveScaleIfAny()
         {
             if (currentShowScale != null)
             {
@@ -122,22 +120,22 @@ namespace InteractiveMusicScales
             }
         }
 
-        void FilterAvailableScales()
+        private void FilterAvailableScales()
         {
-            if(currentSound == 0)
+            if (currentSound == 0)
             {
                 ScalesToShow = ScalesAll.ToArray();
             }
             else
             {
                 int initialCapacity = ScalesAll.Count >> 1; // equals to ScalesAll.Count / 2
-                List<Scale> fittingScales = new List<Scale>( initialCapacity );
+                List<Scale> fittingScales = new List<Scale>(initialCapacity);
 
                 foreach (var scale in ScalesAll)
                 {
                     //The magic of bitwise comparison, if 'currentSound' - set of notes is a subset of a scale,
                     //then at the output of the bitwise 'OR' operation we will get the same scale
-                    if( (scale.Sound | currentSound) == scale.Sound )
+                    if ((scale.Sound | currentSound) == scale.Sound)
                         fittingScales.Add(scale);
                 }
 
@@ -147,7 +145,7 @@ namespace InteractiveMusicScales
 
         partial void UpdateInterfaceWithScale(Scale scale)
         {
-            if(scale != currentShowScale)
+            if (scale != currentShowScale)
             {
                 RemoveScaleIfAny();//Clear previous scale
 
@@ -156,7 +154,7 @@ namespace InteractiveMusicScales
 
                 foreach (var note in Notes)
                 {
-                    if( note.Sound == scale.KeynoteSound )
+                    if (note.Sound == scale.KeynoteSound)
                     {
                         note.IsKeynote = true;
                         currentKeynote = note;
@@ -175,8 +173,6 @@ namespace InteractiveMusicScales
 
             UpdateUI();
         }
-
-
 
         //==============================================================
         //Fretboard part
@@ -202,7 +198,7 @@ namespace InteractiveMusicScales
             }
         }
 
-        void UpdateStringsVisibility()
+        private void UpdateStringsVisibility()
         {
             var stringsSwap = this.StringVisibility;
             this.StringVisibility = null;
@@ -214,37 +210,36 @@ namespace InteractiveMusicScales
         partial void RunSaveScaleDialog()
         {
             /*guardians*/
-            if(currentShowScale != null)
+            if (currentShowScale != null)
             {
-                WarnUser( this.Localizer["Cannot save the new scale while other scale is in display"] );
+                WarnUser(this.Localizer["Cannot save the new scale while other scale is in display"]);
                 return;
             }
 
             if (currentSound == 0)
             {
-                WarnUser( this.Localizer["Cannot save empty scale"] );
+                WarnUser(this.Localizer["Cannot save empty scale"]);
                 return;
             }
-
 
             var selectedNotes = new List<Note>();
 
             foreach (var note in Notes)
             {
-                if(note.IsChecked)
+                if (note.IsChecked)
                     selectedNotes.Add(note);
             }
 
-            var dialogWindow = new ScaleSaveDialogWindow( selectedNotes.ToArray() );
+            var dialogWindow = new ScaleSaveDialogWindow(selectedNotes.ToArray());
             dialogWindow.DataContext = this;
             var dialogResult = dialogWindow.ShowDialog();
 
-            if(dialogResult == true)
+            if (dialogResult == true)
             {
                 /*guardians*/
-                if(dialogWindow.ScaleName == null)
+                if (dialogWindow.ScaleName == null)
                     throw new ArgumentNullException("dialogWindow.ScaleName");
-                if(dialogWindow.KeynoteOfChoice == null)
+                if (dialogWindow.KeynoteOfChoice == null)
                     throw new ArgumentNullException("dialogWindow.KeynoteOfChoice");
 
                 string scaleName = dialogWindow.ScaleName;
@@ -259,23 +254,22 @@ namespace InteractiveMusicScales
 
                 Request_SaveAdditionalScales?.Invoke(AdditionalScales.ToArray());
 
-                MessageBox.Show( this.Localizer["Scale successfully saved"] );
+                MessageBox.Show(this.Localizer["Scale successfully saved"]);
 
                 ClearUI();
             }
         }
 
-        void WarnUser(string warning)
+        private void WarnUser(string warning)
         {
             MessageBox.Show(warning, string.Empty, MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
-
         partial void DeleteSelectedScale()
         {
-            if(currentShowScale == null)
+            if (currentShowScale == null)
             {
-                WarnUser( this.Localizer["To delete the scale one must first select it"] );
+                WarnUser(this.Localizer["To delete the scale one must first select it"]);
                 return;
             }
 
@@ -284,31 +278,30 @@ namespace InteractiveMusicScales
 
             foreach (var scale in ScalesBasic)
             {
-                if( Object.ReferenceEquals(scaleToDelete, scale) )
+                if (Object.ReferenceEquals(scaleToDelete, scale))
                 {
                     itIsBasicScale = true;
                     break;
                 }
             }
-            
-            if(itIsBasicScale)
+
+            if (itIsBasicScale)
             {
-                WarnUser( this.Localizer["Cannot delete basic scale"] );
+                WarnUser(this.Localizer["Cannot delete basic scale"]);
                 return;
             }
 
-            var confirmation = MessageBox.Show( this.Localizer["Delete this scale? Are you sure?"] , "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if(confirmation != MessageBoxResult.Yes)
+            var confirmation = MessageBox.Show(this.Localizer["Delete this scale? Are you sure?"], "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (confirmation != MessageBoxResult.Yes)
                 return;
 
-            
             //Point of no return
             AdditionalScales.Remove(scaleToDelete);
             ScalesAll.Remove(scaleToDelete);
 
             Request_SaveAdditionalScales?.Invoke(AdditionalScales.ToArray());
 
-            MessageBox.Show( this.Localizer["Scale deleted"] );
+            MessageBox.Show(this.Localizer["Scale deleted"]);
 
             ClearUI();
         }

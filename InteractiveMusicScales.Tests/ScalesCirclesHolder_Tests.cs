@@ -1,12 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace InteractiveMusicScales.Tests
 {
     [TestClass]
     public class ScalesCirclesHolder_Tests
     {
-        static Scale[] testScales;
+        private static Scale[] testScales;
 
         [ClassInitialize]
         public static void InitializeFields(TestContext arg)
@@ -101,7 +101,7 @@ namespace InteractiveMusicScales.Tests
 
             try
             {
-                var scale = test[-1,0];
+                var scale = test[-1, 0];
             }
             catch (ArgumentException ex)
             {
@@ -155,7 +155,7 @@ namespace InteractiveMusicScales.Tests
         public void Indexer_TwoCircles_0_0_Cmajor()
         {
             var test = new ScalesCirclesHolder(testScales, 2);
-            var recievedScale = test[0,0];
+            var recievedScale = test[0, 0];
 
             Assert.AreEqual(testScales[0], recievedScale);
         }

@@ -14,28 +14,26 @@
     <Window.Resources>
 
         <!--Converters-->
-        <i:NotesToStringConverter x:Key="NotesToString"/>
-        <i:SharpNoteNameConverter x:Key="SharpNotes"/>
-        <i:FlatNoteNameConverter  x:Key="FlatNotes"/>
-        
+        <i:NotesToStringConverter x:Key="NotesToString" />
+        <i:SharpNoteNameConverter x:Key="SharpNotes" />
+        <i:FlatNoteNameConverter  x:Key="FlatNotes" />
+
         <!--Colors-->
         <SolidColorBrush x:Key="Background">#D3D3D3</SolidColorBrush>
-        
+
         <!--Selected notes textpanel style-->
         <Style x:Key="SelectedNotes" TargetType="TextBlock">
 
             <Style.Triggers>
 
                 <DataTrigger Binding="{Binding PianorollSemitone}" Value="Sharp">
-                    <Setter Property="Text" Value="{Binding ElementName=thisWindow, Path=Notes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource SharpNotes}}"/>
+                    <Setter Property="Text" Value="{Binding ElementName=thisWindow, Path=Notes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource SharpNotes}}" />
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding PianorollSemitone}" Value="Flat">
-                    <Setter Property="Text" Value="{Binding ElementName=thisWindow, Path=Notes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource FlatNotes}}"/>
+                    <Setter Property="Text" Value="{Binding ElementName=thisWindow, Path=Notes, Converter={StaticResource NotesToString}, ConverterParameter={StaticResource FlatNotes}}" />
                 </DataTrigger>
-
             </Style.Triggers>
-            
         </Style>
 
         <!--Combobox style-->
@@ -46,7 +44,7 @@
                     <Setter Property="ItemTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Converter={StaticResource SharpNotes}}"/>
+                                <TextBlock Text="{Binding Converter={StaticResource SharpNotes}}" />
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
@@ -56,35 +54,31 @@
                     <Setter Property="ItemTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Converter={StaticResource FlatNotes}}"/>
+                                <TextBlock Text="{Binding Converter={StaticResource FlatNotes}}" />
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
-
             </Style.Triggers>
-
         </Style>
-
-
     </Window.Resources>
 
     <Grid Background="{StaticResource Background}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="5"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="70" SharedSizeGroup="A"/>
-            <ColumnDefinition Width="*" MinWidth="70" SharedSizeGroup="A"/>
+            <ColumnDefinition Width="*" MinWidth="70" SharedSizeGroup="A" />
+            <ColumnDefinition Width="*" MinWidth="70" SharedSizeGroup="A" />
         </Grid.ColumnDefinitions>
 
         <!--Notes to show-->
-        <TextBlock Margin="5" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SelectedNotes}"/>
+        <TextBlock Margin="5" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SelectedNotes}" />
 
         <!--Scale name-->
         <TextBox
@@ -92,7 +86,7 @@
             Grid.Row="3"
             Grid.ColumnSpan="2"
             Margin="5,10,5,10"
-            Text="{Binding ElementName=thisWindow, Path=ScaleName, Mode=OneWayToSource}" MaxLength="16" MaxLines="1"/>
+            Text="{Binding ElementName=thisWindow, Path=ScaleName, Mode=OneWayToSource}" MaxLength="16" MaxLines="1" />
 
         <!--Keynote selection-->
         <TextBlock Margin="5" Grid.Row="2" VerticalAlignment="Center">Keynote:</TextBlock>
@@ -110,12 +104,11 @@
             HorizontalAlignment="Left"
             Margin="3"
             ItemsSource="{Binding ElementName=thisWindow, Path=Notes}"
-            SelectedItem="{Binding ElementName=thisWindow, Path=KeynoteOfChoice, Mode=OneWayToSource}"/>
+            SelectedItem="{Binding ElementName=thisWindow, Path=KeynoteOfChoice, Mode=OneWayToSource}" />
         </Border>
 
         <!--Buttons-->
         <Button Margin="5" Grid.Row="4" Grid.Column="0" Click="OKButton_Click" IsDefault="True">OK</Button>
         <Button Margin="5" Grid.Row="4" Grid.Column="1" Click="CancelButton_Click" IsCancel="True">Cancel</Button>
-
     </Grid>
 </Window>

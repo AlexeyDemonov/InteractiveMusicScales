@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using InteractiveMusicScales.Managers;
+﻿using InteractiveMusicScales.Managers;
 
 namespace InteractiveMusicScales
 {
-    class SettingsManager : AbstractLoadSaveRequester
+    internal class SettingsManager : AbstractLoadSaveRequester
     {
-        const string settingsFileName = "Settings.xml";
-
+        private const string settingsFileName = "Settings.xml";
 
         public SettingsRequestEventArgs Handle_LoadSettingsRequest()
         {
             var container = base.InvokeLoadRequest(settingsFileName, typeof(SettingsXmlRepack));
 
-            if(container != null && container is SettingsXmlRepack)
+            if (container != null && container is SettingsXmlRepack)
             {
                 var loadedSettings = (SettingsXmlRepack)container;
 

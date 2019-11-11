@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using InteractiveMusicScales.Managers;
 using System.Threading.Tasks;
-using InteractiveMusicScales.Managers;
 
 namespace InteractiveMusicScales
 {
-    class ScalesManager : AbstractLoadSaveRequester
+    internal class ScalesManager : AbstractLoadSaveRequester
     {
-        const string scalesFileName = "AdditionalScales.xml";
-
+        private const string scalesFileName = "AdditionalScales.xml";
 
         public Scale[] Handle_LoadAdditionalScalesRequest()
         {
             var container = base.InvokeLoadRequest(scalesFileName, typeof(ScalesXmlContainer));
 
-            if(container != null && container is ScalesXmlContainer)
+            if (container != null && container is ScalesXmlContainer)
             {
                 var loadedScalesContainer = (ScalesXmlContainer)container;
 
@@ -46,12 +41,12 @@ namespace InteractiveMusicScales
             return SaveAdditionalScalesAsync(scales);
         }
 
-        async Task SaveAdditionalScalesAsync(Scale[] scales)
+        private async Task SaveAdditionalScalesAsync(Scale[] scales)
         {
-            await Task.Run( ()=>SaveAdditionalScales(scales) );
+            await Task.Run(() => SaveAdditionalScales(scales));
         }
 
-        void SaveAdditionalScales(Scale[] scales)
+        private void SaveAdditionalScales(Scale[] scales)
         {
             ScaleXmlRepack[] packedScales = new ScaleXmlRepack[scales.Length];
 

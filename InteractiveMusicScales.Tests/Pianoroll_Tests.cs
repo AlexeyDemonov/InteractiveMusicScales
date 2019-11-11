@@ -1,14 +1,14 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace InteractiveMusicScales.Tests
 {
     [TestClass]
     public class Pianoroll_Tests
     {
-        static Note testSingleNote;
-        static Note[] testNotes;
-        static Pianoroll testPianoroll;
+        private static Note testSingleNote;
+        private static Note[] testNotes;
+        private static Pianoroll testPianoroll;
 
         [ClassInitialize]
         public static void InitializeFields(TestContext arg)

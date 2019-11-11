@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading;
-using System.Collections.Generic;
-using InteractiveMusicScales.Managers;
+﻿using InteractiveMusicScales.Managers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace InteractiveMusicScales.Tests
 {
@@ -28,7 +28,7 @@ namespace InteractiveMusicScales.Tests
             RunTestingParametrized("en-US", "en-US");
         }
 
-        void RunTestingParametrized(string cultureToRunIn, string defaultCultureToSet)
+        private void RunTestingParametrized(string cultureToRunIn, string defaultCultureToSet)
         {
             var localizationManager = new LocalizationManager(defaultCultureToSet);
             var xmlLoaderSaver = new XmlLoaderSaver(catchAndLogExceptions: false);
@@ -63,12 +63,9 @@ namespace InteractiveMusicScales.Tests
 
             xmlLoaderSaver.Handle_SaveRequest($"Localization\\{cultureToRunIn}.xml", container);
 
-
-
             //Load and unpack
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureToRunIn);
             var loadedDictionary = localizationManager.Handle_LoadLocalizationRequest();
-
 
             //Compare
             foreach (var pair in originalDictionary)

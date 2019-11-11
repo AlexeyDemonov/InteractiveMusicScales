@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    class Pianoroll : AbstractNotesHolder
+    internal class Pianoroll : AbstractNotesHolder
     {
-
         public Pianoroll(Note[] notes) : base(notes, "Pianoroll")
         {
             //Argument checks are in abstract base class
@@ -27,7 +22,6 @@ namespace InteractiveMusicScales
                 if (pianokey < 0)
                     throw new ArgumentException($"Pianoroll.GetIndexer: 'pianokey' argument can not be negative (its value was {pianokey} )");
 
-
                 int index = pianokey;
 
                 //I do not expect incoming indexes be multiple times larger than the last index
@@ -38,6 +32,5 @@ namespace InteractiveMusicScales
                 return base.notes[index];
             }
         }
-
     }
 }

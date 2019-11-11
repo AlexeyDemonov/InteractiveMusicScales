@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace InteractiveMusicScales
@@ -15,7 +10,7 @@ namespace InteractiveMusicScales
         //Binder
         public event PropertyChangedEventHandler PropertyChanged;
 
-        void RaisePropertyChange([CallerMemberName] string propertyname = default(string))
+        private void RaisePropertyChange([CallerMemberName] string propertyname = default(string))
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
@@ -27,11 +22,13 @@ namespace InteractiveMusicScales
         //==============================================================
         //Common
         public ICommand NoteCommand { get; private set; }
+
         public Note[] Notes { get; private set; }
 
         //==============================================================
         //Pianoroll
-        Pianoroll pianoroll;
+        private Pianoroll pianoroll;
+
         public Pianoroll Pianoroll
         {
             get => pianoroll;
@@ -43,7 +40,8 @@ namespace InteractiveMusicScales
             }
         }
 
-        Semitone pianorollSemitone;
+        private Semitone pianorollSemitone;
+
         public Semitone PianorollSemitone
         {
             get => pianorollSemitone;
@@ -57,9 +55,11 @@ namespace InteractiveMusicScales
         //==============================================================
         //Fretboard
         public ICommand AddStringCommand { get; private set; }
+
         public ICommand RemoveStringCommand { get; private set; }
 
-        Fretboard fretboard;
+        private Fretboard fretboard;
+
         public Fretboard Fretboard
         {
             get => fretboard;
@@ -70,7 +70,8 @@ namespace InteractiveMusicScales
             }
         }
 
-        Semitone fretboardSemitone;
+        private Semitone fretboardSemitone;
+
         public Semitone FretboardSemitone
         {
             get => fretboardSemitone;
@@ -81,7 +82,8 @@ namespace InteractiveMusicScales
             }
         }
 
-        bool[] stringVisibility;
+        private bool[] stringVisibility;
+
         public bool[] StringVisibility
         {
             get => stringVisibility;
@@ -95,9 +97,11 @@ namespace InteractiveMusicScales
         //==============================================================
         //Scale selector
         public ICommand ScaleCommand { get; private set; }
+
         public ICommand ClearUICommand { get; private set; }
 
-        Scale[] scalesToShow;
+        private Scale[] scalesToShow;
+
         public Scale[] ScalesToShow
         {
             get => scalesToShow;
@@ -111,14 +115,17 @@ namespace InteractiveMusicScales
         //==============================================================
         //Scale save/delete
         public ICommand SaveScaleCommand { get; private set; }
+
         public ICommand DeleteScaleCommand { get; private set; }
 
         //==============================================================
         //Scales circle
         public ICommand TurnCircleLeftCommand { get; private set; }
+
         public ICommand TurnCircleRightCommand { get; private set; }
 
         public Semitone circleSemitone;
+
         public Semitone CircleSemitone
         {
             get => circleSemitone;
@@ -129,7 +136,8 @@ namespace InteractiveMusicScales
             }
         }
 
-        ScalesCirclesHolder scalesCirclesHolder;
+        private ScalesCirclesHolder scalesCirclesHolder;
+
         public ScalesCirclesHolder ScalesCirclesHolder
         {
             get => scalesCirclesHolder;
@@ -142,6 +150,6 @@ namespace InteractiveMusicScales
 
         //==============================================================
         //Localization
-        public Localizer Localizer { get; private set;}
+        public Localizer Localizer { get; private set; }
     }
 }

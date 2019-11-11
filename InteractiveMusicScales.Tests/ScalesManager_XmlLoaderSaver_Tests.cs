@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
 
 namespace InteractiveMusicScales.Tests
 {
@@ -11,7 +9,7 @@ namespace InteractiveMusicScales.Tests
         [TestInitialize]
         public void DeleteFileBeforeTest()
         {
-            if(File.Exists("AdditionalScales.xml"))
+            if (File.Exists("AdditionalScales.xml"))
                 File.Delete("AdditionalScales.xml");
         }
 
@@ -34,13 +32,11 @@ namespace InteractiveMusicScales.Tests
 
             var task = scalesManager.Handle_SaveAdditionalScalesRequestAwaitable(originalScales);
 
-
             //Wait
             task.Wait();
 
             //Load and unpack
             var loadedScales = scalesManager.Handle_LoadAdditionalScalesRequest();
-
 
             //Compare
             for (int i = 0; i < originalScales.Length; i++)

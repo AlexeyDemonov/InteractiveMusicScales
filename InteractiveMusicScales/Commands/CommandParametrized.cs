@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace InteractiveMusicScales
 {
-    class CommandParametrized : ICommand
+    internal class CommandParametrized : ICommand
     {
-        Action<object> actionToExecute;
+        private Action<object> actionToExecute;
 
         public CommandParametrized(Action<object> actionToExecute)
         {
