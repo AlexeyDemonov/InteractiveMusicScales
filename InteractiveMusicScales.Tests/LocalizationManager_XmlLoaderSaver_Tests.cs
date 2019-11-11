@@ -12,7 +12,7 @@ namespace InteractiveMusicScales.Tests
         [TestMethod]
         public void Write_Load_Compare_NoDefaultCulture_Equal_NoException()
         {
-            RunTestingParametrized("ru-RU", null);
+            RunTestingParametrized("en-US", null);
         }
 
         [TestMethod]
