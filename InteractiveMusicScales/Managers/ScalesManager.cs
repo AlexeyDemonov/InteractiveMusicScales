@@ -38,6 +38,22 @@ namespace InteractiveMusicScales
 
         public void Handle_SaveAdditionalScalesRequest(Scale[] scales)
         {
+            _ = SaveAdditionalScalesAsync(scales);
+        }
+
+        //Purely for testing purposes
+        public Task Handle_SaveAdditionalScalesRequestAwaitable(Scale[] scales)
+        {
+            return SaveAdditionalScalesAsync(scales);
+        }
+
+        async Task SaveAdditionalScalesAsync(Scale[] scales)
+        {
+            await Task.Run( ()=>SaveAdditionalScales(scales) );
+        }
+
+        void SaveAdditionalScales(Scale[] scales)
+        {
             ScaleXmlRepack[] packedScales = new ScaleXmlRepack[scales.Length];
 
             for (int i = 0; i < scales.Length; i++)

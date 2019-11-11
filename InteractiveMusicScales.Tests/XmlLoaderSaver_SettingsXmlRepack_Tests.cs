@@ -40,12 +40,12 @@ namespace InteractiveMusicScales.Tests
 
             var xmlLoaderSaver = new XmlLoaderSaver(catchAndLogExceptions: false);
 
-            xmlLoaderSaver.Handle_SaveRequest("TestSettings.ini", container);
+            xmlLoaderSaver.Handle_SaveRequest("TestSettings.xml", container);
 
 
 
             //Load and unpack
-            container = (SettingsXmlRepack)xmlLoaderSaver.Handle_LoadRequest("TestSettings.ini", typeof(SettingsXmlRepack));
+            container = (SettingsXmlRepack)xmlLoaderSaver.Handle_LoadRequest("TestSettings.xml", typeof(SettingsXmlRepack));
 
             int length = container.FretboardStrings.Length;
             var unpackedNotes = new Note[length];

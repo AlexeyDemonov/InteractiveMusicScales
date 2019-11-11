@@ -1,11 +1,20 @@
 ﻿using System;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
 namespace InteractiveMusicScales.Tests
 {
     [TestClass]
     public class ScalesManager_XmlLoaderSaver_TeststTest1
     {
+        [TestInitialize]
+        public void DeleteFileBeforeTest()
+        {
+            if(File.Exists("AdditionalScales.xml"))
+                File.Delete("AdditionalScales.xml");
+        }
+
         [TestMethod]
         public void Write_Load_Compare_Equal_NoException()
         {
@@ -23,9 +32,11 @@ namespace InteractiveMusicScales.Tests
                 new Scale("D major", keynoteSound:Sound.D, scaleSound:Sound.Cd| Sound.D | Sound.E | Sound.Fd| Sound.G | Sound.A | Sound.B),
             };
 
-            scalesManager.Handle_SaveAdditionalScalesRequest(originalScales);
+            var task = scalesManager.Handle_SaveAdditionalScalesRequestAwaitable(originalScales);
 
 
+            //Wait
+            task.Wait();
 
             //Load and unpack
             var loadedScales = scalesManager.Handle_LoadAdditionalScalesRequest();
