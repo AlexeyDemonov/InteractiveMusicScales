@@ -61,6 +61,7 @@
     <Compile Include="TestSubClasses\nonXmlableClass.cs" />
     <Compile Include="TestSubClasses\XmlableClass.cs" />
     <Compile Include="SettingsManager_XmlLoadSaver_Tests.cs" />
+    <Compile Include="ScalesManager_XmlLoaderSaver_Tests.cs" />
     <Compile Include="XmlLoaderSaver_Logger_Tests.cs" />
     <Compile Include="XmlLoaderSaver_LocalizationXmlRepack_Tests.cs" />
     <Compile Include="XmlLoaderSaver_SettingsXmlRepack_Tests.cs" />

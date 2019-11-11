@@ -11,8 +11,7 @@ namespace InteractiveMusicScales
     {
         const string settingsFileName = "Settings.xml";
 
-        //==============================================================
-        //Handlers
+
         public SettingsRequestEventArgs Handle_LoadSettingsRequest()
         {
             var container = base.InvokeLoadRequest(settingsFileName, typeof(SettingsXmlRepack));
