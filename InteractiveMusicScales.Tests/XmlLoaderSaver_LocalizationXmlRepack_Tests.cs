@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace InteractiveMusicScales.Tests
 {
     [TestClass]
-    public class XmlLoadSaver_LocalizationXmlRepack_Tests
+    public class XmlLoaderSaver_LocalizationXmlRepack_Tests
     {
         [TestMethod]
         public void Write_Load_Compare_Equal_NoException()
@@ -28,14 +28,14 @@ namespace InteractiveMusicScales.Tests
 
             var container = new LocalizationXmlRepack() { Entries = packedEntries.ToArray() };
 
-            var xmlLoadSaver = new XmlLoadSaver(catchAndLogExceptions: false);
+            var xmlLoaderSaver = new XmlLoaderSaver(catchAndLogExceptions: false);
 
-            xmlLoadSaver.Handle_SaveRequest("Localization\\Test\\TestLocalization.xml", container);
+            xmlLoaderSaver.Handle_SaveRequest("Localization\\Test\\TestLocalization.xml", container);
 
 
 
             //Load and unpack
-            container = (LocalizationXmlRepack)xmlLoadSaver.Handle_LoadRequest("Localization\\Test\\TestLocalization.xml", typeof(LocalizationXmlRepack));
+            container = (LocalizationXmlRepack)xmlLoaderSaver.Handle_LoadRequest("Localization\\Test\\TestLocalization.xml", typeof(LocalizationXmlRepack));
 
             var unpackedEntries = container.Entries;
 

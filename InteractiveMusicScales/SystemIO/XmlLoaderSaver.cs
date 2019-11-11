@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace InteractiveMusicScales
 {
-    class XmlLoadSaver
+    class XmlLoaderSaver
     {
         bool catchAndLogExceptions;
 
-        public XmlLoadSaver(bool catchAndLogExceptions = true)
+        public XmlLoaderSaver(bool catchAndLogExceptions = true)
         {
             this.catchAndLogExceptions = catchAndLogExceptions;
         }

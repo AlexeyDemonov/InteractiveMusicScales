@@ -5,7 +5,7 @@ using InteractiveMusicScales.Managers;
 namespace InteractiveMusicScales.Tests
 {
     [TestClass]
-    public class XmlLoadSaver_SettingsXmlRepack_Tests
+    public class XmlLoaderSaver_SettingsXmlRepack_Tests
     {
         [TestMethod]
         public void Write_Load_Compare_Equal_NoException()
@@ -38,14 +38,14 @@ namespace InteractiveMusicScales.Tests
                 LastVisibleString = originalSettings.LastVisibleString
             };
 
-            var xmlLoadSaver = new XmlLoadSaver(catchAndLogExceptions: false);
+            var xmlLoaderSaver = new XmlLoaderSaver(catchAndLogExceptions: false);
 
-            xmlLoadSaver.Handle_SaveRequest("TestSettings.ini", container);
+            xmlLoaderSaver.Handle_SaveRequest("TestSettings.ini", container);
 
 
 
             //Load and unpack
-            container = (SettingsXmlRepack)xmlLoadSaver.Handle_LoadRequest("TestSettings.ini", typeof(SettingsXmlRepack));
+            container = (SettingsXmlRepack)xmlLoaderSaver.Handle_LoadRequest("TestSettings.ini", typeof(SettingsXmlRepack));
 
             int length = container.FretboardStrings.Length;
             var unpackedNotes = new Note[length];

@@ -5,14 +5,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace InteractiveMusicScales.Tests
 {
     [TestClass]
-    public class XmlLoadSaver_Logger_Tests
+    public class XmlLoaderSaver_Logger_Tests
     {
-        static XmlLoadSaver xmlLoadSaver;
+        static XmlLoaderSaver xmlLoaderSaver;
 
         [ClassInitialize]
         public static void InitializeFields(TestContext testContext)
         {
-            xmlLoadSaver = new XmlLoadSaver(catchAndLogExceptions: true);
+            xmlLoaderSaver = new XmlLoaderSaver(catchAndLogExceptions: true);
         }
 
         [TestInitialize]
@@ -26,9 +26,9 @@ namespace InteractiveMusicScales.Tests
         public void Write_Read_CorrectData_NoErrors_NoExceptions()
         {
             var originalSample = new XmlableClass() { StringValue="Sample", IntValue=100 };
-            xmlLoadSaver.Handle_SaveRequest("test.xml", originalSample);
+            xmlLoaderSaver.Handle_SaveRequest("test.xml", originalSample);
 
-            var loadedSample = (XmlableClass)xmlLoadSaver.Handle_LoadRequest("test.xml", typeof(XmlableClass));
+            var loadedSample = (XmlableClass)xmlLoaderSaver.Handle_LoadRequest("test.xml", typeof(XmlableClass));
 
             Assert.IsTrue(!(File.Exists("Errors.log")));
             Assert.IsNotNull(loadedSample);
@@ -38,7 +38,7 @@ namespace InteractiveMusicScales.Tests
         public void Write_IncorretData_ErrorsLogged_NoExceptions()
         {
             var incorrectSample = new nonXmlableClass();
-            xmlLoadSaver.Handle_SaveRequest("test.xml", incorrectSample);
+            xmlLoaderSaver.Handle_SaveRequest("test.xml", incorrectSample);
 
             Assert.IsTrue(File.Exists("Errors.log"));
         }
@@ -48,7 +48,7 @@ namespace InteractiveMusicScales.Tests
         {
             File.WriteAllText("test.xml", "abrakadabra");
             
-            var loadedSample = xmlLoadSaver.Handle_LoadRequest("test.xml", typeof(XmlableClass));
+            var loadedSample = xmlLoaderSaver.Handle_LoadRequest("test.xml", typeof(XmlableClass));
 
             Assert.IsTrue(File.Exists("Errors.log"));
             Assert.IsNull(loadedSample);

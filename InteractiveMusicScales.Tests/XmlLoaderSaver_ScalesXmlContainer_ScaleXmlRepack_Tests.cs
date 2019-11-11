@@ -5,7 +5,7 @@ using InteractiveMusicScales.Managers;
 namespace InteractiveMusicScales.Tests
 {
     [TestClass]
-    public class XmlLoadSaver_ScalesXmlContainer_ScaleXmlRepack_Tests
+    public class XmlLoaderSaver_ScalesXmlContainer_ScaleXmlRepack_Tests
     {
         [TestMethod]
         public void Write_Load_Compare_Equal_NoException()
@@ -29,14 +29,14 @@ namespace InteractiveMusicScales.Tests
 
             var container = new ScalesXmlContainer() { Scales = packedScales };
 
-            var xmlLoadSaver = new XmlLoadSaver(catchAndLogExceptions: false);
+            var xmlLoaderSaver = new XmlLoaderSaver(catchAndLogExceptions: false);
 
-            xmlLoadSaver.Handle_SaveRequest("TestScales.xml", container);
+            xmlLoaderSaver.Handle_SaveRequest("TestScales.xml", container);
 
 
 
             //Load and unpack
-            var loadedContainer = (ScalesXmlContainer)xmlLoadSaver.Handle_LoadRequest("TestScales.xml", typeof(ScalesXmlContainer));
+            var loadedContainer = (ScalesXmlContainer)xmlLoaderSaver.Handle_LoadRequest("TestScales.xml", typeof(ScalesXmlContainer));
 
             packedScales = loadedContainer.Scales;
             int length = loadedContainer.Scales.Length;

@@ -69,7 +69,7 @@ namespace InteractiveMusicScales
                 this.circleSemitone = loadedSettings.CircleSemitone;
                 this.lastVisibleString = loadedSettings.LastVisibleString;
 
-                for (int i = 0; i < STRINGS_COUNT; i++)
+                for (int i = 0; i < STRINGS_COUNT && i < loadedSettings.FretboardStrings.Length; i++)
                 {
                     this.fretboard[i] = loadedSettings.FretboardStrings[i];
                 }

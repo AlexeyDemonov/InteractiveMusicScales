@@ -66,11 +66,13 @@
     <Compile Include="InterfaceSubClasses\Converters\HiddenNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SharpNoteNameConverter.cs" />
     <Compile Include="InterfaceSubClasses\Converters\SharpScaleNameConverter.cs" />
+    <Compile Include="Managers\AbstractLoadSaveRequester.cs" />
     <Compile Include="Managers\ManagersSubClasses\LocalizationXmlRepack.cs" />
     <Compile Include="Managers\ManagersSubClasses\LocalizationXmlEntry.cs" />
     <Compile Include="Managers\ManagersSubClasses\ScalesXmlContainer.cs" />
     <Compile Include="Managers\ManagersSubClasses\ScaleXmlRepack.cs" />
     <Compile Include="Managers\ManagersSubClasses\SettingsXmlRepack.cs" />
+    <Compile Include="Managers\SettingsManager.cs" />
     <Compile Include="ScaleSaveDialogWindow.xaml.cs">
       <DependentUpon>ScaleSaveDialogWindow.xaml</DependentUpon>
     </Compile>
@@ -78,7 +80,7 @@
     <Compile Include="Subclasses\Logger.cs" />
     <Compile Include="Subclasses\ScalesSorter.cs" />
     <Compile Include="Subclasses\SettingsRequestEventArgs.cs" />
-    <Compile Include="SystemIO\XmlLoadSaver.cs" />
+    <Compile Include="SystemIO\XmlLoaderSaver.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

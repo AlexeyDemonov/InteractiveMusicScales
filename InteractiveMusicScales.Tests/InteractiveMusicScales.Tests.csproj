@@ -60,10 +60,11 @@
     <Compile Include="Localizer_Tests.cs" />
     <Compile Include="TestSubClasses\nonXmlableClass.cs" />
     <Compile Include="TestSubClasses\XmlableClass.cs" />
-    <Compile Include="XmlLoadSaver_Logger_Tests.cs" />
-    <Compile Include="XmlLoadSaver_LocalizationXmlRepack_Tests.cs" />
-    <Compile Include="XmlLoadSaver_SettingsXmlRepack_Tests.cs" />
-    <Compile Include="XmlLoadSaver_ScalesXmlContainer_ScaleXmlRepack_Tests.cs" />
+    <Compile Include="SettingsManager_XmlLoadSaver_Tests.cs" />
+    <Compile Include="XmlLoaderSaver_Logger_Tests.cs" />
+    <Compile Include="XmlLoaderSaver_LocalizationXmlRepack_Tests.cs" />
+    <Compile Include="XmlLoaderSaver_SettingsXmlRepack_Tests.cs" />
+    <Compile Include="XmlLoaderSaver_ScalesXmlContainer_ScaleXmlRepack_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
